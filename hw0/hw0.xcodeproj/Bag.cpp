@@ -109,8 +109,17 @@ namespace renyp_ns_one
         copy(copyee.data, copyee.data + used, data);
     }
     
-    size_type size() const {return used;}
-    size_type count(const element_t& target) const;
+    size_type size() const 
+    {
+        return used;
+    }
+    
+    size_type count(const element_t& target) const
+    {
+        
+        
+        
+    }
     
 private:
     element_t *data;
