@@ -61,12 +61,38 @@ namespace renyp_ns_one
         
     }
     
-    Bag::size_type Bag::erase(const element_t& target);
-    void insert(const element_t& item);
-    bool is_empty() const;
-    void operator +=(const Bag& addend);
+    const Bag::size_type Bag::erase(const element_t& target)
+    {
+        size_type
+        
+        
+    }
+    void Bag::insert(const element_t& item)
+    {
+        if (used == current_cap) {
+            reserve(used+1);
+        }
+        data[used] = item;
+        ++used;        
+    }
     
-    Bag::void operator =(const Bag& copyee)
+    
+    bool Bag::is_empty() const
+    {
+        return !bool(used);        
+    }
+    
+    void Bag::operator +=(const Bag& addend)
+    // library facilities used: algorithm
+    {
+        if (used + addend.used > current_cap) {
+            reserve(used + addend.used);
+        }
+        copy(addend.data, addend.data + addend.used, data + used);
+        used += addend.used;        
+    }
+    
+    void Bag::operator =(const Bag& copyee)
     {
         element_t *new_data;
         
@@ -93,19 +119,10 @@ private:
     
 }
 // NONMEMBER FUNCTIONs for the bag class
-Bag operator +(const Bag& b1, const Bag& b2);
-}
-
-  
-  void insert(const element_t &item)
-  {
-    
-    
-    
-  }
-  
-  element_t remove(); 
-	
-  bool is_empty() const;
-  
+Bag operator +(const Bag& b1, const Bag& b2)
+{
+    Bag answer(b1.size() + b2.size());
+    answer += b1;
+    answer += b2;
+    return answer;    
 }
