@@ -11,40 +11,42 @@
 
 #include <cstdlib>
 
-class Bag {
-	
-public:
-    typedef int element_t; // define element_t (the type of item that goes in this Bag) as integer for this assignment
-    typedef std::size_t size_type;
-    static const size_type DEEF_CAP = 50;
+namespace renyp_ns_one
+{
+    class Bag
+    {
+    public:
+        typedef int element_t; // define element_t (the type of item that goes in this Bag) as integer for this assignment
+        typedef std::size_t size_type;
+        static const size_type DEFAULT__CAP = 50;
+        
+        Bag(size_type init_cap = DEFAULT_CAP);
+        Bag(const Bag& copyee);
+        ~Bag();
+        
+        void reserve(size_type new_cap);
+        bool remove(const element_t& target); // needs to have no arguments?
+        
+        size_type erase(const element_t& target);
+        void insert(const element_t& item);
+        bool is_empty() const;
+        void operator +=(const Bag& addend);
+        void operator =(const Bag& copyee);
+        
+        size_type size() const {return used;}
+        size_type count(const element_t& target) const;
+        
+    private:
+        element_t *data;
+        size_type used;
+        size_type current_cap;
+        
+    }
+    // NONMEMBER FUNCTIONs for the bag class
+    Bag operator +(const Bag& b1, const Bag& b2);
+}
     
-    Bag(size_type init_cap = DEEF_CAP);
-    Bag(const Bag& fromBag);
-    ~Bag();
-    
-    void reserve(size_type new_cap);
-    bool remove(const element_t target);
-    size_type erase(const element_t& target);
-    void insert(const element_t& entree);
-    void operator +=(const Bag& addend);
-    void operator =(const Bag& source);
-    
-
-    
-    Bag(
-        const element_t& init_data = element_t(),
-        Bag* init_fwd = NULL;
-        Bag* init_bck = NULL;
-        )
-    { bag_data = init_data; fwd_ptr = init_fwd; bck_ptr = init_bck;}       // put Destructor at end
-    
-    
-    // if time, Copy Constructor + assignment operator functions
-    
-    Bag(const Bag& copyee);
-    
-    
-    
+/*
     ~Bag();
     
     // insert (a copy of) an item into the Bag
@@ -55,13 +57,6 @@ public:
 	
     // check if the Bag is empty
     bool is_empty() const;
-    
-private:
-    Bag* fwd_ptr;
-    Bag* bck_ptr;
-    element_t bag_data;
-    element_t item;
-    
-};
+*/    
 
 #endif	// (end the #ifndef above)
