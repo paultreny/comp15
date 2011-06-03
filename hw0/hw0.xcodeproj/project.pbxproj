@@ -1,0 +1,78 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		400938B51398F0B000930D37 /* hw0.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = hw0.cpp; path = hw0.xcodeproj/hw0.cpp; sourceTree = "<group>"; };
+		400938B61398F0B000930D37 /* hw0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hw0.h; path = hw0.xcodeproj/hw0.h; sourceTree = "<group>"; };
+		400938B71398F0D300930D37 /* Bag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bag.h; path = hw0.xcodeproj/Bag.h; sourceTree = "<group>"; };
+		400938B81398F32B00930D37 /* Bag.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Bag.cpp; path = hw0.xcodeproj/Bag.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		400938AC1398F06E00930D37 = {
+			isa = PBXGroup;
+			children = (
+				400938B81398F32B00930D37 /* Bag.cpp */,
+				400938B71398F0D300930D37 /* Bag.h */,
+				400938B51398F0B000930D37 /* hw0.cpp */,
+				400938B61398F0B000930D37 /* hw0.h */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		400938AE1398F06E00930D37 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Apple Computer";
+			};
+			buildConfigurationList = 400938B11398F06E00930D37 /* Build configuration list for PBXProject "hw0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 400938AC1398F06E00930D37;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		400938B31398F06E00930D37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		400938B41398F06E00930D37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		400938B11398F06E00930D37 /* Build configuration list for PBXProject "hw0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				400938B31398F06E00930D37 /* Debug */,
+				400938B41398F06E00930D37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 400938AE1398F06E00930D37 /* Project object */;
+}
