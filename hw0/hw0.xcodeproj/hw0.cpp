@@ -8,6 +8,13 @@
 
 #include "hw0.h"
 #include "Bag.h"
+#include <cstdlib>
+#include <cassert>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+using namespace renyp_ns_one;
 
 int main() { 
   

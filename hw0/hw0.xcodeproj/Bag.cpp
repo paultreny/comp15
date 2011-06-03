@@ -8,3 +8,30 @@
 
 #include "Bag.h"
 
+
+
+
+class Bag {
+	
+private:
+  
+  // your code
+	
+public:
+  
+  Bag(); 
+  
+  
+  
+  void insert(const element_t &item)
+  {
+    
+    
+    
+  }
+  
+  element_t remove(); 
+	
+  bool is_empty() const;
+  
+}
