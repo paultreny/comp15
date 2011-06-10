@@ -7,64 +7,24 @@
 //
 
 #include "Node.h"
-#include <cassert>
-#include <cstdlib>
-
-using namespace std;
 
 namespace renyp_ns_zero
 {
-  // returns length of the Node
-  pos_int length (const Node* head_ptr)
+  void insert (Node*& pointer, const element_t& item)
   {
-    const Node* cursor;
-    pos_int answer;
-    
-    answer = 0;
-    for (cursor = head_ptr; cursor != NULL; cursor = cursor->get_next( ))
-      ++answer;
-    return answer;
+    pointer = new Node(item, pointer);
   }
-  
-  // adds a new Node at the head_ptr
-  void head_insert (Node*& head_ptr, const element_t& item)
+  void remove (Node*& head_ptr)
   {
-    head_ptr = new Node(item, head_ptr);
-  }
-  
-  // adds a new Node in front of the prev_ptr
-  void insert (Node* prev_ptr, const element_t& item)
-  {
-    Node *insert_ptr;
-    
-    insert_ptr = new Node(item, prev_ptr->get_next());
-    prev_ptr->set_next(insert_ptr);
-  }
-  
-  // removes a Node at the head_ptr
-  void head_remove (Node*& head_ptr)
-  {
-    Node *remove_ptr;
-    
-    remove_ptr = head_ptr;
+    Node *temp;
+    temp = head_ptr;
     head_ptr = head_ptr->get_next();
-    delete remove_ptr;
+    delete temp;
   }
   
-  // removes a Node in front of the prev_ptr
-  void remove (Node* prev_ptr)
-  {
-    Node *remove_ptr;
-    
-    remove_ptr = prev_ptr->get_next();
-    prev_ptr->set_next(remove_ptr->get_next());
-    delete remove_ptr;
-  }
-
-  // removes all nodes
   void clear (Node*& head_ptr)
   {
     while (head_ptr != NULL)
-      head_remove(head_ptr);  
+      remove(head_ptr);  
   }
 }

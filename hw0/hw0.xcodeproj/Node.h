@@ -20,48 +20,20 @@ namespace renyp_ns_zero
   
   class Node
   {
-    
-    
-  public:
-    Node (const element_t& init_data = element_t(), Node* init_next = NULL) {node_data = init_data; node_next = init_next; }
-    
-    void set_data (const element_t& new_data) {node_data = new_data; }
-    void set_next (Node* new_next) { node_next = new_next; }
-    
-    element_t get_data () const { return node_data; }
-    
-    const Node* get_next () const {return node_next; }
-    Node* get_next() {return node_next; }
-    
-  private:
-    element_t node_data;
-    Node* node_next;
-};
+    public:
+      Node (const element_t& init_data = element_t(), Node* init_next = NULL) {node_data = init_data; node_next = init_next; }
+      void set_data (const element_t& new_data) {node_data = new_data; }
+      void set_next (Node* new_next) { node_next = new_next; }
+      element_t get_data () const { return node_data; }
+      Node* get_next() {return node_next; }
+      const Node* get_next () const {return node_next; }
+    private:
+      element_t node_data;
+      Node* node_next;
+  };
   
-  pos_int length (const Node* head_ptr);
-  void head_insert (Node*& head_ptr, const element_t& item);
-  void insert (Node* prev_ptr, const element_t& item);
-  Node* search (Node* head, const element_t& target);
-  const Node* search (const Node* head_ptr, const element_t& target);
-  Node* locate (Node* head_ptr, pos_int position);
-  const Node* locate (const Node* head_ptr, pos_int position);
-  
-  void head_remove (Node*& head_ptr);
-  void remove (Node* prev_ptr);
+  void insert (Node*& pointer, const element_t& item);
+  void remove (Node*& head_ptr);
   void clear (Node*& head_ptr);
-  
 }
-
-
 #endif
-
-
-
-
-
-
-
-
-
-
-

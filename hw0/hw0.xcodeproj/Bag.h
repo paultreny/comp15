@@ -7,29 +7,31 @@
 //
 
 #ifndef RENYP_NS_ONE
-#define RENYP_NS_ONE // a standard way to make sure #include only includes this file once (see Section 2.3 in the book)
+#define RENYP_NS_ONE
 
+#include <cstdlib>
 #include "Node.h"
+
+using namespace std;
 
 namespace renyp_ns_one
 {
-  typedef Node::element_t //define element_t as an integer for this assignment
+  typedef Node::element_t
   typedef Node::pos_int pos_int;
   
   class Bag
   {
   public:
-    Bag();
-    Bag(const Bag& source);
-    ~Bag();
+    Bag() { head = NULL; total_nodes = 0; }
+    ~Bag() { clear(head); total_nodes = 0; }
     
-    void insert(const element_t& item);
-    element_t remove();
-    bool is_empty() const;
-
+    void insert(const element_t& item){head_insert(head, item); ++total_nodes;
+      
+    element_t remove() { remove(head); --total_nodes; }
+    bool is_empty() const { return !bool(total_nodes); }
+  
     void operator =(const Bag& source);
     pos_int size() const {return total_nodes; }
-  
   private:
     Node* head;
     element_t data;
