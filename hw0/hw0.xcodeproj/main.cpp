@@ -11,7 +11,7 @@
 #include <stdexcept>
 
 using namespace std;
-using namespace renyp_ns_one;
+using namespace renyp_ns_zero;
 
 //void print_bag (const Bag& mybag);
 
@@ -29,7 +29,7 @@ int main() {
   }
   cout << "Numbers inserted into Bag!" << endl;
   cout << bag_1.size() << " items" << endl;
-  for (int i = bag_1.size(); i > 0; i--)
+  for (pos_int i = bag_1.size(); i > 0; i--)
     {
       cout << bag_1.remove() << " removed." << endl;
     }

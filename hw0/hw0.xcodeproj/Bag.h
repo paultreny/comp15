@@ -29,5 +29,5 @@ namespace renyp_ns_zero
     Node* head;
     element_t data;
     pos_int total_nodes;
-  }
+  };
 }
