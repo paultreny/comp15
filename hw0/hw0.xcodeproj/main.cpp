@@ -20,8 +20,9 @@ int main() {
 	Bag bag_1;
   element_t input = 0;
   cout << "[hw0] Let's test some bags!" << endl;
-  cout << "[hw0] Attempting to remove an item from an empty Bag: ";
-  cout << bag_1.remove();
+  cout << "[hw0] Prevented crash from removing from empty bag? ";
+  cout << boolalpha;
+  cout << !bag_1.remove() << endl;
   cout << "[hw0] Enter numbers (separated by spaces)" << endl;
   cout << "[hw0] Enter a negative number and press Enter when done:";
   while (true)
@@ -37,8 +38,7 @@ int main() {
     {
       cout << "[hw0] "<< bag_1.remove() << " removed." << endl;
     }
-  cout << "[hw0] Checking if Bag is empty... " << (bag_1.is_empty() ? "False":"True")
-  << endl;
+  cout << "[hw0] Checking if Bag is empty... " << bag_1.is_empty() << endl;
   
   cout << "[hw0] Goodbye!" << endl;
   

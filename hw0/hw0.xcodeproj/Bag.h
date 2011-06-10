@@ -22,7 +22,7 @@ namespace renyp_ns_zero
     
     void insert(const element_t& item){node_insert(head, item); ++total_nodes;}
     element_t remove();
-    bool is_empty() const { return !bool(total_nodes); }
+    bool is_empty() const { return !(bool(total_nodes)); }
     pos_int size() const {return total_nodes; }
     
   private:
