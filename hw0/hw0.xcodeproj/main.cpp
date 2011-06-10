@@ -18,11 +18,11 @@ using namespace renyp_ns_zero;
 int main() { 
   
 	Bag bag_1;
-  int input;
+  int input = 0;
   cout << "Let's test some bags!\nEnter some numbers, then" << endl;
   cout << "Enter a negative number when done:";
   cin >> input;
-  while (input >= 0);
+  for (int z=0; z<5; z++)
   {
     bag_1.insert(input);
     cin >> input;

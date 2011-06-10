@@ -15,9 +15,9 @@ namespace renyp_ns_zero
     return grabbed;
   }
   
-  void node_insert (Node*& pointer, const element_t& item)
+  void node_insert (Node*& head_ptr, const element_t& item)
   {
-    pointer = new Node(item, pointer);
+    head_ptr = new Node(item, head_ptr);
   }
   
   element_t node_remove (Node*& head_ptr)
