@@ -26,14 +26,13 @@ namespace renyp_ns_zero
       element_t get_data () const { return node_data; }
       Node* get_next() {return node_next; }
       const Node* get_next () const {return node_next; }
-    
     private:
       element_t node_data;
       Node* node_next;
   };
   
   void node_insert (Node*& pointer, const element_t& item);
-  void node_remove (Node*& head_ptr);
+  element_t node_remove (Node*& head_ptr);
   void clear (Node*& head_ptr);
 }
 #endif
