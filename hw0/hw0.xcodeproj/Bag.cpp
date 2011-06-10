@@ -7,8 +7,9 @@
 #include "Node.h"
 #include "Bag.h"
 
-namespace renyp_ns_zero
+namespace renyp_ns_zero // custom namespace
 {
+  // removes an item from the bag, decrements total_nodes
   element_t Bag::remove()
   {
     if (!is_empty())

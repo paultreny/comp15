@@ -7,14 +7,14 @@
 #ifndef RENYP_NS_ZERO
 #define RENYP_NS_ZERO
 
-#include <cstdlib>
+#include <cstdlib> // used for NULL & std::size_t
 
 using namespace std;
 
-namespace renyp_ns_zero
+namespace renyp_ns_zero // custom namespace
 {
-  typedef int element_t;
-  typedef std::size_t pos_int;
+  typedef int element_t; // sets our node data type to int
+  typedef std::size_t pos_int; // non-negative int, used for size
   
   class Node
   {
