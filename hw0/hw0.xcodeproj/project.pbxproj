@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400697ED13A1AB57003671A8 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 400697EB13A1AB57003671A8 /* Node.cpp */; };
 		40FBA65C13991636003083E6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40FBA65B13991636003083E6 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,8 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		400938B51398F0B000930D37 /* hw0.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = hw0.cpp; path = hw0.xcodeproj/hw0.cpp; sourceTree = "<group>"; };
-		400938B61398F0B000930D37 /* hw0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hw0.h; path = hw0.xcodeproj/hw0.h; sourceTree = "<group>"; };
+		400697EB13A1AB57003671A8 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = hw0.xcodeproj/Node.cpp; sourceTree = "<group>"; };
+		400697EC13A1AB57003671A8 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = hw0.xcodeproj/Node.h; sourceTree = "<group>"; };
+		400938B51398F0B000930D37 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = hw0.xcodeproj/main.cpp; sourceTree = "<group>"; };
 		400938B71398F0D300930D37 /* Bag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bag.h; path = hw0.xcodeproj/Bag.h; sourceTree = "<group>"; };
 		400938B81398F32B00930D37 /* Bag.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Bag.cpp; path = hw0.xcodeproj/Bag.cpp; sourceTree = "<group>"; };
 		40FBA65713991636003083E6 /* hw0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hw0; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,10 +48,11 @@
 		400938AC1398F06E00930D37 = {
 			isa = PBXGroup;
 			children = (
+				400697EB13A1AB57003671A8 /* Node.cpp */,
+				400697EC13A1AB57003671A8 /* Node.h */,
 				400938B81398F32B00930D37 /* Bag.cpp */,
 				400938B71398F0D300930D37 /* Bag.h */,
-				400938B51398F0B000930D37 /* hw0.cpp */,
-				400938B61398F0B000930D37 /* hw0.h */,
+				400938B51398F0B000930D37 /* main.cpp */,
 				40FBA65A13991636003083E6 /* hw0 */,
 				40FBA65813991636003083E6 /* Products */,
 			);
@@ -123,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40FBA65C13991636003083E6 /* main.cpp in Sources */,
+				400697ED13A1AB57003671A8 /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +206,7 @@
 				40FBA66013991636003083E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
