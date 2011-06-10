@@ -39,11 +39,8 @@
 /* Begin PBXFileReference section */
 		400697EB13A1AB57003671A8 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = hw0.xcodeproj/Node.cpp; sourceTree = "<group>"; };
 		400697EC13A1AB57003671A8 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = hw0.xcodeproj/Node.h; sourceTree = "<group>"; };
-		400697F313A1EC0D003671A8 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
-		400697F813A1EC0D003671A8 /* main.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = main.1; sourceTree = "<group>"; };
-		4006980313A1F33D003671A8 /* hw0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hw0; sourceTree = BUILT_PRODUCTS_DIR; };
-		4006980613A1F33D003671A8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		4006980813A1F33D003671A8 /* hw0.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hw0.1; sourceTree = "<group>"; };
+		400697F313A1EC0D003671A8 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = main; path = /Users/paulreny/GitHub/comp15/hw0/build/Release/main; sourceTree = "<absolute>"; };
+		4006980313A1F33D003671A8 /* hw0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = hw0; path = /Users/paulreny/GitHub/comp15/hw0/build/Release/hw0; sourceTree = "<absolute>"; };
 		400938B51398F0B000930D37 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = hw0.xcodeproj/main.cpp; sourceTree = "<group>"; };
 		400938B71398F0D300930D37 /* Bag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bag.h; path = hw0.xcodeproj/Bag.h; sourceTree = "<group>"; };
 		400938B81398F32B00930D37 /* Bag.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Bag.cpp; path = hw0.xcodeproj/Bag.cpp; sourceTree = "<group>"; };
@@ -67,23 +64,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		400697F513A1EC0D003671A8 /* main */ = {
-			isa = PBXGroup;
-			children = (
-				400697F813A1EC0D003671A8 /* main.1 */,
-			);
-			path = main;
-			sourceTree = "<group>";
-		};
-		4006980513A1F33D003671A8 /* hw0 */ = {
-			isa = PBXGroup;
-			children = (
-				4006980613A1F33D003671A8 /* main.cpp */,
-				4006980813A1F33D003671A8 /* hw0.1 */,
-			);
-			path = hw0;
-			sourceTree = "<group>";
-		};
 		400938AC1398F06E00930D37 = {
 			isa = PBXGroup;
 			children = (
@@ -92,10 +72,6 @@
 				400938B81398F32B00930D37 /* Bag.cpp */,
 				400938B71398F0D300930D37 /* Bag.h */,
 				400938B51398F0B000930D37 /* main.cpp */,
-				400697F313A1EC0D003671A8 /* main */,
-				400697F513A1EC0D003671A8 /* main */,
-				4006980313A1F33D003671A8 /* hw0 */,
-				4006980513A1F33D003671A8 /* hw0 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -292,6 +268,7 @@
 				400697FB13A1EC0D003671A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4006980913A1F33D003671A8 /* Build configuration list for PBXNativeTarget "hw0" */ = {
 			isa = XCConfigurationList;
@@ -300,6 +277,7 @@
 				4006980B13A1F33D003671A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		400938B11398F06E00930D37 /* Build configuration list for PBXProject "hw0" */ = {
 			isa = XCConfigurationList;
