@@ -1,10 +1,8 @@
 //  Paul Reny - COMP 15
-//  Bag.h
-//  hw0
-//
-//  Created by Paul Reny on 6/3/11.
-//  Copyright 2011 Reny Design. All rights reserved.
-//
+//  2011/06/09
+//  Assignment: hw0
+//  File: Bag.h
+//  
 
 #ifndef RENYP_NS_ONE
 #define RENYP_NS_ONE
@@ -25,9 +23,9 @@ namespace renyp_ns_one
     Bag() { head = NULL; total_nodes = 0; }
     ~Bag() { clear(head); total_nodes = 0; }
     
-    void insert(const element_t& item){head_insert(head, item); ++total_nodes;
+    void insert(const element_t& item){insert(head, item); ++total_nodes;}
       
-    element_t remove() { remove(head); --total_nodes; }
+    element_t remove() {remove(head); --total_nodes; }
     bool is_empty() const { return !bool(total_nodes); }
   
     void operator =(const Bag& source);

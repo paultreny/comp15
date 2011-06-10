@@ -1,10 +1,8 @@
-//
-//  Node.cpp
-//  hw0
-//
-//  Created by Paul Reny on 6/9/11.
-//  Copyright 2011 Apple Computer. All rights reserved.
-//
+//  Paul Reny - COMP 15
+//  2011/06/09
+//  Assignment: hw0
+//  File: Node.cpp
+//  
 
 #include "Node.h"
 
