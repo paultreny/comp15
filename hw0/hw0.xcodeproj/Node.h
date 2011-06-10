@@ -8,13 +8,12 @@
 #define RENYP_NS_ZERO
 
 #include <cstdlib>
-#include <string>
 
 using namespace std;
 
 namespace renyp_ns_zero
 {
-  typedef string element_t;
+  typedef int element_t;
   typedef std::size_t pos_int;
   
   class Node
@@ -33,8 +32,8 @@ namespace renyp_ns_zero
       Node* node_next;
   };
   
-  void insert (Node*& pointer, const element_t& item);
-  void remove (Node*& head_ptr);
+  void node_insert (Node*& pointer, const element_t& item);
+  void node_remove (Node*& head_ptr);
   void clear (Node*& head_ptr);
 }
 #endif

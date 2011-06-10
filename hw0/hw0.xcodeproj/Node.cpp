@@ -8,11 +8,12 @@
 
 namespace renyp_ns_zero
 {
-  void insert (Node*& pointer, const element_t& item)
+  void node_insert (Node*& pointer, const element_t& item)
   {
     pointer = new Node(item, pointer);
   }
-  void remove (Node*& head_ptr)
+  
+  void node_remove (Node*& head_ptr)
   {
     Node *temp;
     temp = head_ptr;
@@ -23,6 +24,6 @@ namespace renyp_ns_zero
   void clear (Node*& head_ptr)
   {
     while (head_ptr != NULL)
-      remove(head_ptr);  
+      node_remove(head_ptr);  
   }
 }
