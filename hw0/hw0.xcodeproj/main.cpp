@@ -24,7 +24,7 @@ int main()
   element_t input = element_t();
   
   cout << "[hw0] Let's test my Bag!" << endl;
-  cout << "[hw0] (T|F) Prevented crash from removing from empty bag? "; 
+  cout << "[hw0] Prevented crash from removing from empty bag? "; 
   cout << boolalpha; // sets cout to display true/false instead of 1/0
   cout << !bag_1.remove() << endl; // Bag.remove() returns 0 if empty
   
@@ -45,10 +45,10 @@ int main()
   for (pos_int i = bag_1.size(); i > 0; i--) // removing items until empty
     {
       cout << bag_1.remove() << " ";
+      if (i==1) {cout << "removed.\n[hw0] ";}
     }
-  cout << "removed." << endl;
-  
-  cout << "[hw0] Checking if Bag is empty... " << bag_1.is_empty() << endl;
+ 
+  cout << "Checking if Bag is empty... " << bag_1.is_empty() << endl;
   
   cout << "[hw0] Goodbye!" << endl;
   
