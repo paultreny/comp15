@@ -22,6 +22,7 @@ namespace renyp_ns_zero
   
   element_t node_remove (Node*& head_ptr)
   {
+    if (head_ptr == NULL) {return -1;}
     Node *temp;
     element_t grabbed = head_ptr->get_data();
     temp = head_ptr;

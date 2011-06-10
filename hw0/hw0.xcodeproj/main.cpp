@@ -18,25 +18,29 @@ using namespace renyp_ns_zero;
 int main() { 
   
 	Bag bag_1;
-  int input = 0;
-  cout << "Let's test some bags!\nEnter some numbers, then" << endl;
-  cout << "Enter a negative number when done:";
-  cin >> input;
-  for (int z=0; z<5; z++)
+  element_t input = 0;
+  cout << "[hw0] Let's test some bags!" << endl;
+  cout << "[hw0] Attempting to remove an item from an empty Bag: ";
+  cout << bag_1.remove();
+  cout << "[hw0] Enter numbers (separated by spaces)" << endl;
+  cout << "[hw0] Enter a negative number and press Enter when done:";
+  while (true)
   {
-    bag_1.insert(input);
     cin >> input;
+    if (input < 0) break;
+    bag_1.insert(input);
   }
-  cout << "Numbers inserted into Bag!" << endl;
-  cout << bag_1.size() << " items" << endl;
+  cout << "[hw0] Numbers inserted into Bag!" << endl;
+  cout << "[hw0] " << bag_1.size() << " items" << endl;
+  
   for (pos_int i = bag_1.size(); i > 0; i--)
     {
-      cout << bag_1.remove() << " removed." << endl;
+      cout << "[hw0] "<< bag_1.remove() << " removed." << endl;
     }
-  cout << "Checking if Bag is empty... " << (bag_1.is_empty() ? "True":"False")
+  cout << "[hw0] Checking if Bag is empty... " << (bag_1.is_empty() ? "False":"True")
   << endl;
   
-  cout << "Goodbye!" << endl;
+  cout << "[hw0] Goodbye!" << endl;
   
   // create a few Bags, insert and remove things, and make sure they have all
 	// the properties of a bag.

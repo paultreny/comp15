@@ -21,7 +21,7 @@ namespace renyp_ns_zero
     ~Bag() { clear(head); total_nodes = 0; }
     
     void insert(const element_t& item){node_insert(head, item); ++total_nodes;}
-    element_t remove() {return(node_remove(head)); --total_nodes; }
+    element_t remove() { --total_nodes; return(node_remove(head)); }
     bool is_empty() const { return !bool(total_nodes); }
     pos_int size() const {return total_nodes; }
     
