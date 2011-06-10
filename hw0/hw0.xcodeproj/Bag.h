@@ -14,8 +14,8 @@ using namespace std;
 
 namespace renyp_ns_one
 {
-  typedef Node::element_t
-  typedef Node::pos_int pos_int;
+  typedef renyp_ns_one::Node::element_t
+  typedef renyp_ns_one::Node::pos_int pos_int;
   
   class Bag
   {
