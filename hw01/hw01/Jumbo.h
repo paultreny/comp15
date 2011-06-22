@@ -15,18 +15,20 @@ class Jumbo
   //friend Jumbo operator+ (const Jumbo&, const Jumbo&);
 
 public:
-  Jumbo();
-  ~Jumbo();
+  Jumbo(); // DEFAULT CONSTRUCTOR
+  Jumbo (unsigned int value); // INT CONSTRUCTOR
+  Jumbo (const string& valuestr); // STRING CONSTRUCTOR
+  
+  Jumbo (const Jumbo& source); // COPY CONSTRUCTOR
+  ~Jumbo(); // DESTRUCTOR
+  
+  
+  
+  string str() const; // Returns string representation of number
+  Jumbo add (const Jumbo& source) const; // Adds one Jumbo to another
 
-  Jumbo (unsigned int value);
-  Jumbo (const Jumbo& source);
-  Jumbo (const string& valuestr);
-  
-  string str() const;
-  
-  Jumbo& operator= (const Jumbo& source); // make sure to check if assigning obj to itself
-  Jumbo add (const Jumbo& source) const;
-  
+  Jumbo& operator= (const Jumbo& source); //check if assigning self
+    
   /* OPTIONAL   
    Jumbo operator+(const Jumbo &addend) const;
    Jumbo operator+(unsigned int value) const;
@@ -43,19 +45,14 @@ public:
    bool operator!=(const Jumbo &RHS) const;
    
    Hint: The best way to do this is to write one function that takes two Jumbos (or their private internal representations) and returns:
-   
-   zero if they are equal
-   a negative number if the first Jumbo is less than the other, or
-   a positive number if the first Jumbo is greater than the other. 
-   
-   */
+   -zero if they are equal
+   -a negative number if the first Jumbo is less than the other, or
+   -a positive number if the first Jumbo is greater than the other. 
+  */
+  
   //  friend istream& operator>> (istream &in, Jumbo &n);
   
 
 private:
-  list<int>* head;
-  
-
- 
-
+  list<unsigned int>* head;
 };
