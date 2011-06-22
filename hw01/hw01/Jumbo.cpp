@@ -7,12 +7,14 @@
 //
 
 #include "Jumbo.h"
+#include <iterator>
+#include <list>
 
 ostream& operator<< (ostream& out, const Jumbo &n)
 {
   list<unsigned int>::const_iterator it;
   if (n.head->empty()) {
-    cout << "NULL" << endl;
+    cout << "Empty" << endl;
     return out;
   }
   for (it = n.head->begin(); it != n.head->end(); ++it)
@@ -75,17 +77,52 @@ string Jumbo::str() const {
 }
 
 Jumbo Jumbo::add (const Jumbo& source) const {
+  list <unsigned int> * new_head = new list<unsigned int> ();
   if (source.head == NULL && this->head == NULL) return Jumbo();
   if (source.head == NULL) return *this;
   if (this->head == NULL) return source;
-  if (&source == this) return *this; //double the number
-  if (source.head->size() > head->size()) {
-    for (list<unsigned int>::const_iterator it = head->begin(); it != head->end(); ++it)
-      {
-        
-      }  
+  if (&source == this) return *this; //double the number TBI
+  unsigned int carryover = 0;
+  if (source.head->size() > head->size())
+  {
+    list<unsigned int>::const_reverse_iterator tir = source.head->rbegin();
+    for (list<unsigned int>::const_reverse_iterator rit = head->rbegin(); rit != head->rend(); ++rit)
+    {
+      unsigned int temp = (*rit + *tir + carryover);
+      new_head->push_front(temp%10);
+      carryover = temp/10;
+      ++tir;
+    }
+    while (tir != source.head->rend())
+    {
+      unsigned int temptwo = (*tir+carryover);
+      new_head->push_front(temptwo%10);
+      carryover = temptwo/10;
+      ++tir;
+    }
   }
-  return source;
+  else if (head->size() > source.head->size())
+  {
+    list<unsigned int>::const_reverse_iterator rit = head->rbegin();
+    for (list<unsigned int>::const_reverse_iterator tir = source.head->rbegin(); tir != source.head->rend(); ++tir)
+    {
+      unsigned int temp = (*rit + *tir + carryover);
+      new_head->push_front(temp%10);
+      carryover = temp/10;
+      ++rit;
+    }
+    while (rit != head->rend())
+    {
+      unsigned int temptwo = (*rit+carryover);
+      new_head->push_front(temptwo%10);
+      carryover = temptwo/10;
+      ++rit;
+    }    
+  }
+  if (carryover == 1) new_head->push_front(1);
+  Jumbo RoboJumbo;
+  RoboJumbo.head = new_head;
+  return RoboJumbo;
 }
 
 Jumbo& Jumbo::operator= (const Jumbo& source) { //check if assigning self
