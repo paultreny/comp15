@@ -37,7 +37,7 @@ Jumbo::Jumbo (const string& valuestr)
   head = new list<int> ();
   for (int i = 0; i != valuestr.size(); i++)
   {
-    head->push_back(valuestr[i]-'0');
+    head->push_back((valuestr[i])-'0');
   }
 }
 
@@ -60,11 +60,9 @@ Jumbo::Jumbo (const Jumbo& source)
 string Jumbo::str() const
 {
   string temp;
-  list<int>::iterator iter;
-  if (head->empty() == true) return "empty";
+  list<int>::const_iterator iter;
   for (iter = head->begin(); iter != head->end(); ++iter)
   {
-    cout << *iter;
     int tempnum = *iter;
     tempnum+=48;
     temp+=(char(tempnum));
@@ -75,13 +73,21 @@ string Jumbo::str() const
 }
 
 
-/*Jumbo::Jumbo Jumbo::add (const Jumbo&) const
+Jumbo Jumbo::add (const Jumbo& source) const
 {
+  if (source.head == NULL && this->head == NULL) return Jumbo();
+  if (source.head == NULL) return *this;
+  if (this->head == NULL) return source;
+  if (&source == this) return *this; //double the number
+  if (source.head->size() > head->size())
+    for (list<int>::iterator it = head->begin(); it != head->end(); ++it)
+      {
+        
+        
+      }  
 
-  
-  
-  
-}*/
+  return source;
+}
 Jumbo& Jumbo::operator= (const Jumbo& source)
 {
   if (source.head == this->head) return *this;
@@ -95,7 +101,7 @@ Jumbo& Jumbo::operator= (const Jumbo& source)
 ostream& operator<< (ostream& out, const Jumbo &n)
 {
   list<int>::iterator it;
-  for (it = n.head->begin(); it != n.head->end(); it++)
+  for (it = n.head->begin(); it != n.head->end(); ++it)
   {
     cout << *it;
   }

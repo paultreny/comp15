@@ -25,7 +25,7 @@ public:
   string str() const;
   
   Jumbo& operator= (const Jumbo& source); // make sure to check if assigning obj to itself
-  Jumbo add (const Jumbo&) const { return Jumbo("test");};
+  Jumbo add (const Jumbo& source) const;
   
   /* OPTIONAL   
    Jumbo operator+(const Jumbo &addend) const;
