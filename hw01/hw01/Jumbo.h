@@ -23,13 +23,13 @@ public:
   Jumbo (const string& valuestr);
   
   
-  string str() const;
+  string str() const { };
   
   
   
   Jumbo& operator= (const Jumbo&); // make sure to check if assigning obj to itself
   
-  Jumbo add (const Jumbo& added) const;
+  Jumbo add (const Jumbo&) const {};
   
   /* OPTIONAL   
    Jumbo operator+(const Jumbo &addend) const;
