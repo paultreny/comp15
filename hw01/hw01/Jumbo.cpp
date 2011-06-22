@@ -17,13 +17,18 @@ Jumbo::Jumbo()
 Jumbo::Jumbo (unsigned int value)
 {
   head = new list<int> ();
-  if (value == 0) head->push_front(0);
+  if (value == 0)
+  {
+    head->push_back(0);
+    return;
+  }
   else
   while (value != 0)
   {
-    head->push_front(value%10);
+    head->push_back(value%10);
     value /= 10;
   }
+  head->reverse();
 }
 
 
@@ -44,25 +49,35 @@ Jumbo::~Jumbo()
 
 Jumbo::Jumbo (const Jumbo& source)
 {
-  head = new list<int> ();
-  head = source.head;
+  this->head = new list<int> ();
+  this->head = source.head;
+  /*for (list<int>::iterator it = source.head->begin(); it != source.head->end(); it++)
+  {
+    head->push_back(*it);
+  }*/
 }
 
 string Jumbo::str() const
 {
-  string temp = "";
-  if (head == NULL) return "NULL"; 
-  for (list<int>::iterator it = head->begin(); it != head->end(); it++)
+  string temp;
+  list<int>::iterator iter;
+  if (head->empty() == true) return "empty";
+  for (iter = head->begin(); iter != head->end(); ++iter)
   {
-    temp+=(char(*it+48));   
+    cout << *iter;
+    int tempnum = *iter;
+    tempnum+=48;
+    temp+=(char(tempnum));
+    //cout << temp << " " << endl;
   }
+  
   return temp;
 }
 
 
 /*Jumbo::Jumbo Jumbo::add (const Jumbo&) const
 {
-  
+
   
   
   
@@ -70,8 +85,8 @@ string Jumbo::str() const
 Jumbo& Jumbo::operator= (const Jumbo& source)
 {
   if (source.head == this->head) return *this;
-  head->clear();
-  head = source.head;
+  this->head->clear();
+  this->head = source.head;
   return *this;
 }// make sure to check if assigning obj to itself
 

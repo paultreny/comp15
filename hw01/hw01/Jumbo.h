@@ -16,22 +16,15 @@ class Jumbo
 
 public:
   Jumbo();
-  
-  Jumbo(const Jumbo&);
-  
   ~Jumbo();
 
   Jumbo (unsigned int value);
-  
+  Jumbo (const Jumbo& source);
   Jumbo (const string& valuestr);
-  
   
   string str() const;
   
-  
-  
-  Jumbo& operator= (const Jumbo&); // make sure to check if assigning obj to itself
-  
+  Jumbo& operator= (const Jumbo& source); // make sure to check if assigning obj to itself
   Jumbo add (const Jumbo&) const { return Jumbo("test");};
   
   /* OPTIONAL   
@@ -60,7 +53,7 @@ public:
   
 
 private:
-  list<int> * head;
+  list<int>* head;
   
 
  
