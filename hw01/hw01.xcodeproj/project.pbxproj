@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40B6C8CF13B17A3500E3F0AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B6C8CE13B17A3500E3F0AC /* main.cpp */; };
+		40B6C8D813B17BB000E3F0AC /* Jumbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B6C8D613B17BB000E3F0AC /* Jumbo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,8 @@
 		40B6C8CA13B17A3500E3F0AC /* hw01 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hw01; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B6C8CE13B17A3500E3F0AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		40B6C8D013B17A3500E3F0AC /* hw01.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hw01.1; sourceTree = "<group>"; };
+		40B6C8D613B17BB000E3F0AC /* Jumbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Jumbo.cpp; sourceTree = "<group>"; };
+		40B6C8D713B17BB000E3F0AC /* Jumbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jumbo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 			children = (
 				40B6C8CE13B17A3500E3F0AC /* main.cpp */,
 				40B6C8D013B17A3500E3F0AC /* hw01.1 */,
+				40B6C8D613B17BB000E3F0AC /* Jumbo.cpp */,
+				40B6C8D713B17BB000E3F0AC /* Jumbo.h */,
 			);
 			path = hw01;
 			sourceTree = "<group>";
@@ -115,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40B6C8CF13B17A3500E3F0AC /* main.cpp in Sources */,
+				40B6C8D813B17BB000E3F0AC /* Jumbo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
