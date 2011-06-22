@@ -78,12 +78,20 @@ string Jumbo::str() const {
 
 Jumbo Jumbo::add (const Jumbo& source) const {
   list <unsigned int> * new_head = new list<unsigned int> ();
+  unsigned int carryover = 0;
   if (source.head == NULL && this->head == NULL) return Jumbo();
   if (source.head == NULL) return *this;
   if (this->head == NULL) return source;
-  if (&source == this) return *this; //double the number TBI
-  unsigned int carryover = 0;
-  if (source.head->size() > head->size())
+  if (&source == this)
+  {
+    for (list<unsigned int>::const_reverse_iterator itt = head->rbegin(); itt != head->rend(); ++itt)
+    {
+      unsigned int temp = (*itt + *itt + carryover);
+      new_head->push_front(temp%10);
+      carryover = temp/10;
+    }
+  } //double the number TBI
+  else if (source.head->size() >= head->size())
   {
     list<unsigned int>::const_reverse_iterator tir = source.head->rbegin();
     for (list<unsigned int>::const_reverse_iterator rit = head->rbegin(); rit != head->rend(); ++rit)

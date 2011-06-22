@@ -13,7 +13,7 @@
 using namespace std;
 
 int main() {   
-	Jumbo total(1234);	// (test integer constructor)
+	Jumbo total(98989);	// (test integer constructor)
 	cout << total << endl; // test operator<<
   while (true) {    
 		string instr;  // user input 
@@ -23,7 +23,8 @@ int main() {
     Jumbo a = total; // create a from running total (test copy constructor)
 		Jumbo b(instr); // create b from input (test string constructor)
     cout << "Jumbo A: " << a << endl;
-    Jumbo c = a.add(b); // create c from adding a + b (test add function)
+    Jumbo d;
+    Jumbo c = a.add(d); // create c from adding a + b (test add function)
     cout << "Jumbo B: " << b << endl;
     cout << "Jumbo C: " << c << endl;
     //cout << "b.str() :" << b.str() << endl;
