@@ -200,6 +200,7 @@
 				40B6C8D513B17A3500E3F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

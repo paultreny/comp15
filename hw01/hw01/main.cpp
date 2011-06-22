@@ -3,34 +3,27 @@
 // main.cpp
 //
 
-#include <iostream>
-#include <cstdlib>
-#include <list>
+/* Compute and print Fibonacci numbers */
 #include "Jumbo.h"
-#include <iterator>
-#include <algorithm>
+#include <iostream>
 
 using namespace std;
 
-int main() {   
-	Jumbo total(98989);	// (test integer constructor)
-	cout << total << endl; // test operator<<
-  while (true) {    
-		string instr;  // user input 
-    cout << "Running sum is: " << total.str() << endl << endl; // (test str() function)
-    cout << "Add:  "; 	
-		cin >> instr;
-    Jumbo a = total; // create a from running total (test copy constructor)
-		Jumbo b(instr); // create b from input (test string constructor)
-    cout << "Jumbo A: " << a << endl;
-    Jumbo d;
-    Jumbo c = a.add(d); // create c from adding a + b (test add function)
-    cout << "Jumbo B: " << b << endl;
-    cout << "Jumbo C: " << c << endl;
-    //cout << "b.str() :" << b.str() << endl;
-    total = b; // assign to total (test assignment operator)
-    total = total;
-		cout << "Jumbo total: " << total << endl;
-	}
-  return 0;  
+int main() {
+  Jumbo a(1); // 1st                                                                                                                                         
+  Jumbo b(1); // 2nd                                                                                                                                        
+  int count = 0; // keep track of N for Nth Fib Sequence
+  while (true) {
+    
+    // a holds the value of the Nth Fib. number, if we start counting from                                                                                  
+    // Fib. numbers 0 and 1 are 0 and 1.                                                                                                                    
+    if (count %100 == 0)  cout << "N=" << count << " Fib=" << a.str() << endl;
+    // Only output if N is a multiple of 100 ^
+    Jumbo c = a.add(b); // c = a + b                                                                                                                        
+    count++;
+    a = b; // copy                                                                                                                                          
+    b = c; // copy                                                                                                                                          
+  }
+  return 0;
+  
 }
