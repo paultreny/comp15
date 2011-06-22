@@ -11,6 +11,9 @@ using namespace std;
 
 class Jumbo
 {
+  friend ostream& operator<< (ostream &out, const Jumbo &n);
+  //friend Jumbo operator+ (const Jumbo&, const Jumbo&);
+
 public:
   Jumbo();
   
@@ -23,13 +26,13 @@ public:
   Jumbo (const string& valuestr);
   
   
-  string str() const { };
+  string str() const;
   
   
   
   Jumbo& operator= (const Jumbo&); // make sure to check if assigning obj to itself
   
-  Jumbo add (const Jumbo&) const {};
+  Jumbo add (const Jumbo&) const { return Jumbo("test");};
   
   /* OPTIONAL   
    Jumbo operator+(const Jumbo &addend) const;
@@ -53,12 +56,11 @@ public:
    a positive number if the first Jumbo is greater than the other. 
    
    */
-  friend Jumbo operator+ (const Jumbo&, const Jumbo&);
   //  friend istream& operator>> (istream &in, Jumbo &n);
-  //  friend ostream& operator<< (ostream &out, const Jumbo &n);
+  
 
 private:
-  list<size_t> * head;
+  list<int> * head;
   
 
  
