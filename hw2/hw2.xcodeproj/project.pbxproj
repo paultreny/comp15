@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4039CF5C13C6DB6A00FE66AF /* SearchTreeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4039CF5A13C6DB6A00FE66AF /* SearchTreeNode.cpp */; };
 		408C466113C6B53F00ECEF02 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 408C466013C6B53F00ECEF02 /* main.cpp */; };
 		408C466A13C6B54900ECEF02 /* Dictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 408C466813C6B54900ECEF02 /* Dictionary.cpp */; };
 /* End PBXBuildFile section */
@@ -25,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		4039CF5813C6D8C400FE66AF /* words */ = {isa = PBXFileReference; lastKnownFileType = text; path = words; sourceTree = "<group>"; };
+		4039CF5A13C6DB6A00FE66AF /* SearchTreeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SearchTreeNode.cpp; sourceTree = "<group>"; };
+		4039CF5B13C6DB6A00FE66AF /* SearchTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTreeNode.h; sourceTree = "<group>"; };
 		408C465C13C6B53F00ECEF02 /* hw2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hw2; sourceTree = BUILT_PRODUCTS_DIR; };
 		408C466013C6B53F00ECEF02 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		408C466213C6B53F00ECEF02 /* hw2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hw2.1; sourceTree = "<group>"; };
@@ -64,6 +67,8 @@
 			children = (
 				4039CF5813C6D8C400FE66AF /* words */,
 				408C466013C6B53F00ECEF02 /* main.cpp */,
+				4039CF5A13C6DB6A00FE66AF /* SearchTreeNode.cpp */,
+				4039CF5B13C6DB6A00FE66AF /* SearchTreeNode.h */,
 				408C466813C6B54900ECEF02 /* Dictionary.cpp */,
 				408C466913C6B54900ECEF02 /* Dictionary.h */,
 				408C466213C6B53F00ECEF02 /* hw2.1 */,
@@ -123,6 +128,7 @@
 			files = (
 				408C466113C6B53F00ECEF02 /* main.cpp in Sources */,
 				408C466A13C6B54900ECEF02 /* Dictionary.cpp in Sources */,
+				4039CF5C13C6DB6A00FE66AF /* SearchTreeNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

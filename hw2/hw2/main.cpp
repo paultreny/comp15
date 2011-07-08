@@ -10,6 +10,11 @@
 #include <iostream>
 #include <cctype>
 #include "Dictionary.h"
+#include <queue>
+#include <stack>
+
+// include STL stack and queue
+
 
 using namespace std;
 
@@ -20,7 +25,7 @@ int main (int argc, const char * argv[])
   // STEP: check (using dictionary->lookup) if legal words, of same length
   
   // STEP: create search_nodes (new empty data structure) stack or queue, will do both
-  
+  //explicit queue
   // STEP: create explored_words (empty list) storing all words we encounter in our search
   
   // STEP: create a new search tree node 'root' with word1 and an empty parent path
@@ -59,4 +64,3 @@ int main (int argc, const char * argv[])
   cout << "End" << endl;
   return EXIT_SUCCESS;
 }
-
