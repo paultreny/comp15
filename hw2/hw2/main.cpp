@@ -12,6 +12,7 @@ using namespace comp15;
 #include <iostream>
 #include <cstdlib>
 #include <iostream>
+#include <iomanip>
 #include <cctype>
 #include "Dictionary.h"
 #include "SearchTreeNode.h"
@@ -28,9 +29,10 @@ bool explored (AVLTree<string, string>*& AVLExplored, string& searchword);
 
 int main ()
 {
+  cout << "Welcome to StepByStep" << endl;
   // STEP: create and read-in words to Dictionary
   Dictionary * dict = new Dictionary("/Users/paulreny/GitHub/comp15/hw2/hw2/words");
-  cerr << "Dictionary read in successfully!" << endl;
+  cout << "Dictionary read successful!" << endl;
 
   // STEP: Ask user for word1, word2, read from cin
   string word_1;
@@ -45,7 +47,7 @@ int main ()
         dict->lookup(word_1) &&
         dict->lookup(word_2))
     legalwords = true;
-    else cerr << "Invalid word pair! Try again!" << endl;
+    else cout << "Invalid word pair! Try again!" << endl;
     } while (legalwords == false);
   
   // STEP: choose Queue (q) or Stack (s)
@@ -54,16 +56,16 @@ int main ()
     cin >> qS;
     qS = tolower(qS);
     if (qS != 'q' && qS != 's')
-      cerr << "Invalid choice! Try again!" << endl;
+      cout << "Invalid choice! Try again!" << endl;
   }while (qS != 'q' && qS != 's');
   
   if (qS == 'q')
     queueStepByStep(dict, word_1, word_2);
   if (qS == 's')
     stackStepByStep(dict, word_1, word_2);
-  
   return EXIT_SUCCESS;
 }
+
 
 // QUEUE IMPLEMENTATION
 void queueStepByStep(Dictionary* dict, string& word_1, string& word_2)
@@ -92,12 +94,12 @@ void queueStepByStep(Dictionary* dict, string& word_1, string& word_2)
     // STEP: current_node = search_nodes.remove() (pop next search node off the stack or queue
     SearchTreeNode* current_node = search_nodes->front();
     search_nodes->pop();
-    cout << "Popped " << current_node->word << endl;
+    //cout << "Popped " << current_node->word << endl;
     // "expand" the current search node
     
     // ++num_expanded;
     ++num_expanded;
-    cout << "Num_expanded: " << num_expanded << endl;
+    //cout << "Num_expanded: " << num_expanded << endl;
     
     // FOR (each word 'word' of current_node's word):
     for (size_t position = 0; position < wordsize; position++)
@@ -113,17 +115,32 @@ void queueStepByStep(Dictionary* dict, string& word_1, string& word_2)
         {
           // Print Solution (current_node's path plus word2
           cout << "Path Found!" << endl;
-          cout << word_1 << endl;
+          // cout << word_1 << endl;
           SearchTreeNode* tempNode = current_node;
+          stack<string> * tempStack = new stack<string>;
+          tempStack->push(word_2);
           while (tempNode->parent)
           {
-            cout << tempNode->word << endl;
+            tempStack->push(tempNode->word);
+            // cout << tempNode->word << endl;
             tempNode = tempNode->parent;
+            
           }
-          cout << word_2 << endl;
+          size_t count = 0;
+          cout << setw(2) << count;
+          cout << " " << word_1 << endl;
+          
+          // tempStack->push(word_1);
+          while (!tempStack->empty())
+          {
+            cout << setw(2) << ++count;
+            cout << " " << tempStack->top() << endl;
+            tempStack->pop();
+          }
+          // cout << word_2 << endl;
           // Print number of search nodes expanded
           cout << "Nodes Expanded: " << num_expanded << endl;
-          cout << "End. Time Elapsed: " << timer.elapsed() << endl;
+          cout << "Time Elapsed: " << timer.elapsed() << endl;
           return;
         }
         
@@ -151,6 +168,9 @@ void queueStepByStep(Dictionary* dict, string& word_1, string& word_2)
 */    }
     }              
   }
+  cout << "Darn.\nNo StepByStep solution found..." << endl;
+  cout << "Nodes Expanded: " << num_expanded << endl;
+  cout << "Time Elapsed: " << timer.elapsed() << endl;
   return;
 }
 
