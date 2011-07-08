@@ -4,7 +4,7 @@
 //
 //  Copyright 2011 Reny Design. All rights reserved.
 //
-/*
+
 
 Comparison of Runtimes      &     Nodes Expanded  &   Path Length
 (rounded to the 1000th decimal place)
@@ -44,30 +44,3 @@ directness of the path is not a factor, then the clear
 winner is the Stack, due to it's faster runtime.)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
