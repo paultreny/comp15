@@ -1,0 +1,73 @@
+//  Paul Reny - COMP 15 - 07/07/11
+//  HW2
+//  document_hw2.txt
+//
+//  Copyright 2011 Reny Design. All rights reserved.
+//
+/*
+
+Comparison of Runtimes      &     Nodes Expanded  &   Path Length
+(rounded to the 1000th decimal place)
+
+            Queue     Stack      Queue   Stack      Queue   Stack
+
+cat-dog     0.027     0.015         70      36          3      36 
+
+free-food   0.145     0.191        342     381          4     356
+
+grape-vines 1.796     0.910       5792    2394          8    1811
+
+stack-queue 4.359     4.199      13741   13741          no path
+
+
+When running my StepByStep program, there are a few
+obvious differences between it's performance when
+implemented using a queue versus a stack.
+
+When run with a Queue, we see longer run-times
+in the majority of the cases, with a similar number,
+if not more, nodes being expanded. HOWEVER, the path
+that is generated from word_1 to word_2 is much more
+direct in almost all cases that I have run.
+(see chart above)
+
+When run with a Stack, we gain slightly faster run
+times, but it is at the expense of directness, as you
+can see from the chart above, the stack finds
+increasingly indirect paths as it gets longer words.
+
+For me, personally, I prefer the Queue; I would much
+rather have a closer approximation to what I would
+call a "reasonable" path between words, even if it
+takes slightly longer at runtime. (Of course, if the
+directness of the path is not a factor, then the clear
+winner is the Stack, due to it's faster runtime.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

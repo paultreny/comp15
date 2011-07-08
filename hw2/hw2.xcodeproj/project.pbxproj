@@ -29,6 +29,7 @@
 		4039CF5813C6D8C400FE66AF /* words */ = {isa = PBXFileReference; lastKnownFileType = text; path = words; sourceTree = "<group>"; };
 		4039CF5A13C6DB6A00FE66AF /* SearchTreeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SearchTreeNode.cpp; sourceTree = "<group>"; };
 		4039CF5B13C6DB6A00FE66AF /* SearchTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTreeNode.h; sourceTree = "<group>"; };
+		4041044213C73357007ED7E4 /* document_hw2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = document_hw2.txt; sourceTree = "<group>"; };
 		40767D2413C70B8100E99267 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		40767D2513C70B8100E99267 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		40767D2813C71B9100E99267 /* AVLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVLTree.h; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 				408C466213C6B53F00ECEF02 /* hw2.1 */,
 				40767D2413C70B8100E99267 /* Timer.cpp */,
 				40767D2513C70B8100E99267 /* Timer.h */,
+				4041044213C73357007ED7E4 /* document_hw2.txt */,
 			);
 			path = hw2;
 			sourceTree = "<group>";
