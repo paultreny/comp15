@@ -72,40 +72,40 @@ int main (int argc, const char * argv[])
     ++num_expanded;
     cout << "Num_expanded: " << num_expanded << endl;
     
-    
-    
     // FOR (each word 'word' of current_node's word):
     for (size_t position = 0; position < wordsize; position++)
     {
       for (char letter='a'; letter <= 'z'; letter++)
       {
-        // IF 'word' == word2
-        if (current_node->word == word_2)
+        string successor = current_node->word.substr(0,position) 
+        + letter
+        + current_node->word.substr(position+1, wordsize);
+       
+        // IF successor == word_2
+        if (successor == word_2)
         {
           // Print Solution (current_node's path plus word2
+          cout << "Path Found!" << endl;
+          cout << word_1 << endl;
           SearchTreeNode* tempNode = current_node;
           while (tempNode->parent)
           {
             cout << tempNode->word << endl;
-             tempNode = tempNode->parent;
+            tempNode = tempNode->parent;
           }
           cout << word_2 << endl;
           // Print number of search nodes expanded
           cout << "Nodes Expanded: " << num_expanded << endl;
+          return EXIT_SUCCESS;
         }
         
-      
-        string successor = current_node->word.substr(0,position) 
-                         + letter
-                         + current_node->word.substr(position+1, wordsize);
-        
-        // ELSE if 'word' is legal (in dictionary) && 'word' is not in explored_words:
+        //  IF successor is legal (in dictionary)
         if (dict->lookup(successor))
         {
-          cout << "successor = " << successor << endl;
+          // IF successor is not in explored_words
           if (!explored(explored_words, current_node->word))
           {
-            cout << "Adding " << successor << " to explored_words" << endl;
+            cout  << successor << " has not been explored..." << endl;
 
             // Create a newSearchNode containing successor, pointing to it's parent, current_node
             SearchTreeNode* newSearchNode = new SearchTreeNode (successor, current_node);
@@ -115,6 +115,8 @@ int main (int argc, const char * argv[])
             explored_words->push_back(successor);
             cout << "Pushed " << successor << " onto search_nodes, it's parent is " << current_node->word << endl;
           }
+          else
+            cout << successor << " has already been explored." << endl;
         }
       }
       //      current_node = current_node->parent;
