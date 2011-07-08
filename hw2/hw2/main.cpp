@@ -47,7 +47,7 @@ int main (int argc, const char * argv[])
   
   // STEP: create explored_words (empty list) storing all words we encounter in our search
   list<string> * explored_words = new list<string>;
-  explored_words->push_back(word_2);
+  explored_words->push_back(word_1);
   
   // STEP: create a new search tree node 'root' with word1 and an empty parent path
   SearchTreeNode* root = new SearchTreeNode(word_1, NULL);
@@ -68,9 +68,12 @@ int main (int argc, const char * argv[])
     cout << "Popped " << current_node->word << endl;
     // "expand" the current search node
     
-      // ++num_expanded;
+    // ++num_expanded;
     ++num_expanded;
     cout << "Num_expanded: " << num_expanded << endl;
+    
+    
+    
     // FOR (each word 'word' of current_node's word):
     for (size_t position = 0; position < wordsize; position++)
     {
@@ -89,30 +92,32 @@ int main (int argc, const char * argv[])
           cout << word_2 << endl;
           // Print number of search nodes expanded
           cout << "Nodes Expanded: " << num_expanded << endl;
-        
         }
-        string successor = current_node->word.substr(0,position)
-        + letter
-        + current_node->word.substr(position+1, wordsize);
-        cout << "successor = " << successor << endl;
+        
+      
+        string successor = current_node->word.substr(0,position) 
+                         + letter
+                         + current_node->word.substr(position+1, wordsize);
+        
         // ELSE if 'word' is legal (in dictionary) && 'word' is not in explored_words:
         if (dict->lookup(successor))
         {
-          // Insert 'word' into explored_words
+          cout << "successor = " << successor << endl;
           if (!explored(explored_words, current_node->word))
           {
+            cout << "Adding " << successor << " to explored_words" << endl;
+
+            // Create a newSearchNode containing successor, pointing to it's parent, current_node
+            SearchTreeNode* newSearchNode = new SearchTreeNode (successor, current_node);
+            // Push 'w_node' onto search_nodes
+            search_nodes->push(newSearchNode);
+            // Insert successor into explored_words
             explored_words->push_back(successor);
-            
-            // Create a new search node 'w_node' with word 'word'
-            search_nodes->push(new SearchTreeNode(successor, search_nodes->front()));
             cout << "Pushed " << successor << " onto search_nodes, it's parent is " << current_node->word << endl;
-            // Set 'w_node's' path to current_node's path plus current_node
-            
-          
-          // Push 'w_node' onto search_nodes
           }
         }
       }
+      //      current_node = current_node->parent;
     }
               
   }
@@ -136,6 +141,7 @@ bool explored (list<string>*& exploredList, string& searchword)
        it != exploredList->end();
        it++)
     {
+      cout << "*it " << *it << endl;
       if (*it == searchword)
         return true;
     }
