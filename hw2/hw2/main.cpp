@@ -31,7 +31,7 @@ int main ()
 {
   cout << "Welcome to StepByStep" << endl;
   // STEP: create and read-in words to Dictionary
-  Dictionary * dict = new Dictionary("/Users/paulreny/GitHub/comp15/hw2/hw2/words");
+  Dictionary * dict = new Dictionary("/usr/share/dict/words");
   cout << "Dictionary read successful!" << endl;
 
   // STEP: Ask user for word1, word2, read from cin
