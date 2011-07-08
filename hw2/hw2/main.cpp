@@ -103,7 +103,7 @@ int main (int argc, const char * argv[])
         if (dict->lookup(successor))
         {
           // IF successor is not in explored_words
-          if (!explored(explored_words, current_node->word))
+          if (explored(explored_words, successor) == false)
           {
             cout  << successor << " has not been explored..." << endl;
 
@@ -111,6 +111,7 @@ int main (int argc, const char * argv[])
             SearchTreeNode* newSearchNode = new SearchTreeNode (successor, current_node);
             // Push 'w_node' onto search_nodes
             search_nodes->push(newSearchNode);
+            cout << "Pushed " << newSearchNode->word << " onto search_nodes" << endl;
             // Insert successor into explored_words
             explored_words->push_back(successor);
             cout << "Pushed " << successor << " onto search_nodes, it's parent is " << current_node->word << endl;
@@ -139,11 +140,11 @@ int main (int argc, const char * argv[])
 
 bool explored (list<string>*& exploredList, string& searchword)
 {
-  for (list<string>::iterator it = exploredList->begin();
+  for (list<string>::const_iterator it = exploredList->begin();
        it != exploredList->end();
        it++)
     {
-      cout << "*it " << *it << endl;
+      cout << "*it = " << *it << "  searchword = " << searchword << endl;
       if (*it == searchword)
         return true;
     }
