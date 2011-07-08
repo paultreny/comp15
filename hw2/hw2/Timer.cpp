@@ -46,3 +46,4 @@ namespace comp15 {
   std::ostream& operator<<(std::ostream &out, const Timer &timer) { return out << timer.elapsed(); }
   
 }//namespace
+

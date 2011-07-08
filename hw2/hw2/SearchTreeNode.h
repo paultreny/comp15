@@ -23,3 +23,4 @@ public:
   ~SearchTreeNode() { parent = NULL; delete parent; };
 };
 #endif
+
