@@ -1,3 +1,10 @@
+//  Paul Reny - COMP 15 - 07/07/11
+//  HW2
+//  Dictionary.h
+//
+//  Copyright 2011 Reny Design. All rights reserved.
+//
+
 #ifndef DICTIONARY_H
 #define DICTIONARY_H 0 
 

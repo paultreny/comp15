@@ -1,14 +1,14 @@
-//
+//  Paul Reny - COMP 15 - 07/07/11
+//  HW2
 //  main.cpp
-//  hw2
 //
-//  Created by Paul Reny on 7/7/11.
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 
 #include <iostream>
 #include <cstdlib>
 #include <iostream>
+#include <cctype>
 #include "Dictionary.h"
 
 using namespace std;
@@ -56,7 +56,7 @@ int main (int argc, const char * argv[])
   
   
   // insert code here...
-  std::cout << "Hello, World!\n";
-  return 0;
+  cout << "End" << endl;
+  return EXIT_SUCCESS;
 }
 

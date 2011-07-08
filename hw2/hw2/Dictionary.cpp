@@ -1,3 +1,10 @@
+//  Paul Reny - COMP 15 - 07/07/11
+//  HW2
+//  Dictionary.cpp
+//
+//  Copyright 2011 Reny Design. All rights reserved.
+//
+
 #include "Dictionary.h"
 #include <algorithm>
 #include <iostream> // notox
