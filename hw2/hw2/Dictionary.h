@@ -2,7 +2,7 @@
 //  HW2
 //  Dictionary.h
 //
-//  Copyright 2011 Reny Design. All rights reserved.
+//  Copyright 2011 Keith Noto. All rights reserved.
 //
 
 #ifndef DICTIONARY_H
