@@ -53,12 +53,12 @@ int main ()
     // check if the same word >_>
     if (word_1 == word_2)
     {
-      cout << "Path Found!\n 0 " << word_1 
-           << "Nodes Expanded: none\nTime Elapsed: 0s" << endl;
+      cout << "Path Found!\n 0 " << word_1 << endl
+      << "Nodes Expanded: none" << endl << "Time Elapsed: 0s" << endl;
       return EXIT_SUCCESS;
     }
   
-  // STEP: choose Queue (q) or Stack (s)
+  // STEP: choose Queue (q) or Stack (s) implementations
   do {
     cout << "Queue (q) or Stack (s)? : ";
     cin >> qS;
