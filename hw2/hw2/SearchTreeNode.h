@@ -17,7 +17,8 @@ class SearchTreeNode
 public:
   string word; // the word currently considered
   SearchTreeNode *parent; // pointer to the search tree node that expanded to create this node (NULL for the search tree's root)
-  
+
+  // DEFAULT CONSTRUCTOR (With default value for word, and default NULL for parent
   SearchTreeNode (string w = string(), SearchTreeNode* p = NULL){ word = w; parent = p;};
   ~SearchTreeNode() { parent = NULL; delete parent; };
 };

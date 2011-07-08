@@ -1,8 +1,7 @@
-//
+//  Paul Reny - COMP 15 - 07/07/11
+//  HW2
 //  SearchTreeNode.cpp
-//  hw2
 //
-//  Created by Paul Reny on 7/8/11.
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 
