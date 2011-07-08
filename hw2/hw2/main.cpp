@@ -49,6 +49,14 @@ int main ()
     legalwords = true;
     else cout << "Invalid word pair! Try again!" << endl;
     } while (legalwords == false);
+    
+    // check if the same word >_>
+    if (word_1 == word_2)
+    {
+      cout << "Path Found!\n 0 " << word_1 
+           << "Nodes Expanded: none\nTime Elapsed: 0s" << endl;
+      return EXIT_SUCCESS;
+    }
   
   // STEP: choose Queue (q) or Stack (s)
   do {
@@ -72,7 +80,7 @@ void queueStepByStep(Dictionary* dict, string& word_1, string& word_2)
 {
   Timer timer; // initiate timer
   
-  // STEP: create search_nodes (new empty data structure) queue
+  // STEP: create search_nodes (new empty data structure) QUEUE
   queue<SearchTreeNode*> * search_nodes = new queue<SearchTreeNode*>;
   
   // STEP: create a new search tree node root with word_1 and a NULL parent path
@@ -94,93 +102,165 @@ void queueStepByStep(Dictionary* dict, string& word_1, string& word_2)
     // STEP: current_node = search_nodes.remove() (pop next search node off the stack or queue
     SearchTreeNode* current_node = search_nodes->front();
     search_nodes->pop();
-    //cout << "Popped " << current_node->word << endl;
-    // "expand" the current search node
     
-    // ++num_expanded;
     ++num_expanded;
-    //cout << "Num_expanded: " << num_expanded << endl;
-    
-    // FOR (each word 'word' of current_node's word):
+    // STEP: "expand" the current search node
+    // FOR EACH: word_step of current_node's word):
     for (size_t position = 0; position < wordsize; position++)
     {
       for (char letter='a'; letter <= 'z'; letter++)
       {
-        string successor = current_node->word.substr(0,position) 
+        string word_step = current_node->word.substr(0,position) 
         + letter
         + current_node->word.substr(position+1, wordsize);
         
-        // IF successor == word_2
-        if (successor == word_2)
+        if (word_step == word_2)
         {
-          // Print Solution (current_node's path plus word2
+          // Print Solution (use a temp stack to make it pretty)
           cout << "Path Found!" << endl;
-          // cout << word_1 << endl;
           SearchTreeNode* tempNode = current_node;
           stack<string> * tempStack = new stack<string>;
           tempStack->push(word_2);
           while (tempNode->parent)
           {
             tempStack->push(tempNode->word);
-            // cout << tempNode->word << endl;
             tempNode = tempNode->parent;
-            
           }
           size_t count = 0;
           cout << setw(2) << count;
           cout << " " << word_1 << endl;
-          
-          // tempStack->push(word_1);
           while (!tempStack->empty())
           {
             cout << setw(2) << ++count;
             cout << " " << tempStack->top() << endl;
             tempStack->pop();
           }
-          // cout << word_2 << endl;
           // Print number of search nodes expanded
           cout << "Nodes Expanded: " << num_expanded << endl;
-          cout << "Time Elapsed: " << timer.elapsed() << endl;
+          cout << "Time Elapsed: " << timer.elapsed() << "s" << endl;
           return;
         }
         
-        //  IF successor is legal (in dictionary)
-        //  && IF (successor has been discovered) == false
-        bool isLegal = dict->lookup(successor);
-        bool isExplored = explored(explored_words, successor);
+        //  IF word_step is legal (in dictionary)
+        //  && IF (word_step has been discovered) == false
+        bool isLegal = dict->lookup(word_step);
+        bool isExplored = explored(explored_words, word_step);
         
         if (isLegal && (isExplored == false))
         {
-          // STEP: Create a newSearchNode containing successor,
+          // STEP: Create a newSearchNode containing word_step,
           //       pointing to it's parent (current_node)
-          SearchTreeNode* newSearchNode = new SearchTreeNode (successor, current_node);
+          SearchTreeNode* newSearchNode = new SearchTreeNode (word_step, current_node);
           
           // STEP: push newSearchNode onto search_nodes queue
-          //       add successor to explored_words list
+          //       add word_step to explored_words list
           search_nodes->push(newSearchNode);
-          explored_words->insert(successor, successor);
-          
-          //cout << "Pushed " << successor << " (" << current_node->word << ")" << endl;
+          explored_words->insert(word_step, word_step);
         }
 /*      ELSE
-         successor isn't in the dictionary
+         word_step isn't in the dictionary
          AND/OR has already been explored
 */    }
     }              
   }
   cout << "Darn.\nNo StepByStep solution found..." << endl;
   cout << "Nodes Expanded: " << num_expanded << endl;
-  cout << "Time Elapsed: " << timer.elapsed() << endl;
+  cout << "Time Elapsed: " << timer.elapsed() << "s" << endl;
   return;
 }
 
+
+// STACK IMPLEMENTATION
 void stackStepByStep(Dictionary* dict, string& word_1, string& word_2)
 {
+  Timer timer; // initiate timer
   
+  // STEP: create search_nodes (new empty data structure) STACK
+  stack<SearchTreeNode*> * search_nodes = new stack<SearchTreeNode*>;
   
+  // STEP: create a new search tree node root with word_1 and a NULL parent path
+  //       & push root onto search_nodes, initially consists of just this one node
+  SearchTreeNode* root = new SearchTreeNode(word_1, NULL);  
+  search_nodes->push(root);
   
+  // STEP: create explored_words (empty list) storing all words we encounter in our search
+  AVLTree<string, string> * explored_words = new AVLTree<string, string>;
+  explored_words->insert(word_1, word_1);
   
+  // STEP: num_expanded = 0
+  size_t num_expanded = 0;
+  size_t wordsize = word_1.size();
   
+  // STEP: WHILE search_nodes is not empty:
+  while (!search_nodes->empty())
+  {
+    // STEP: current_node = search_nodes.remove() (pop next search node off the stack or queue
+    SearchTreeNode* current_node = search_nodes->top();
+    search_nodes->pop();
+    
+    ++num_expanded;
+    // STEP: "expand" the current search node
+    // FOR EACH: word_step of current_node's word):
+    for (size_t position = 0; position < wordsize; position++)
+    {
+      for (char letter='a'; letter <= 'z'; letter++)
+      {
+        string word_step = current_node->word.substr(0,position) 
+        + letter
+        + current_node->word.substr(position+1, wordsize);
+        
+        if (word_step == word_2)
+        {
+          // Print Solution (use a temp stack to make it pretty)
+          cout << "Path Found!" << endl;
+          SearchTreeNode* tempNode = current_node;
+          stack<string> * tempStack = new stack<string>;
+          tempStack->push(word_2);
+          while (tempNode->parent)
+          {
+            tempStack->push(tempNode->word);
+            tempNode = tempNode->parent;
+          }
+          size_t count = 0;
+          cout << setw(2) << count;
+          cout << " " << word_1 << endl;
+          while (!tempStack->empty())
+          {
+            cout << setw(2) << ++count;
+            cout << " " << tempStack->top() << endl;
+            tempStack->pop();
+          }
+          // Print number of search nodes expanded
+          cout << "Nodes Expanded: " << num_expanded << endl;
+          cout << "Time Elapsed: " << timer.elapsed() << "s" << endl;
+          return;
+        }
+        
+        //  IF word_step is legal (in dictionary)
+        //  && IF (word_step has been discovered) == false
+        bool isLegal = dict->lookup(word_step);
+        bool isExplored = explored(explored_words, word_step);
+        
+        if (isLegal && (isExplored == false))
+        {
+          // STEP: Create a newSearchNode containing word_step,
+          //       pointing to it's parent (current_node)
+          SearchTreeNode* newSearchNode = new SearchTreeNode (word_step, current_node);
+          
+          // STEP: push newSearchNode onto search_nodes queue
+          //       add word_step to explored_words list
+          search_nodes->push(newSearchNode);
+          explored_words->insert(word_step, word_step);
+        }
+/*      ELSE
+         word_step isn't in the dictionary
+         AND/OR has already been explored
+*/    }
+    }              
+  }
+  cout << "Darn.\nNo StepByStep solution found..." << endl;
+  cout << "Nodes Expanded: " << num_expanded << endl;
+  cout << "Time Elapsed: " << timer.elapsed() << "s" << endl;
   return;
 }
 
