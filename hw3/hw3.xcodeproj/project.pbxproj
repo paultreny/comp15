@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15E8F13DDDBBF000DAA8F /* main.cpp */; };
 		40B15EA913DDE10B000DAA8F /* stopwords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EA413DDE10B000DAA8F /* stopwords.cpp */; };
-		40B15EAA13DDE10B000DAA8F /* stemmer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EA613DDE10B000DAA8F /* stemmer.cpp */; };
+		40B15EAB13DDF30B000DAA8F /* stemmer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EA613DDE10B000DAA8F /* stemmer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,9 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B15EAB13DDF30B000DAA8F /* stemmer.cpp in Sources */,
 				40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */,
 				40B15EA913DDE10B000DAA8F /* stopwords.cpp in Sources */,
-				40B15EAA13DDE10B000DAA8F /* stemmer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
