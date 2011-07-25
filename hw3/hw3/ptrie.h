@@ -14,6 +14,17 @@
 
 using namespace std;
 
+class ptrie
+{
+public:
+  
+  
+  
+  
+  
+  
+};
+/*
 template <typename VALUE, int RANGE, typename KEYTYPE>
 struct ptrie
 {
@@ -189,7 +200,7 @@ struct ptrie
   }
 };
 
-
+*/
 #endif
 
 

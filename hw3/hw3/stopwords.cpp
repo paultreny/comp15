@@ -26,7 +26,7 @@ void stopwords() {
 
 	}
 
-	return 0;
+	return;
 
 }
 
