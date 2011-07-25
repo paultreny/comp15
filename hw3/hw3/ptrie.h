@@ -148,9 +148,9 @@ struct ptrie
       }
       ++pos;
     }
-  
+    
     // ok, found a match, now delete the branch starting from our last fork position
-  
+    
     type_t **kill_point = &last_fork->table[ buf[last_fork_pos]&(range_mask) ];
     delete *kill_point;
     *kill_point = 0;
