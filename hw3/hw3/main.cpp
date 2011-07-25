@@ -22,7 +22,7 @@ int main (int argc, const char * argv[])
   cout << "HW3" << endl;
   
   // CREATE DATA STRUCTURE
-  
+  return EXIT_SUCCESS;
   while (!cin.eof())
     {
       // CHECK IF NOT A LETTER (isalpha)
@@ -31,7 +31,7 @@ int main (int argc, const char * argv[])
     
       // READ WORD
       
-      // COMPARE TO STOP WORDS TRIE
+      // COMPARE TO STOP WORDS TRIE // HASH FUNCTION?
       
       // POTENTIALLY USE STEMMER, TO MAKE WORDS MORE SIMPLE? //
       

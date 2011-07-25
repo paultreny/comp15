@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15E8F13DDDBBF000DAA8F /* main.cpp */; };
 		40B15EA913DDE10B000DAA8F /* stopwords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EA413DDE10B000DAA8F /* stopwords.cpp */; };
-		40B15EAB13DDF30B000DAA8F /* stemmer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EA613DDE10B000DAA8F /* stemmer.cpp */; };
+		40B15EAE13DE0A3C000DAA8F /* ptrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,10 +34,10 @@
 		40B15EA213DDE10B000DAA8F /* waldo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waldo.txt; sourceTree = "<group>"; };
 		40B15EA313DDE10B000DAA8F /* stopwords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopwords.txt; sourceTree = "<group>"; };
 		40B15EA413DDE10B000DAA8F /* stopwords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stopwords.cpp; sourceTree = "<group>"; };
-		40B15EA513DDE10B000DAA8F /* stemmer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stemmer.h; sourceTree = "<group>"; };
-		40B15EA613DDE10B000DAA8F /* stemmer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stemmer.cpp; sourceTree = "<group>"; };
 		40B15EA713DDE10B000DAA8F /* raven.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = raven.txt; sourceTree = "<group>"; };
 		40B15EA813DDE10B000DAA8F /* flatland.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flatland.txt; sourceTree = "<group>"; };
+		40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ptrie.cpp; sourceTree = "<group>"; };
+		40B15EAD13DE0A3C000DAA8F /* ptrie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ptrie.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +77,11 @@
 				40B15EA213DDE10B000DAA8F /* waldo.txt */,
 				40B15EA313DDE10B000DAA8F /* stopwords.txt */,
 				40B15EA413DDE10B000DAA8F /* stopwords.cpp */,
-				40B15EA513DDE10B000DAA8F /* stemmer.h */,
-				40B15EA613DDE10B000DAA8F /* stemmer.cpp */,
 				40B15EA713DDE10B000DAA8F /* raven.txt */,
 				40B15EA813DDE10B000DAA8F /* flatland.txt */,
 				40B15E9113DDDBBF000DAA8F /* hw3.1 */,
+				40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */,
+				40B15EAD13DE0A3C000DAA8F /* ptrie.h */,
 			);
 			path = hw3;
 			sourceTree = "<group>";
@@ -136,9 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40B15EAB13DDF30B000DAA8F /* stemmer.cpp in Sources */,
 				40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */,
 				40B15EA913DDE10B000DAA8F /* stopwords.cpp in Sources */,
+				40B15EAE13DE0A3C000DAA8F /* ptrie.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
