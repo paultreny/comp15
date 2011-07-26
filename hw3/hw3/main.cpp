@@ -6,7 +6,9 @@
 //
 //
 //
-// Your job is to choose one of the data structures covered in class that can map a character string to a integer, with the objective of optimizing retrieval time. You are expected to justify your decision.
+// Your job is to choose one of the data structures covered in class that can 
+// map a character string to a integer, with the objective of optimizing
+// retrieval time. You are expected to justify your decision.
 //
 //
 //
@@ -16,7 +18,7 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
-#include "ptrie.h"
+//#include "ptrie.h"
 #include "hash.h"
 
 using namespace std;
@@ -30,7 +32,9 @@ int main (int argc, const char * argv[])
   const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
   unsigned int keys = 0;			// 	and keys inserted into table
 	unsigned int *table = new unsigned int[TBLSZ]; 
-	
+  unsigned int unused = 0;
+  unsigned int used = 0;
+  
   for (unsigned int i=0; i<TBLSZ; i++)
   {
     table[i] = 0; 
@@ -53,14 +57,19 @@ int main (int argc, const char * argv[])
     }
 		table[hv % TBLSZ]++;
 		keys++;
-    unsigned int j = 0;
+  }
+  for(unsigned int j=0; j<TBLSZ; j++)
+  {
+    if (table[j]==0)
+      ++unused;
+    else
+      ++used;
+  }
+  cout << (100 * (used/TBLSZ)) << " % used" << used << " " << unused << endl;
+    //      cout << setw(6) << j << " " << table[j] << endl;
+    //  ++j;
     
-    while (j != TBLSZ)
-    {
-      cout << setw(6) << j << " " << table[j] << endl;
-      ++j;
-    }
-	}
+	
   cout << "Stop words hashed: " << keys << endl;
   cout << "HW3" << endl;
   
