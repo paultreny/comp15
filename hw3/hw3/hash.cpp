@@ -7,8 +7,10 @@
 //
 
 #include "hash.h"
-
+#include <math.h>
+#include <stdio.h>
 #include <stdint.h>
+using namespace std;
 
 // Jenkins's Hash (copied from COMP15/Spring 2011)
 unsigned int jenkins(const char *key, unsigned int length) { 
@@ -28,11 +30,12 @@ unsigned int jenkins(const char *key, unsigned int length) {
 }
 
 unsigned int paulhash(const char *key, unsigned int length) {
-  unsigned int hash = 5381;
+  unsigned int hash = 0;
   unsigned int i;
   for( i=0; i < length; i++)
   {
-    hash = ((hash << 5) + hash) + i; // hash * 33 + c
+    hash = hash + ( ( (key[i]-96)^2) * pow(10,i));
+//    hash = ((hash << 5) + hash) + i; // hash * 33 + c;
   }
   return hash;
 }
@@ -51,5 +54,5 @@ unsigned int paulhashFNV( const char *key, unsigned int length)
 
 
 unsigned int hash(const std::string& word) { 
-	return paulhashFNV(word.c_str(), word.size());
+	return jenkins(word.c_str(), word.size());
 }

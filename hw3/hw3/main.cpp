@@ -47,10 +47,6 @@ int main (int argc, const char * argv[])
     string w;
 		fin >> w;
     
-    if ( (hash(w) % TBLSZ) == (hash("door") % TBLSZ) )
-    {
-      cout << w << endl;
-    }
 		unsigned long hv = hash(w); // hash stop words using murmurhash3
     if (hv != hash(w)) // if the hash function doesn't work, cerr <<
     {
@@ -67,18 +63,15 @@ int main (int argc, const char * argv[])
 		keys++;
     }
   }
-  cout << hash("door");
   
   cout << "Stop words hashed: " << keys << endl;
   cout << "HW3" << endl;
  
   
     
-  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/raven.txt";
+  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/bard.txt";
   // CREATE DATA STRUCTURE
   AVLTree<string, int> * word_count = new AVLTree<string, int>;
-  
-  
   
   int unique_words = 0;
   int maxcount = 0;
@@ -123,12 +116,14 @@ int main (int argc, const char * argv[])
     }
     if (isWord)
     {
+      if (!foundEnd)
+      {
+        substr_len = word.size() - substr_start;
+      }
       word = word.substr(substr_start, substr_len);
     }
     if( isWord && table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
     {
-      if ((hash(word) % TBLSZ) == (569751337 % TBLSZ))
-        cout << word;
       if (word_count->lookup(word))
       {
         int *count = word_count->lookup(word);
