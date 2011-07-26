@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4040045813DF510F00CA6E7F /* hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4040044613DF3BD600CA6E7F /* hash.cpp */; };
 		40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15E8F13DDDBBF000DAA8F /* main.cpp */; };
 		40B15EA913DDE10B000DAA8F /* stopwords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EA413DDE10B000DAA8F /* stopwords.cpp */; };
-		40B15EB213DE23C7000DAA8F /* murmurhash3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4040044213DF3A9300CA6E7F /* perfect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = perfect.cpp; sourceTree = "<group>"; };
+		4040044613DF3BD600CA6E7F /* hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hash.cpp; sourceTree = "<group>"; };
+		4040045013DF412D00CA6E7F /* AVLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVLTree.h; sourceTree = "<group>"; };
+		4040045113DF412D00CA6E7F /* BSTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTree.h; sourceTree = "<group>"; };
+		4040045213DF412D00CA6E7F /* SearchTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTreeNode.h; sourceTree = "<group>"; };
+		4040045313DF412D00CA6E7F /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		4040045413DF415900CA6E7F /* SearchTreeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SearchTreeNode.cpp; sourceTree = "<group>"; };
 		40B15E8B13DDDBBF000DAA8F /* hw3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hw3; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B15E8F13DDDBBF000DAA8F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		40B15E9113DDDBBF000DAA8F /* hw3.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = hw3.1; sourceTree = "<group>"; };
@@ -73,6 +80,12 @@
 		40B15E8E13DDDBBF000DAA8F /* hw3 */ = {
 			isa = PBXGroup;
 			children = (
+				4040045313DF412D00CA6E7F /* Map.h */,
+				4040045113DF412D00CA6E7F /* BSTree.h */,
+				4040045013DF412D00CA6E7F /* AVLTree.h */,
+				4040045413DF415900CA6E7F /* SearchTreeNode.cpp */,
+				4040045213DF412D00CA6E7F /* SearchTreeNode.h */,
+				4040044213DF3A9300CA6E7F /* perfect.cpp */,
 				40B15E8F13DDDBBF000DAA8F /* main.cpp */,
 				40B15E9F13DDE10B000DAA8F /* yeast.txt */,
 				40B15EA013DDE10B000DAA8F /* bard.txt */,
@@ -85,6 +98,7 @@
 				40B15E9113DDDBBF000DAA8F /* hw3.1 */,
 				40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */,
 				40B15EAD13DE0A3C000DAA8F /* ptrie.h */,
+				4040044613DF3BD600CA6E7F /* hash.cpp */,
 				40B15EAF13DE23C7000DAA8F /* hash.h */,
 				40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */,
 				40B15EB113DE23C7000DAA8F /* hashmain.cpp */,
@@ -142,9 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4040045813DF510F00CA6E7F /* hash.cpp in Sources */,
 				40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */,
 				40B15EA913DDE10B000DAA8F /* stopwords.cpp in Sources */,
-				40B15EB213DE23C7000DAA8F /* murmurhash3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

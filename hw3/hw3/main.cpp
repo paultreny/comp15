@@ -18,22 +18,22 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
-//#include "ptrie.h"
+#include "AVLTree.h"
 #include "hash.h"
 
 using namespace std;
+using namespace comp15;
 
 int main (int argc, const char * argv[])
 {
 // CREATE STOPWORDS TRIE
 //  stopword_trie stop_words;
-  const unsigned int TBLSZ = 93563; // choose a prime just in case
-                                      // other fine choices:  1000003 2584853 3072263 8004823
+
+  const unsigned int TBLSZ = 8004823; // choose a prime just in case
+                           //93563         // other fine choices:  1000003 2584853 3072263 8004823
   const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
   unsigned int keys = 0;			// 	and keys inserted into table
 	unsigned int *table = new unsigned int[TBLSZ]; 
-  unsigned int unused = 0;
-  unsigned int used = 0;
   
   for (unsigned int i=0; i<TBLSZ; i++)
   {
@@ -47,73 +47,108 @@ int main (int argc, const char * argv[])
     string w;
 		fin >> w;
     
-		unsigned long hv = hash(w); 
-		
-    if (hv != hash(w)) { cerr << "The hash function is BROKEN." << endl; exit(-1); }
-    
-		if (table[hv % TBLSZ] )
+    if ( (hash(w) % TBLSZ) == (hash("door") % TBLSZ) )
     {
-      cout << "Stop Word!" << endl;
+      cout << w << endl;
     }
+		unsigned long hv = hash(w); // hash stop words using murmurhash3
+    if (hv != hash(w)) // if the hash function doesn't work, cerr <<
+    {
+      cerr << "The hash function is BROKEN." << endl; exit(-1);
+    }
+  
+		if (table[hv % TBLSZ] == 1) // if there is a hash conflict, 
+    { 
+      cout << "StopWord Hash Conflict! " << w << " " << (hv % TBLSZ) << endl;
+    }
+    else
+    {
 		table[hv % TBLSZ]++;
 		keys++;
+    }
   }
-  for(unsigned int j=0; j<TBLSZ; j++)
-  {
-    if (table[j]==0)
-      ++unused;
-    else
-      ++used;
-  }
-  cout << (100 * (used/TBLSZ)) << " % used" << used << " " << unused << endl;
-    //      cout << setw(6) << j << " " << table[j] << endl;
-    //  ++j;
-    
-	
+  cout << hash("door");
+  
   cout << "Stop words hashed: " << keys << endl;
   cout << "HW3" << endl;
+ 
   
-  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/waldo.txt";
+    
+  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/raven.txt";
   // CREATE DATA STRUCTURE
-  int discard = 0;
-  int count = 0;
-  for (ifstream fin(FILENAME); !fin.eof(); fin>>ws)
- // while (!cin.eof())
-  {
-      string word;
-      bool isWord = true;
-      fin >> word;
-      
-      for (int i=0; i<word.size(); ++i )
-      {
-        isWord = isalpha(word[i]);
-        if (!isWord)
-        {
-          ++discard;
-          break;
-        }
-        word[i] = tolower(word[i]);
-      }
-      if( isWord && !table[hash(word) % TBLSZ] )
-      {
-        cout << word << endl;
-        ++count;
-      }
-  }
-  cout << count << endl;
-  cout << discard << endl;
-      // CHECK IF NOT A LETTER (isalpha)
-    
-      // CONVERT TO LOWERCASE (tolower)
-    
-      // READ WORD
-      
-      // COMPARE TO STOP WORDS TRIE // HASH FUNCTION?
-            
-      // ADD WORD TO DATA STRUCTURE
-      // & INCREMENT COUNT OF WORD
-      
+  AVLTree<string, int> * word_count = new AVLTree<string, int>;
   
+  
+  
+  int unique_words = 0;
+  int maxcount = 0;
+  string maxword;
+  
+  ifstream fin(FILENAME);
+  while (!fin.eof())
+  {
+    string word;
+    //bool isLetter = false;
+    bool isWord = false;
+    fin >> word;
+    bool foundStart = false;
+    bool foundEnd = false;
+    int substr_start = 0;
+    int substr_len = 0;
+    for (int i=0; i<word.size(); i++)
+    {
+      //isLetter = isalpha(word[i]); // CHECK IF NOT A LETTER (isalpha)
+      
+      if (isalpha(word[i])) // if at least one letter
+      {
+        if (!foundStart)
+        {
+          substr_start = i;
+          foundStart = true;
+        }
+        if (!foundEnd)
+        {
+          ++substr_len;
+          isWord = true;
+          word[i] = tolower(word[i]);
+        }        // CONVERT TO LOWERCASE (tolower)
+      }
+      else
+      {
+        if (isWord)
+        {
+          foundEnd = true;
+        }
+      }
+    }
+    if (isWord)
+    {
+      word = word.substr(substr_start, substr_len);
+    }
+    if( isWord && table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
+    {
+      if ((hash(word) % TBLSZ) == (569751337 % TBLSZ))
+        cout << word;
+      if (word_count->lookup(word))
+      {
+        int *count = word_count->lookup(word);
+        *count = *count + 1;
+        if (*count > maxcount)
+        {
+          maxcount = *count;
+          maxword = word;
+        }
+      }
+      else
+      {
+        word_count->insert(word, 1);
+        ++unique_words;
+      }
+    }
+  }
+  cout << "unique words: " << unique_words << endl;
+  cout << "most frequent: " << endl << maxword << " " << maxcount << " times." << endl;
+   
   // DATA STRUCTURE THOUGHTS
   //
   // Heap/Priority Queue might be good, would keep track of words with the highest occurance
@@ -122,9 +157,7 @@ int main (int argc, const char * argv[])
   //
   //
   // 
-  
-
-  
+ 
   return EXIT_SUCCESS;
 }
 
