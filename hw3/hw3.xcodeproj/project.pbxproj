@@ -47,9 +47,6 @@
 		40B15EAF13DE23C7000DAA8F /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = murmurhash3.cpp; sourceTree = "<group>"; };
 		40B15EB113DE23C7000DAA8F /* hashmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hashmain.cpp; sourceTree = "<group>"; };
-		40CF506313E0021800853301 /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bloom_filter.hpp; path = ../bloom_filter.hpp; sourceTree = "<group>"; };
-		40CF506413E0021800853301 /* bloom_filter_example02.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bloom_filter_example02.cpp; path = ../bloom_filter_example02.cpp; sourceTree = "<group>"; };
-		40CF506513E0021800853301 /* bloom_filter_example01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bloom_filter_example01.cpp; path = ../bloom_filter_example01.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +104,6 @@
 				40B15E9113DDDBBF000DAA8F /* hw3.1 */,
 				40B15EB113DE23C7000DAA8F /* hashmain.cpp */,
 				40B15EA113DDE10B000DAA8F /* wd */,
-				40CF506313E0021800853301 /* bloom_filter.hpp */,
-				40CF506413E0021800853301 /* bloom_filter_example02.cpp */,
-				40CF506513E0021800853301 /* bloom_filter_example01.cpp */,
 			);
 			name = unused;
 			path = hw3;
