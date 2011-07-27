@@ -25,31 +25,33 @@ struct pTrieNode
 {
   char key;
   struct pTrieNode *next_sib, *child_list;
-  
-  inline pTrieNode(char c_key = '\0', pTrieNode *next = NULL, pTrieNode *children = NULL)
+  struct pTrieNode *parent;
+  inline pTrieNode(pTrieNode *parent_node = NULL, char c_key = '\0', pTrieNode *next = NULL, pTrieNode *children = NULL)
   {
+    this->parent = parent_node;
     this->key = c_key;
     this->next_sib = next;
     this->child_list = children;
   }
 };
-
+/*
 typedef struct pTrieCDT
 {
   pTrieNode *root;
 } pTrieCDT;
-
-typedef struct pTrieCDT *pTrieADT;
+*/
+//typedef struct pTrieCDT *pTrieADT;
 
 // ADD STRING TO TRIE
-bool pTrieAdd(pTrieADT trie, std::string keys)
+bool pTrieAdd( pTrieNode &trie, std::string keys)
 {
-  pTrieNode *level = trie->root;
+  pTrieNode * level = trie.parent;
   int i=0;
   for (;;)
   {
-    pTrieNode *found;
+    pTrieNode *found = NULL;
     pTrieNode *curr;
+    level->key = keys[i];
     
     for (curr = level; curr !=NULL; curr = curr->next_sib )
     {
@@ -63,7 +65,9 @@ bool pTrieAdd(pTrieADT trie, std::string keys)
     // no nodes at this level or none with next char in key
     if (!found) 
     {
-      level->child_list = new pTrieNode(keys[i]);
+      level->key = keys[i];
+      
+      //level->child_list = new pTrieNode(keys[i]);
 
 //      level->next_sib = new pTrieNode(keys[i]);
       found = level->next_sib;    
@@ -80,16 +84,16 @@ bool pTrieAdd(pTrieADT trie, std::string keys)
 }
 
 // CREATE NEW TRIE
-pTrieADT pTrieCreate()
+pTrieNode * pTrieCreate()
 {
-//  pTrieADT trie = new pTrieCDT();
-  return new pTrieCDT();
+  pTrieNode* trie = new pTrieNode(NULL, '\0', NULL, NULL);
+  return (trie);
 }
 
 // RETURN TRUE IF KEY EXISTS
-bool pTrieIsMember(const pTrieADT &trie, std::string keys) // returns true if key in trie
+bool pTrieIsMember(const pTrieNode &trie, std::string keys) // returns true if key in trie
 {
-  pTrieNode *level = trie->root; // start at top level
+  pTrieNode *level = trie.parent; // start at top level
   int i = 0; // start at beginning of key
   
   for(;;)
