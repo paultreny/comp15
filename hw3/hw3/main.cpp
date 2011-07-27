@@ -32,7 +32,7 @@ int main (int argc, const char * argv[])
   const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
   unsigned int keys = 0;			// 	and keys inserted into table
   
-  pTrieNode * stopTrie = NULL;
+  pTrieNode * stopTrie = pTrieCreate();
   for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
   {
     if (!fin)
@@ -42,7 +42,6 @@ int main (int argc, const char * argv[])
     }
     string w;
     fin >> w;
-    cout << stopTrie->parent << endl;
     if (pTrieAdd(stopTrie, w))
     {
       ++keys;
@@ -91,7 +90,7 @@ int main (int argc, const char * argv[])
  */
   
     
-  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/bard.txt";
+  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/yeast.txt";
   // CREATE DATA STRUCTURE
   AVLTree<string, int> * word_count = new AVLTree<string, int>;
   
@@ -144,7 +143,7 @@ int main (int argc, const char * argv[])
       }
       word = word.substr(substr_start, substr_len);
     }
-    if( isWord && pTrieIsMember(stopTrie, word) )// table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
+    if( isWord && !pTrieIsMember(stopTrie, word) )// table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
     {
       if (word_count->lookup(word))
       {

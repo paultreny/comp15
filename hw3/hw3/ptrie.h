@@ -25,15 +25,15 @@ struct pTrieNode
 {
   char key;
   struct pTrieNode *next_sib, *child_list;
-  struct pTrieNode *parent;
-  inline pTrieNode(pTrieNode *parent_node = NULL, char c_key = '\0', pTrieNode *next = NULL, pTrieNode *children = NULL)
+  inline pTrieNode(char c_key = '\0', pTrieNode *next = NULL, pTrieNode *children = NULL)
   {
-    this->parent = parent_node;
     this->key = c_key;
     this->next_sib = next;
     this->child_list = children;
   }
 };
+
+//typedef struct pTrieNodeRoot { pTrieNode *root;} pTrieNodeRoot;
 /*
 typedef struct pTrieCDT
 {
@@ -42,94 +42,75 @@ typedef struct pTrieCDT
 */
 //typedef struct pTrieCDT *pTrieADT;
 
-// ADD STRING TO TRIE
-bool pTrieAdd( pTrieNode *&head, std::string keys)
+// CREATE NEW TRIE
+pTrieNode * pTrieCreate()
 {
-  int i=0;
+  pTrieNode *root = new pTrieNode (NULL, NULL, NULL);
+  return (root);
+}
+
+// ADD STRING TO TRIE
+bool pTrieAdd( pTrieNode* &root, std::string keys)
+{
   int len = keys.size();
-  if (!head)
-  {
-    head = new pTrieNode(head, keys[i]);
-  }
-  pTrieNode * level = head;
-  if (i==1)
-  {
-    level->child_list = new pTrieNode(level,keys[i]);
-    level = level->child_list;
-  }
-  for (;;)
+  pTrieNode * level = root;
+  for (int i = 0; i < len; ++i)
   {
     pTrieNode *found = NULL;
     pTrieNode *curr;
-        
     for (curr = level; curr !=NULL; curr = curr->next_sib )
     {
-      // if node on this current level matchest the current char
+      // if node on this current level matchest the current char}
       if (curr->key = keys[i])
       {
         found = curr;
         break;
       }
     }
-    // no nodes at this level or none with next char in key
-    if (!found) 
-    {
-      curr->child_list = new pTrieNode(level,keys[i]);
-      found = curr->next_sib;    
-    }
-    if (keys[i] == '\0')
-    {
-      curr->key = keys[i];
-      return 1;
-    }
     
-    ++i; 
+    // no nodes at this level or none with next char in key
+    // add new node with current char as next sibling
+    if (!found)
+    { 
+      curr = new pTrieNode(keys[i]);
+      found = curr;
+    }
+    level = found->child_list;
   }
-  return false;
+  
+  return true;
 }
 
-// CREATE NEW TRIE
-pTrieNode * pTrieCreate()
-{
-  pTrieNode* trie = new pTrieNode(NULL, '\0', NULL, NULL);
-  return (trie);
-}
 
 // RETURN TRUE IF KEY EXISTS
-bool pTrieIsMember(const pTrieNode &trie, std::string keys) // returns true if key in trie
+bool pTrieIsMember(pTrieNode* &root, std::string keys) // returns true if key in trie
 {
-  pTrieNode *level = trie.parent; // start at top level
-  int i = 0; // start at beginning of key
-  
-  for(;;)
+  int len = keys.size();
+  pTrieNode * level = root;
+  for (int i = 0; i < len; ++i)
   {
     pTrieNode *found = NULL;
     pTrieNode *curr;
-    
-    for( curr = level; curr != NULL; curr = curr->next_sib )
+    for (curr = level; curr !=NULL; curr = curr->next_sib)
     {
-      // want a node at this level to match the current char in key
-      if (curr->key == keys[i] )
+      // if node on this current level matchest the current char}
+      if (curr->key = keys[i])
       {
         found = curr;
         break;
       }
     }
     
-    // if no nodes this level or none with next char in key, then not present
-    if ( !found )
+    // no nodes at this level or none with next char in key
+    // add new node with current char as next sibling
+    if (!found)
+    { 
       return 0;
+    }
     
-    // if we matched the end of key, it is in trie, ie, is a stopword
-    if (keys[i] == '\0')
-      return 1;
-    
-    // goto next level
     level = found->child_list;
-    
-    // advance in string key
-    ++i;
   }
+  return 1;
 }
 
 #endif // pTrie_H end
