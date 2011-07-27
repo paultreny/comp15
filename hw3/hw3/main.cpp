@@ -20,19 +20,40 @@
 #include <fstream>
 #include "AVLTree.h"
 #include "hash.h"
+#include "ptrie.h"
 
 using namespace std;
 using namespace comp15;
+//using namespace preny;
 
 int main (int argc, const char * argv[])
 {
 // CREATE STOPWORDS TRIE
-//  stopword_trie stop_words;
-
-  const unsigned int TBLSZ = 8004823; // choose a prime just in case
-                           //93563         // other fine choices:  1000003 2584853 3072263 8004823
   const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
   unsigned int keys = 0;			// 	and keys inserted into table
+  
+  pTrieADT stopTrie = pTrieCreate();
+  for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
+  {
+    if (!fin)
+    {
+      cerr << "Error: Failed to read from file \"" << STOPFILE << "\"" << endl;
+      exit(-1);
+    }
+    string w;
+    fin >> w;
+    
+    if (pTrieAdd(stopTrie, w))
+    {
+      ++keys;
+    }
+  }
+  cout << "Stop words hashed: " << keys << endl;
+  
+/*
+  const unsigned int TBLSZ = 8004823; // choose a prime just in case
+                           //93563         // other fine choices:  1000003 2584853 3072263 8004823
+ 
 	unsigned int *table = new unsigned int[TBLSZ]; 
   
   for (unsigned int i=0; i<TBLSZ; i++)
@@ -46,6 +67,7 @@ int main (int argc, const char * argv[])
                      << STOPFILE << "\"" << endl; exit(-1); }
     string w;
 		fin >> w;
+    
     
 		unsigned long hv = hash(w); // hash stop words using murmurhash3
     if (hv != hash(w)) // if the hash function doesn't work, cerr <<
@@ -66,7 +88,7 @@ int main (int argc, const char * argv[])
   
   cout << "Stop words hashed: " << keys << endl;
   cout << "HW3" << endl;
- 
+ */
   
     
   const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/bard.txt";
@@ -122,7 +144,7 @@ int main (int argc, const char * argv[])
       }
       word = word.substr(substr_start, substr_len);
     }
-    if( isWord && table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
+    if( isWord && pTrieIsMember(stopTrie, word) )// table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
     {
       if (word_count->lookup(word))
       {
