@@ -37,19 +37,21 @@ using namespace std;
 
 int main (int argc, const char * argv[])
 {
-  //const char STOPFILE[] = "/g/15/2011uc/public_html/homework/hw3/stopwords.txt";
-  const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt";
-  int stop_hashed = 0; // 
-  const unsigned long TBLSZ = 8004823; // choose a prime just in case
-                                       //93563         // other fine choices:  1000003 2584853 3072263 8004823
+  // STOPWORD Hash Table setup
+  // large prime to avoid collisions, memory is cheap!
+  const unsigned long TBLSZ = 8004823;
 	unsigned long *table = new unsigned long[TBLSZ]; 
-  
   for (unsigned long i=0; i<TBLSZ; i++) 
   {
     table[i] = 0; // Zero out table
   }
   
-	for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
+  // FILE INPUT setup
+  const char STOPFILE[] = "/g/15/2011uc/public_html/homework/hw3/stopwords.txt";
+  //const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt";
+  int stop_hashed = 0;
+  
+  for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
   {
 		if (!fin)     // Read in and error check the file input
     {
@@ -59,41 +61,33 @@ int main (int argc, const char * argv[])
     
     string w;
 		fin >> w;
-    
 		unsigned long hv = hash(w); // hash stop words using murmurhash3
-    
-    if (hv != hash(w)) // if the hash function doesn't work, cerr <<
-    {
-      cerr << "The hash function is BROKEN." << endl; exit(-1);
-    }
-    
-		if (table[hv % TBLSZ] == 1) // if there is a hash conflict, 
+		if (table[hv % TBLSZ] == 1) // if there is a hash conflict, output error
     { 
-      cout << "StopWord Hash Conflict! " << w << " " << (hv % TBLSZ) << endl;
+      cout << "Stopword Collision! Fix Hash! " << w
+           << " " << (hv % TBLSZ) << endl;
     }
     else
     {
-      table[hv % TBLSZ]++;
-      stop_hashed++;
+      ++table[hv % TBLSZ];
+      ++stop_hashed;
     }
   }
-  
-  cout << "Stop words hashed: " << stop_hashed << endl;
-  cout << "HW3" << endl;
-  
+  cout << "Stop words: " << stop_hashed << endl;
   
   
   // CREATE DATA STRUCTURE
+  // Chosen to use AVLTree, for ease of use and speed
   AVLTree<string, int> * word_count = new AVLTree<string, int>;
-  
-  int unique_words = 0;
-  int maxcount = 0;
+  int unique_words = 0, maxcount = 0;
   string maxword;
   
+  
+  // FILE INPUT Setup / cin function
   //  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/flatland.txt";
   //  ifstream fin(FILENAME);
   //  while (!fin.eof())
-  while (!cin.eof())
+  while (!cin.eof()) // redirect standard input, ie,  "./main < flatland.txt"
   {
     string word;
     bool isWord = false;
@@ -103,24 +97,27 @@ int main (int argc, const char * argv[])
     bool foundEnd = false;
     int substr_start = 0;
     int substr_len = 0;
+    
+    
+    // STRING PARSING for file input
     for (int i=0; i<word.size(); i++)
     {      
-      if (isalpha(word[i])) // if at least one letter
+      if (isalpha(word[i])) // finds and marks the position of first letter
       {
-        if (!foundStart)
+        if (!foundStart) // has start of word been found?
         {
           substr_start = i;
           foundStart = true;
         }
-        if (!foundEnd)
+        if (!foundEnd) // has end of word been found?
         {
           ++substr_len;
-          isWord = true;
+          isWord = true;// if a letter present, it is a word
           word[i] = tolower(word[i]); // CONVERT TO LOWERCASE (tolower)
         }       
       }
-      else
-      {
+      else // once at end of word, if a second symbol isn't encountered
+      {    
         if (isWord)
         {
           foundEnd = true;
@@ -129,43 +126,36 @@ int main (int argc, const char * argv[])
     }
     if (isWord)
     {
-      if (!foundEnd)
+      if (!foundEnd) // if only a first symbol, trim front part of string
       {
         substr_len = (int)word.size() - substr_start;
       }
-      word = word.substr(substr_start, substr_len);
+      word = word.substr(substr_start, substr_len); // trim string of non-chars
     }
-    //if( isWord && !pTrieIsMember(stopTrie, word) ) // COMPARE TO STOP WORDS
+    
+    
+    // STRING COMPARISON with stopwords, if hash collision, it is a stopword
     if( isWord && ( table[hash(word) % TBLSZ] == 0) ) 
     {
-      if (word_count->lookup(word))
-      {
+      if (word_count->lookup(word))         // IF word is already in our tree
+      {                                     // increment count++
         int *count = word_count->lookup(word);
         *count = *count + 1;
-        if (*count > maxcount)
+        if (*count > maxcount) 
         {
           maxcount = *count;
           maxword = word;
         }
       }
-      else
-      {
+      else                                  // If a new word, insert with 1
+      {                                     // occurance
         word_count->insert(word, 1);
         ++unique_words;
       }
     }
   }
-  cout << "unique words: " << unique_words << endl;
-  cout << "most frequent: " << endl << maxword << " " << maxcount << " times." << endl;
-  
-  // DATA STRUCTURE THOUGHTS
-  //
-  // Heap/Priority Queue might be good, would keep track of words with the highest occurance
-  //
-  //
-  //
-  //
-  // 
+  cout << "Unique Words:  " << unique_words << endl;
+  cout << "Most Frequent:\n " << maxword << " ~ " << maxcount << " times!" << endl;
   
   return EXIT_SUCCESS;
 }

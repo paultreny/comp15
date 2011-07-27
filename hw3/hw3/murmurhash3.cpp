@@ -1,3 +1,10 @@
+//  Paul Reny - COMP 15 - 07/24/11
+//  HW3
+//  murmurhash3.cpp
+//
+//  Copyright Austin Appleby
+//
+
 #include "hash.h"
 #include <string>
 
@@ -343,7 +350,7 @@ unsigned int hash( const std::string &key ) {
 
 	unsigned long h;
 
-	MurmurHash3_x86_32 ( key.c_str(), key.size(), 0, &h);
+	MurmurHash3_x86_32 ( key.c_str(), (int)key.size(), 0, &h);
 
 	return (unsigned int)h;
 

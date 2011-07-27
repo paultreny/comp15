@@ -1,11 +1,11 @@
+//  Paul Reny - COMP 15 - 07/24/11
+//  HW3
+//  hash.h
 //
-//  hash.cpp
-//  hw3
-//
-//  Created by Paul Reny on 7/26/11.
 //  Copyright 2011 Reny Design. All rights reserved.
 //
-
+//
+/*
 #include "hash.h"
 #include <math.h>
 #include <stdio.h>
@@ -93,3 +93,4 @@ unsigned int DJBHash(const std::string& str)
 unsigned int hash(const std::string& word) { 
 	return paulhash(word.c_str(), (int)word.size());
 }
+*/

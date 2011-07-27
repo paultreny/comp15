@@ -84,8 +84,6 @@
 				4040045113DF412D00CA6E7F /* BSTree.h */,
 				4040045013DF412D00CA6E7F /* AVLTree.h */,
 				40B15E8F13DDDBBF000DAA8F /* main.cpp */,
-				40B15EAD13DE0A3C000DAA8F /* ptrie.h */,
-				4040044613DF3BD600CA6E7F /* hash.cpp */,
 				40B15EAF13DE23C7000DAA8F /* hash.h */,
 				40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */,
 			);
@@ -95,6 +93,8 @@
 		40CF506913E0025B00853301 /* unused */ = {
 			isa = PBXGroup;
 			children = (
+				40B15EAD13DE0A3C000DAA8F /* ptrie.h */,
+				4040044613DF3BD600CA6E7F /* hash.cpp */,
 				4040044213DF3A9300CA6E7F /* perfect.cpp */,
 				40B15EA413DDE10B000DAA8F /* stopwords.cpp */,
 				4040045413DF415900CA6E7F /* SearchTreeNode.cpp */,

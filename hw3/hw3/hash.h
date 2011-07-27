@@ -1,11 +1,17 @@
+//  Paul Reny - COMP 15 - 07/24/11
+//  HW3
+//  hash.h
+//
+//  Copyright 2011 Reny Design. All rights reserved.
+//
+
 #ifndef HASH_FUNCTION_H 
 #define HASH_FUNCTION_H 0
 
 #include <string>
 
-// The hash function.  You implement this in hash.cpp
+// see murmurhash3.cpp for the hash function itself
 
-unsigned int hash( const std::string &word );
-unsigned int DJBHash(const std::string& str);
+unsigned int hash( const std::string &word);
 
 #endif	
