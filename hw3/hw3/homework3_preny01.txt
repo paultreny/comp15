@@ -1,0 +1,45 @@
+//  Paul Reny - COMP 15 - 07/24/11
+//  HW3
+//  main.cpp
+//
+//  Copyright 2011 Reny Design. All rights reserved.
+//
+//
+// Your job is to choose one of the data structures covered in class that can 
+// map a character string to a integer, with the objective of optimizing
+// retrieval time. You are expected to justify your decision.
+//
+// I've chosen to use a Hash function for comparing the stop words, and
+// an AVL tree for keeping track of the unique words and their number of
+// occurances.
+//
+// I did this for a couple of reasons. A hash table for the small number of
+// of stop words (319) means that it is relatively easy to compare a hash of
+// a word as it is input, and if there is a conflict, then it is ignored, as
+// it shares the same address as a stopword. This is much better than 319x 
+// comparisons each time we come across a stopword!
+// 
+// 
+//
+//
+//
+//
+//
+// 
+// 
+// 
+// 
+// 
+// 
+// Most common word:
+// waldo.txt      schmaldo        2 times
+// yeast.txt      
+// raven.txt      door           14 times
+// flatland.txt   line           95 times
+// bard.txt       thou         5440 times
+// 
+// 
+// 
+// 
+// 
+//

@@ -46,6 +46,7 @@
 		40B15EAF13DE23C7000DAA8F /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = murmurhash3.cpp; sourceTree = "<group>"; };
 		40B15EB113DE23C7000DAA8F /* hashmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hashmain.cpp; sourceTree = "<group>"; };
+		40CF506E13E0204900853301 /* homework3_preny01.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = homework3_preny01.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 				40B15E8F13DDDBBF000DAA8F /* main.cpp */,
 				40B15EAF13DE23C7000DAA8F /* hash.h */,
 				40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */,
+				40CF506E13E0204900853301 /* homework3_preny01.txt */,
 			);
 			path = hw3;
 			sourceTree = "<group>";
