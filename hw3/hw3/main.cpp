@@ -19,7 +19,7 @@ using namespace comp15;
 
 using namespace std;
 
-int main (int argc, const char * argv[])
+int main ()
 {
   // STOPWORD Hash Table setup
   // large prime to avoid collisions, memory is cheap!
@@ -84,7 +84,7 @@ int main (int argc, const char * argv[])
     
     
     // STRING PARSING for file input
-    for (int i=0; i<word.size(); i++)
+    for (int i=0; i< (int)word.size(); i++)
     {      
       if (isalpha(word[i])) // finds and marks the position of first letter
       {
