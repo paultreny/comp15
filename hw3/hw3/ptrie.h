@@ -12,18 +12,140 @@
 
 #include <string>
 
-using namespace std;
+namespace preny {
+
+  typedef unsigned int UInt32;
+  typedef std::numeric_limits<UInt32> UInt32Limits;
 
 class ptrie
 {
 public:
+  static const UInt32 INVALID_VALUE = static_cast<UInt32>(-1);
+
+  static const int AtoZ = 26 * 8;
   
+  ptrie() {}
+  virtual ~ptrie{}
   
+  virtual bool build(const ptrie &trie) = 0;
   
+  bool find(const char *key, UInt32 *value_ptr = NULL) const;
+  bool find(const char *key, UInt32 length, UInt32 *value_ptr = NULL) const;
   
+  bool follow(UInt32 index, const char *seq, UInt32 *index_ptr) const;
+  bool follow(UInt32 index, const char *seq, UInt32 length,
+              UInt32 *index_ptr) const;
+  
+  virtual UInt32 find_child(UInt32 index, UInt8 child_label) const = 0;
+  
+  virtual UInt32 child(UInt32 index) const = 0;
+  virtual UInt32 sibling(UInt32 index) const = 0;
+  virtual UInt8 label(UInt32 index) const = 0;
+  
+  virtual bool get_value(UInt32 index, UInt32 *value_ptr = NULL) const = 0;
+  bool has_value(UInt32 index) const;
+  UInt32 value(UInt32 index) const;
+  
+  UInt32 root() const;
+  
+  virtual UInt32 num_units() const = 0;
+  virtual UInt32 num_nodes() const = 0;
+  virtual UInt32 num_keys() const = 0;
+  virtual UInt32 size() const = 0;
+  
+  virtual void clear() = 0;
+  virtual void *map(void *addr) = 0;
+  virtual bool read(std::istream *input) = 0;
+  virtual bool write(std::ostream *output) const = 0;
+  
+private:
+  // Disallows copies.
+  TrieBase(const TrieBase &);
+  TrieBase &operator=(const TrieBase &);
+};
+
+inline bool TrieBase::find(const char *key, UInt32 *value_ptr) const
+{
+  assert(key != NULL);
+  
+  UInt32 index;
+  if (!follow(root(), key, &index))
+    return false;
+  
+  return get_value(index, value_ptr);
+}
+
+inline bool TrieBase::find(const char *key, UInt32 length,
+                           UInt32 *value_ptr) const
+{
+  assert(key != NULL || length == 0);
+  
+  UInt32 index;
+  if (!follow(root(), key, length, &index))
+    return false;
+  
+  return get_value(index, value_ptr);
+}
+
+inline bool TrieBase::follow(UInt32 index, const char *seq,
+                             UInt32 *index_ptr = NULL) const
+{
+  assert(index < num_units());
+  assert(seq != NULL);
+  
+  while (*seq != '\0')
+  {
+    index = find_child(index, *seq);
+    if (index == 0)
+      return false;
+    ++seq;
+  }
+  if (index_ptr != NULL)
+    *index_ptr = index;
+  return true;
+}
+
+inline bool TrieBase::follow(UInt32 index, const char *seq,
+                             UInt32 length, UInt32 *index_ptr = NULL) const
+{
+  assert(index < num_units());
+  assert(seq != NULL || length == 0);
+  
+  for (UInt32 i = 0; i < length; ++i)
+  {
+    index = find_child(index, seq[i]);
+    if (index == 0)
+      return false;
+  }
+  if (index_ptr != NULL)
+    *index_ptr = index;
+  return true;
+}
+
+inline bool TrieBase::has_value(UInt32 index) const
+{
+  assert(index < num_units());
+  
+  return get_value(index);
+}
+
+inline UInt32 TrieBase::value(UInt32 index) const
+{
+  assert(index < num_units());
+  
+  UInt32 value = INVALID_VALUE;
+  get_value(index, &value);
+  return value;
+}
+
+inline UInt32  TrieBase::root() const { return 0; }
+
+}  // namespace sumire
+
   
   
 };
+
 /*
 template <typename VALUE, int RANGE, typename KEYTYPE>
 struct ptrie
@@ -201,6 +323,7 @@ struct ptrie
 };
 
 */
+}
 #endif
 
 
