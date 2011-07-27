@@ -20,7 +20,7 @@
 #include <fstream>
 #include "AVLTree.h"
 #include "hash.h"
-#include "ptrie.h"
+//#include "ptrie.h"
 
 using namespace std;
 using namespace comp15;
@@ -31,7 +31,7 @@ int main (int argc, const char * argv[])
 // CREATE STOPWORDS TRIE
   const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
   unsigned int keys = 0;			// 	and keys inserted into table
-  
+ /* 
   pTrieNode * stopTrie = pTrieCreate();
   for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
   {
@@ -42,14 +42,18 @@ int main (int argc, const char * argv[])
     }
     string w;
     fin >> w;
+    if (w == "the")
+      cout << w << endl;
+
     if (pTrieAdd(stopTrie, w))
     {
       ++keys;
     }
+
   }
-  cout << "Stop words hashed: " << keys << endl;
-  
-/*
+  cout << "Stop words: " << keys << endl;
+*/  
+
   const unsigned int TBLSZ = 8004823; // choose a prime just in case
                            //93563         // other fine choices:  1000003 2584853 3072263 8004823
  
@@ -68,8 +72,8 @@ int main (int argc, const char * argv[])
 		fin >> w;
     
     
-		unsigned long hv = hash(w); // hash stop words using murmurhash3
-    if (hv != hash(w)) // if the hash function doesn't work, cerr <<
+		unsigned long hv = DJBHash(w); // hash stop words using murmurhash3
+    if (hv != DJBHash(w)) // if the hash function doesn't work, cerr <<
     {
       cerr << "The hash function is BROKEN." << endl; exit(-1);
     }
@@ -87,10 +91,10 @@ int main (int argc, const char * argv[])
   
   cout << "Stop words hashed: " << keys << endl;
   cout << "HW3" << endl;
- */
+ 
   
     
-  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/yeast.txt";
+  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/waldo.txt";
   // CREATE DATA STRUCTURE
   AVLTree<string, int> * word_count = new AVLTree<string, int>;
   
@@ -110,9 +114,7 @@ int main (int argc, const char * argv[])
     int substr_start = 0;
     int substr_len = 0;
     for (int i=0; i<word.size(); i++)
-    {
-      //isLetter = isalpha(word[i]); // CHECK IF NOT A LETTER (isalpha)
-      
+    {      
       if (isalpha(word[i])) // if at least one letter
       {
         if (!foundStart)
@@ -124,8 +126,8 @@ int main (int argc, const char * argv[])
         {
           ++substr_len;
           isWord = true;
-          word[i] = tolower(word[i]);
-        }        // CONVERT TO LOWERCASE (tolower)
+          word[i] = tolower(word[i]); // CONVERT TO LOWERCASE (tolower)
+        }       
       }
       else
       {
@@ -143,7 +145,8 @@ int main (int argc, const char * argv[])
       }
       word = word.substr(substr_start, substr_len);
     }
-    if( isWord && !pTrieIsMember(stopTrie, word) )// table[hash(word) % TBLSZ] == 0) // COMPARE TO STOP WORDS
+    //if( isWord && !pTrieIsMember(stopTrie, word) ) // COMPARE TO STOP WORDS
+    if( isWord && ( table[DJBHash(word) % TBLSZ] == 0) ) 
     {
       if (word_count->lookup(word))
       {

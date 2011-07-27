@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15E8F13DDDBBF000DAA8F /* main.cpp */; };
+		40CF506B13E0084D00853301 /* hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4040044613DF3BD600CA6E7F /* hash.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,9 @@
 		40B15EAF13DE23C7000DAA8F /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = murmurhash3.cpp; sourceTree = "<group>"; };
 		40B15EB113DE23C7000DAA8F /* hashmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hashmain.cpp; sourceTree = "<group>"; };
+		40CF506313E0021800853301 /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bloom_filter.hpp; path = ../bloom_filter.hpp; sourceTree = "<group>"; };
+		40CF506413E0021800853301 /* bloom_filter_example02.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bloom_filter_example02.cpp; path = ../bloom_filter_example02.cpp; sourceTree = "<group>"; };
+		40CF506513E0021800853301 /* bloom_filter_example01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bloom_filter_example01.cpp; path = ../bloom_filter_example01.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 			children = (
 				40B15E8E13DDDBBF000DAA8F /* hw3 */,
 				40B15E8C13DDDBBF000DAA8F /* Products */,
+				40CF506913E0025B00853301 /* unused */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,30 +83,49 @@
 		40B15E8E13DDDBBF000DAA8F /* hw3 */ = {
 			isa = PBXGroup;
 			children = (
+				40CF506A13E002B700853301 /* txts */,
 				4040045313DF412D00CA6E7F /* Map.h */,
 				4040045113DF412D00CA6E7F /* BSTree.h */,
 				4040045013DF412D00CA6E7F /* AVLTree.h */,
-				4040045413DF415900CA6E7F /* SearchTreeNode.cpp */,
-				4040045213DF412D00CA6E7F /* SearchTreeNode.h */,
-				4040044213DF3A9300CA6E7F /* perfect.cpp */,
 				40B15E8F13DDDBBF000DAA8F /* main.cpp */,
-				40B15E9F13DDE10B000DAA8F /* yeast.txt */,
-				40B15EA013DDE10B000DAA8F /* bard.txt */,
-				40B15EA113DDE10B000DAA8F /* wd */,
-				40B15EA213DDE10B000DAA8F /* waldo.txt */,
-				40B15EA313DDE10B000DAA8F /* stopwords.txt */,
-				40B15EA413DDE10B000DAA8F /* stopwords.cpp */,
-				40B15EA713DDE10B000DAA8F /* raven.txt */,
-				40B15EA813DDE10B000DAA8F /* flatland.txt */,
-				40B15E9113DDDBBF000DAA8F /* hw3.1 */,
-				40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */,
 				40B15EAD13DE0A3C000DAA8F /* ptrie.h */,
 				4040044613DF3BD600CA6E7F /* hash.cpp */,
 				40B15EAF13DE23C7000DAA8F /* hash.h */,
 				40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */,
-				40B15EB113DE23C7000DAA8F /* hashmain.cpp */,
 			);
 			path = hw3;
+			sourceTree = "<group>";
+		};
+		40CF506913E0025B00853301 /* unused */ = {
+			isa = PBXGroup;
+			children = (
+				4040044213DF3A9300CA6E7F /* perfect.cpp */,
+				40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */,
+				40B15EA413DDE10B000DAA8F /* stopwords.cpp */,
+				4040045413DF415900CA6E7F /* SearchTreeNode.cpp */,
+				4040045213DF412D00CA6E7F /* SearchTreeNode.h */,
+				40B15E9113DDDBBF000DAA8F /* hw3.1 */,
+				40B15EB113DE23C7000DAA8F /* hashmain.cpp */,
+				40B15EA113DDE10B000DAA8F /* wd */,
+				40CF506313E0021800853301 /* bloom_filter.hpp */,
+				40CF506413E0021800853301 /* bloom_filter_example02.cpp */,
+				40CF506513E0021800853301 /* bloom_filter_example01.cpp */,
+			);
+			name = unused;
+			path = hw3;
+			sourceTree = "<group>";
+		};
+		40CF506A13E002B700853301 /* txts */ = {
+			isa = PBXGroup;
+			children = (
+				40B15E9F13DDE10B000DAA8F /* yeast.txt */,
+				40B15EA013DDE10B000DAA8F /* bard.txt */,
+				40B15EA213DDE10B000DAA8F /* waldo.txt */,
+				40B15EA313DDE10B000DAA8F /* stopwords.txt */,
+				40B15EA713DDE10B000DAA8F /* raven.txt */,
+				40B15EA813DDE10B000DAA8F /* flatland.txt */,
+			);
+			name = txts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40CF506B13E0084D00853301 /* hash.cpp in Sources */,
 				40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

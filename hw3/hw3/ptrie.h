@@ -97,6 +97,10 @@ bool pTrieIsMember(pTrieNode* &root, std::string keys) // returns true if key in
       if (curr->key = keys[i])
       {
         found = curr;
+        if (i == len)
+        {
+          return true;
+        }
         break;
       }
     }
@@ -105,6 +109,10 @@ bool pTrieIsMember(pTrieNode* &root, std::string keys) // returns true if key in
     // add new node with current char as next sibling
     if (!found)
     { 
+      if (i == len)
+      {
+        return 0;
+      }
       return 0;
     }
     

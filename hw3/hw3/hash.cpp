@@ -52,7 +52,35 @@ unsigned int paulhashFNV( const char *key, unsigned int length)
   return hash;
 }
 
+unsigned int DJBHash(const std::string& str)
+{
+  unsigned int hash = 0xAAAAAAAA;
+  
+  for(std::size_t i = 0; i < str.length(); i++)
+  {
+    hash ^= ((i & 1) == 0) ? (  (hash <<  7) ^ str[i] * (hash >> 3)) :
+    (~((hash << 11) + (str[i] ^ (hash >> 5))));
+  }
+  return hash;
+//  unsigned int hash = 5381;
+//  
+//  for(std::size_t i = 0; i < str.length(); i++)
+//  {
+//    hash = ((hash << 5) + hash) + str[i];
+//  }
+//  
+//  return hash;
+//  
+//  unsigned int hash = 1315423911;
+//  
+//  for(std::size_t i = 0; i < str.length(); i++)
+//  {
+//    hash ^= ((hash << 5) + str[i] + (hash >> 2));
+//  }
+//  
+//  return hash;
+}
 
 unsigned int hash(const std::string& word) { 
-	return jenkins(word.c_str(), word.size());
+	return paulhash(word.c_str(), word.size());
 }

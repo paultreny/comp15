@@ -6,6 +6,6 @@
 // The hash function.  You implement this in hash.cpp
 
 unsigned int hash( const std::string &word );
-
+unsigned int DJBHash(const std::string& str);
 
 #endif	
