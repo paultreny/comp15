@@ -1,14 +1,17 @@
 //  Paul Reny - COMP 15 - 07/24/11
 //  HW3
-//  main.cpp
+//  homework3_preny01.txt
 //
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 //
+// 
+============================================================================= 
 // Your job is to choose one of the data structures covered in class that can 
 // map a character string to a integer, with the objective of optimizing
 // retrieval time. You are expected to justify your decision.
-//
+=============================================================================
+// 
 // I've chosen to use a Hash function for comparing the stop words, and
 // an AVL tree for keeping track of the unique words and their number of
 // occurances.
@@ -19,27 +22,27 @@
 // it shares the same address as a stopword. This is much better than 319x 
 // comparisons each time we come across a stopword!
 // 
+// The choice to use an AVLTree was based on the fact that it is the fastest
+// Map type implementation that I am familiar with. I had thought of using a
+// heap/priority queue, but ultimately decided against it, mostly for the sake
+// of my own sanity, after trying to make one that used more than one type of
+// key.
 // 
-//
-//
-//
-//
-//
-// 
-// 
+// I chose the murmurhash3 hash function for number of reasons. I wanted to
+// minimize any chance of collisions, as that would give me false positives
+// when comparing stopwords. I also wanted a hash function that worked fairly
+// quickly, as it would be called often. With a lot of XOR ^ bit shifting and
+// a 'divide and conquer' approach made it a winner in my eyes.
 // 
 // 
 // 
 // 
 // Most common word:
 // waldo.txt      schmaldo        2 times
-// yeast.txt      
+// yeast.txt      tatattatca    102 times
 // raven.txt      door           14 times
 // flatland.txt   line           95 times
-// bard.txt       thou         5440 times
+// bard.txt       thou         5544 times
 // 
 // 
 // 
-// 
-// 
-//
