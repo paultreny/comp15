@@ -10,8 +10,18 @@
 // map a character string to a integer, with the objective of optimizing
 // retrieval time. You are expected to justify your decision.
 //
+// I've chosen to use a Hash function for comparing the stop words, and
+// an AVL tree for keeping track of the unique words and their number of
+// occurances.
+//
+// I did this for a couple of reasons. A hash table for the small number of
+// of stop words (319) means that it is relatively easy to compare a hash of
+// a word as it is input, and if there is a conflict, then it is ignored, as
+// it shares the same address as a stopword.
 //
 //
+//
+
 
 #include <iostream>
 #include <iomanip>
@@ -20,81 +30,59 @@
 #include <fstream>
 #include "AVLTree.h"
 #include "hash.h"
-//#include "ptrie.h"
+
+using namespace comp15;
 
 using namespace std;
-using namespace comp15;
-//using namespace preny;
 
 int main (int argc, const char * argv[])
 {
-// CREATE STOPWORDS TRIE
-  const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
-  unsigned int keys = 0;			// 	and keys inserted into table
- /* 
-  pTrieNode * stopTrie = pTrieCreate();
-  for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
-  {
-    if (!fin)
-    {
-      cerr << "Error: Failed to read from file \"" << STOPFILE << "\"" << endl;
-      exit(-1);
-    }
-    string w;
-    fin >> w;
-    if (w == "the")
-      cout << w << endl;
-
-    if (pTrieAdd(stopTrie, w))
-    {
-      ++keys;
-    }
-
-  }
-  cout << "Stop words: " << keys << endl;
-*/  
-
-  const unsigned int TBLSZ = 8004823; // choose a prime just in case
-                           //93563         // other fine choices:  1000003 2584853 3072263 8004823
- 
-	unsigned int *table = new unsigned int[TBLSZ]; 
+  //const char STOPFILE[] = "/g/15/2011uc/public_html/homework/hw3/stopwords.txt";
+  const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt";
+  int stop_hashed = 0; // 
+  const unsigned long TBLSZ = 8004823; // choose a prime just in case
+                                       //93563         // other fine choices:  1000003 2584853 3072263 8004823
+	unsigned long *table = new unsigned long[TBLSZ]; 
   
-  for (unsigned int i=0; i<TBLSZ; i++)
+  for (unsigned long i=0; i<TBLSZ; i++) 
   {
-    table[i] = 0; 
+    table[i] = 0; // Zero out table
   }
   
 	for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
   {
-		if (!fin) { cerr << "Error:  Failed to read from input file \""
-                     << STOPFILE << "\"" << endl; exit(-1); }
+		if (!fin)     // Read in and error check the file input
+    {
+      cerr << "Error reading \"" << STOPFILE << "\"" << endl;
+      exit(-1);
+    }
+    
     string w;
 		fin >> w;
     
+		unsigned long hv = hash(w); // hash stop words using murmurhash3
     
-		unsigned long hv = DJBHash(w); // hash stop words using murmurhash3
-    if (hv != DJBHash(w)) // if the hash function doesn't work, cerr <<
+    if (hv != hash(w)) // if the hash function doesn't work, cerr <<
     {
       cerr << "The hash function is BROKEN." << endl; exit(-1);
     }
-  
+    
 		if (table[hv % TBLSZ] == 1) // if there is a hash conflict, 
     { 
       cout << "StopWord Hash Conflict! " << w << " " << (hv % TBLSZ) << endl;
     }
     else
     {
-		table[hv % TBLSZ]++;
-		keys++;
+      table[hv % TBLSZ]++;
+      stop_hashed++;
     }
   }
   
-  cout << "Stop words hashed: " << keys << endl;
+  cout << "Stop words hashed: " << stop_hashed << endl;
   cout << "HW3" << endl;
- 
   
-    
-  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/waldo.txt";
+  
+  
   // CREATE DATA STRUCTURE
   AVLTree<string, int> * word_count = new AVLTree<string, int>;
   
@@ -102,13 +90,15 @@ int main (int argc, const char * argv[])
   int maxcount = 0;
   string maxword;
   
-  ifstream fin(FILENAME);
-  while (!fin.eof())
+  //  const char FILENAME[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/flatland.txt";
+  //  ifstream fin(FILENAME);
+  //  while (!fin.eof())
+  while (!cin.eof())
   {
     string word;
-    //bool isLetter = false;
     bool isWord = false;
-    fin >> word;
+    //fin >> word;
+    cin >> word;
     bool foundStart = false;
     bool foundEnd = false;
     int substr_start = 0;
@@ -141,12 +131,12 @@ int main (int argc, const char * argv[])
     {
       if (!foundEnd)
       {
-        substr_len = word.size() - substr_start;
+        substr_len = (int)word.size() - substr_start;
       }
       word = word.substr(substr_start, substr_len);
     }
     //if( isWord && !pTrieIsMember(stopTrie, word) ) // COMPARE TO STOP WORDS
-    if( isWord && ( table[DJBHash(word) % TBLSZ] == 0) ) 
+    if( isWord && ( table[hash(word) % TBLSZ] == 0) ) 
     {
       if (word_count->lookup(word))
       {
@@ -167,7 +157,7 @@ int main (int argc, const char * argv[])
   }
   cout << "unique words: " << unique_words << endl;
   cout << "most frequent: " << endl << maxword << " " << maxcount << " times." << endl;
-   
+  
   // DATA STRUCTURE THOUGHTS
   //
   // Heap/Priority Queue might be good, would keep track of words with the highest occurance
@@ -176,7 +166,7 @@ int main (int argc, const char * argv[])
   //
   //
   // 
- 
+  
   return EXIT_SUCCESS;
 }
 

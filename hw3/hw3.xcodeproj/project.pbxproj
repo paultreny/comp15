@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15E8F13DDDBBF000DAA8F /* main.cpp */; };
-		40CF506B13E0084D00853301 /* hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4040044613DF3BD600CA6E7F /* hash.cpp */; };
+		40CF506D13E0185000853301 /* murmurhash3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,7 +42,6 @@
 		40B15EA413DDE10B000DAA8F /* stopwords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stopwords.cpp; sourceTree = "<group>"; };
 		40B15EA713DDE10B000DAA8F /* raven.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = raven.txt; sourceTree = "<group>"; };
 		40B15EA813DDE10B000DAA8F /* flatland.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flatland.txt; sourceTree = "<group>"; };
-		40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ptrie.cpp; sourceTree = "<group>"; };
 		40B15EAD13DE0A3C000DAA8F /* ptrie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ptrie.h; sourceTree = "<group>"; };
 		40B15EAF13DE23C7000DAA8F /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		40B15EB013DE23C7000DAA8F /* murmurhash3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = murmurhash3.cpp; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				4040044213DF3A9300CA6E7F /* perfect.cpp */,
-				40B15EAC13DE0A3C000DAA8F /* ptrie.cpp */,
 				40B15EA413DDE10B000DAA8F /* stopwords.cpp */,
 				4040045413DF415900CA6E7F /* SearchTreeNode.cpp */,
 				4040045213DF412D00CA6E7F /* SearchTreeNode.h */,
@@ -172,7 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40CF506B13E0084D00853301 /* hash.cpp in Sources */,
+				40CF506D13E0185000853301 /* murmurhash3.cpp in Sources */,
 				40B15E9013DDDBBF000DAA8F /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

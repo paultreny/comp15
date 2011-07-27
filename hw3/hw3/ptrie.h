@@ -20,6 +20,38 @@
 #include <string>
 #include <cstdlib>
 
+using namespace std;
+
+const int TREE_WIDTH = 26;
+struct trie_node
+{
+  char letter;
+  struct trie_node *next[TREE_WIDTH];
+
+  inline trie_node(char kee = -1, trie_node *kids[] = NULL)
+  {
+    this->letter = kee;
+  }
+  
+  inline trie_node* createRoot()
+  {
+    return (new trie_node(-1));
+  }
+  
+  inline void add(const string & word)
+  {
+    int len = word.size();
+    
+    
+    
+  }
+  
+};
+
+
+
+
+
 
 struct pTrieNode
 {
@@ -32,15 +64,6 @@ struct pTrieNode
     this->child_list = children;
   }
 };
-
-//typedef struct pTrieNodeRoot { pTrieNode *root;} pTrieNodeRoot;
-/*
-typedef struct pTrieCDT
-{
-  pTrieNode *root;
-} pTrieCDT;
-*/
-//typedef struct pTrieCDT *pTrieADT;
 
 // CREATE NEW TRIE
 pTrieNode * pTrieCreate()
@@ -107,12 +130,8 @@ bool pTrieIsMember(pTrieNode* &root, std::string keys) // returns true if key in
     
     // no nodes at this level or none with next char in key
     // add new node with current char as next sibling
-    if (!found)
+    if (!found && i==len)
     { 
-      if (i == len)
-      {
-        return 0;
-      }
       return 0;
     }
     
