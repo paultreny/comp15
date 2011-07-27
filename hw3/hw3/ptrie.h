@@ -43,16 +43,25 @@ typedef struct pTrieCDT
 //typedef struct pTrieCDT *pTrieADT;
 
 // ADD STRING TO TRIE
-bool pTrieAdd( pTrieNode &trie, std::string keys)
+bool pTrieAdd( pTrieNode *&head, std::string keys)
 {
-  pTrieNode * level = trie.parent;
   int i=0;
+
+  if (!head)
+    std::cout << "head = null" << std::endl;
+  if (head->next_sib == NULL)
+    std::cout << "next_sib = null" << std::endl;
+  if (head->child_list == NULL)
+  {
+    std::cout << "child_list = null" << std::endl;
+    head->child_list = new pTrieNode(head,keys[i]);
+  }
+  pTrieNode * level = head;
   for (;;)
   {
     pTrieNode *found = NULL;
     pTrieNode *curr;
-    level->key = keys[i];
-    
+        
     for (curr = level; curr !=NULL; curr = curr->next_sib )
     {
       // if node on this current level matchest the current char
