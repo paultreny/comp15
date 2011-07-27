@@ -32,7 +32,7 @@ int main (int argc, const char * argv[])
   const char STOPFILE[] = "/Users/paulreny/GitHub/comp15/hw3/hw3/stopwords.txt"; // /usr/share/dict/words
   unsigned int keys = 0;			// 	and keys inserted into table
   
-  pTrieNode * stopTrie = pTrieCreate();
+  pTrieNode * stopTrie = NULL;
   for (ifstream fin(STOPFILE); !fin.eof(); fin>>ws)
   {
     if (!fin)

@@ -46,17 +46,17 @@ typedef struct pTrieCDT
 bool pTrieAdd( pTrieNode *&head, std::string keys)
 {
   int i=0;
-
+  int len = keys.size();
   if (!head)
-    std::cout << "head = null" << std::endl;
-  if (head->next_sib == NULL)
-    std::cout << "next_sib = null" << std::endl;
-  if (head->child_list == NULL)
   {
-    std::cout << "child_list = null" << std::endl;
-    head->child_list = new pTrieNode(head,keys[i]);
+    head = new pTrieNode(head, keys[i]);
   }
   pTrieNode * level = head;
+  if (i==1)
+  {
+    level->child_list = new pTrieNode(level,keys[i]);
+    level = level->child_list;
+  }
   for (;;)
   {
     pTrieNode *found = NULL;
@@ -65,7 +65,7 @@ bool pTrieAdd( pTrieNode *&head, std::string keys)
     for (curr = level; curr !=NULL; curr = curr->next_sib )
     {
       // if node on this current level matchest the current char
-      if (keys[i] == curr->key)
+      if (curr->key = keys[i])
       {
         found = curr;
         break;
@@ -74,19 +74,15 @@ bool pTrieAdd( pTrieNode *&head, std::string keys)
     // no nodes at this level or none with next char in key
     if (!found) 
     {
-      level->key = keys[i];
-      
-      //level->child_list = new pTrieNode(keys[i]);
-
-//      level->next_sib = new pTrieNode(keys[i]);
-      found = level->next_sib;    
+      curr->child_list = new pTrieNode(level,keys[i]);
+      found = curr->next_sib;    
     }
     if (keys[i] == '\0')
     {
+      curr->key = keys[i];
       return 1;
     }
     
-    level = found->child_list;
     ++i; 
   }
   return false;
