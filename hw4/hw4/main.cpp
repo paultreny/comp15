@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <iomanip>
 #include <cassert>
+#include <queue>
+
 
 using namespace std;
 
@@ -29,6 +31,8 @@ int main (int argc, const char * argv[])
     // CHECK IF 3 letter Alpha and both cities, or discard.
     for (int i = 0; i < 3; i++)
     {
+      assert(sizeof(iata1));
+      assert(sizeof(iata2));
       assert(isalpha(iata1[i]));
       assert(isalpha(iata2[i]));
     }
@@ -41,6 +45,23 @@ int main (int argc, const char * argv[])
   }
   return (EXIT_SUCCESS);
 }
+
+/*
+(
+s.dist = 0
+for (;;)
+v = smallest unknown distance vertex
+if (v == not_a_vertex) break;
+v.known = true;
+
+for each w adjacent to v
+if ( ! w.known )
+if ( v.dist + c(v,w) < w.dist)
+{ decrease (w.dist to  v.dist + c(v,w) 
+            w.path = v;
+            }
+  */        
+            
   /*  if (argc == 1)
   {
     file_provided = 1;
@@ -174,3 +195,5 @@ for (ifstream fin(FILENAME); !fin.eof(); fin>>ws) {
  PHX	ORD	500.00
  MSP	MSN	 25.00
 */
+
+
