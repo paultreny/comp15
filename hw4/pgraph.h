@@ -15,9 +15,8 @@
 
 
 template <class Item>
-class pgraph 
-{
-  
+class pgraph {
+
 public:
   static const std::size_t MAXIMUM = INT_MAX;
   

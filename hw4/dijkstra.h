@@ -28,9 +28,9 @@
 //   starting at the start vertex. The function f has been applied to the
 //   label of each vertex visited by the search.
 
-#ifndef SEARCHES_H
-#define SEARCHES_H
-#include "graph.h"
+#ifndef PTR_COMP15_HW4_DIJKSTRA
+#define PTR_COMP15_HW4_DIJKSTRA
+#include "pgraph.h"
 
 namespace main_savitch_15
 {
@@ -42,7 +42,10 @@ namespace main_savitch_15
   
   template <class Process, class Item, class SizeType>
   void breadth_first(Process f, graph<Item>& g, SizeType start);
+  
+  template <class Process, class Item, class SizeType>
+  void dijkstra(Process f, pgraph<Item>& g, SizeType start);
 }
 
-#include "searches.template" // Include the implementation.
+#include "dijkstra.template" // Include the implementation.
 #endif

@@ -20,6 +20,7 @@ using namespace std;
 
 int main (int argc, const char * argv[])
 {
+  pgraph<string> *flightmap = new pgraph<string>;
   
   
   cout << "  A  |  B  |   Cost" << endl;
@@ -39,6 +40,10 @@ int main (int argc, const char * argv[])
       assert(isalpha(iata2[i]));
     }
     assert(cost > 0);
+    flightmap->add_vertex(iata1);
+    flightmap->add_vertex(iata2);
+    flightmap->add_edge(
+    
     cout << " " << iata1 << " | " << iata2 << " | ";
     cout << setw(8) << cost << endl;
 
