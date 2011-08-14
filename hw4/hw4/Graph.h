@@ -26,6 +26,10 @@ using namespace std;
   
 class Flightpath; // aka EDGE
 
+struct compare_flights;
+
+//struct compare_flights{}; //bool operator()(Flightpath*, Flightpath*) const;
+
 class Airport // AIRPORT - NODE - VERTEX
 {
 public:
@@ -42,9 +46,10 @@ class Flightpath // FLIGHTPATH - EDGE
 {
 public:
   double price;
+  Airport* origin;
   Airport* dest;
-  Flightpath(double c, Airport *d = NULL):price(c), dest(d) {}  
-  ~Flightpath() { if (dest) delete dest; }
+  Flightpath(double c, Airport *o = NULL, Airport *d = NULL):price(c), origin(o), dest(d) {}  
+  ~Flightpath() { if (origin) delete origin; if (dest) delete dest; }
 };
 
 
@@ -90,13 +95,14 @@ public:
 };
 
 
-// is this correct?
 struct compare{ bool operator()(Airport * &a, Airport * &b) const
-  {
-    // least to greatest
-    return (b->min_cost) < (a->min_cost);      
-  }
+{ return (b->min_cost) < (a->min_cost); }
 };
+
+
+//struct compare_flights { bool operator()(Flightpath* &a, Flightpath* &b) const
+//  { return ((b->dest->cityCode) < (a->dest->cityCode)); }
+//};
 
 
 // for each solution, reset node information
@@ -221,23 +227,23 @@ void dijkstra ( string s, string t, aGraph &airports )
 }
 
 
-void get_graph(string const &filename, aGraph &agraph) 
-{
-	ifstream inf(filename.c_str());
-	string from, to;
-	double weight;
-	while ( inf.good() ) 
-	{
-		inf >> from >> to >> weight;
-		if ( inf.good() ) 
-		{
-			Airport *Target = agraph.find_in_agraph(to);
-			Airport *Source = agraph.find_in_agraph(from);
-			Flightpath *connector = new Flightpath(weight,Target);
-			Source->adjAirports.push_back(connector);
-		}
-	}
-}
+//void get_graph(string const &filename, aGraph &agraph) 
+//{
+//	ifstream inf(filename.c_str());
+//	string from, to;
+//	double weight;
+//	while ( inf.good() ) 
+//	{
+//		inf >> from >> to >> weight;
+//		if ( inf.good() ) 
+//		{
+//			Airport *Target = agraph.find_in_agraph(to);
+//			Airport *Source = agraph.find_in_agraph(from);
+//			Flightpath *connector = new Flightpath(weight,Target);
+//			Source->adjAirports.push_back(connector);
+//		}
+//	}
+//}
 
 /*
 int main()

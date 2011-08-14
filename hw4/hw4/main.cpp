@@ -57,7 +57,7 @@ int main ( int argc, const char * argv[])
     
     Airport *Source = flightmap->find_in_agraph(iata1);
     Airport *Target = flightmap->find_in_agraph(iata2);
-    Flightpath *dest_target = new Flightpath(cost, Target);
+    Flightpath *dest_target = new Flightpath(cost, Source, Target);
     //Flightpath *dest_source = new Flightpath(cost, Source);
     
     
