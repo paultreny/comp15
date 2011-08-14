@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		402A06B413F1097800B890B2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402A06B313F1097800B890B2 /* main.cpp */; };
 		402A06B613F1097800B890B2 /* hw4.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 402A06B513F1097800B890B2 /* hw4.1 */; };
-		4058272A13F7B70E000D9537 /* pgraph.template in Sources */ = {isa = PBXBuildFile; fileRef = 4058272813F7B70E000D9537 /* pgraph.template */; };
-		40E2058013F7C17E0039483A /* dijkstra.template in Sources */ = {isa = PBXBuildFile; fileRef = 4058272B13F7BBF3000D9537 /* dijkstra.template */; };
+		40E2058413F7E2EA0039483A /* adjList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40E2058213F7E2EA0039483A /* adjList.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +44,8 @@
 		4058272913F7B70E000D9537 /* pgraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pgraph.h; path = ../pgraph.h; sourceTree = "<group>"; };
 		4058272B13F7BBF3000D9537 /* dijkstra.template */ = {isa = PBXFileReference; lastKnownFileType = text; name = dijkstra.template; path = ../dijkstra.template; sourceTree = "<group>"; };
 		4058272C13F7BBF3000D9537 /* dijkstra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dijkstra.h; path = ../dijkstra.h; sourceTree = "<group>"; };
+		40E2058213F7E2EA0039483A /* adjList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = adjList.cpp; path = ../adjList.cpp; sourceTree = "<group>"; };
+		40E2058313F7E2EA0039483A /* adjList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = adjList.h; path = ../adjList.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,8 @@
 		402A06B213F1097800B890B2 /* hw4 */ = {
 			isa = PBXGroup;
 			children = (
+				40E2058213F7E2EA0039483A /* adjList.cpp */,
+				40E2058313F7E2EA0039483A /* adjList.h */,
 				4058272B13F7BBF3000D9537 /* dijkstra.template */,
 				4058272C13F7BBF3000D9537 /* dijkstra.h */,
 				4058272813F7B70E000D9537 /* pgraph.template */,
@@ -153,9 +156,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E2058013F7C17E0039483A /* dijkstra.template in Sources */,
 				402A06B413F1097800B890B2 /* main.cpp in Sources */,
-				4058272A13F7B70E000D9537 /* pgraph.template in Sources */,
+				40E2058413F7E2EA0039483A /* adjList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +184,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -202,7 +204,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;

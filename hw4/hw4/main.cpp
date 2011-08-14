@@ -14,13 +14,22 @@
 #include <cassert>
 #include <queue>
 #include <limits.h> // for double max???
-#include "pgraph.h"
+//#include "pgraph.h"
+
+#include "Graph.h"
 
 using namespace std;
 
-int main (int argc, const char * argv[])
+
+
+
+int main ( int argc, const char * argv[])
 {
-  pgraph<string> *flightmap = new pgraph<string>;
+  AirMap flightmap;
+  
+  ifstream arq(getenv("FLIGHTDATA"));
+  cin.rdbuf(arq.rdbuf());
+  
   
   
   cout << "  A  |  B  |   Cost" << endl;
@@ -39,22 +48,39 @@ int main (int argc, const char * argv[])
       assert(isalpha(iata1[i]));
       assert(isalpha(iata2[i]));
     }
+    
+    if (iata1 > iata2)  // make it so the two cities are in alphabetical order
+    {
+      string temp = iata1;
+      iata1 = iata2;
+      iata2 = temp;
+    }
     assert(cost > 0);
-    flightmap->add_vertex(iata1);
-    flightmap->add_vertex(iata2);
-    flightmap->add_edge(
+//    flightmap->add_vertex(iata1);
+//    flightmap->add_vertex(iata2);
+//    flightmap->add_edge();
+    
+    Airport *Target = flightmap.find_in_airmap(iata1);
+    Airport *Source = flightmap.find_in_airmap(iata2);
+    Flightpath *redEye = new Flightpath(cost, Target);
+    
+    if (!redEye ) return (EXIT_FAILURE);
+    cout << redEye->price << redEye->origin->IATAcode << redEye->dest->IATAcode << endl;
+  
+
+    Source->adjAirports.push_back(redEye);
+    
     
     cout << " " << iata1 << " | " << iata2 << " | ";
     cout << setw(8) << cost << endl;
 
-    
-    
+       
   }
   return (EXIT_SUCCESS);
 }
 
 
-
+/*
 struct Vertex {
   int id;
   std::vector<int> neighbors;
@@ -62,8 +88,7 @@ struct Vertex {
   int prev;  // need some sentry value for "undefined"
 };
 
-
-
+*/
 
 
 /*

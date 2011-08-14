@@ -19,29 +19,34 @@
 using namespace std;
 
 
+class Flightpath; // aka EDGE
+
 // AIRPORT - NODE - VERTEX
 class Airport
 {
 public:
   string  IATAcode;
-  list    Flightpath*> adjFlights;
+  list    <Flightpath*> adjAirports;
   bool    visited;
-  double  cost;
+  double  min_cost;
   Airport *prev_ptr;
-}
+  Airport(string code){ IATAcode = code; visited = 0; }
+  
+};
 
 
 // FLIGHTPATH - EDGE
 class Flightpath
 {
 public:
-  double weight;
-  Airport * dest;
+  double price;
+  Airport* origin;
+  Airport* dest;
   
-  Flightpath(double c, Airport *d = NULL):weight(c), dest(d) {}  
+  Flightpath(double c, Airport *d = NULL):price(c), dest(d) {}  
   
   ~Flightpath() { if (dest) delete dest; }
-}
+};
 
 
 // AIRMAP - NODEMAP - AIRPORTS
@@ -50,28 +55,30 @@ class AirMap
 public:
   map < string, Airport* > airmap;
   
-  Airport * find_in_airmap (const string &iata)
+  Airport* find_in_airmap (const string &iata)
   {
-    Airport * result = airmap[iata];
+    Airport* result = airmap[iata];
     if ( result == 0 )
     {
       result = airmap[iata] = new Airport(iata);
       return result;
     }
   }
+  
   friend ostream& operator<<(ostream& o, AirMap amap)
   {
-		map<string,Node*>::iterator im;
-		for(im = amap.airmap.begin(); im != amap.airmap.end(); im++)
+		map< string, Airport* >::iterator mapi;
+		for(mapi = amap.airmap.begin(); mapi != amap.airmap.end(); mapi++)
     {
 			//pair<string,Node*> p = *im;
 			//o << p.second->name << endl;
-			o << (*im).second->name << endl;
-      list<Flightpath*> adjFlights = (*im).second->adjFlights;
+			if (!amap.second) break;
+      o << (*mapi).second->IATAcode << endl;
+      list<Flightpath*> adjAirports = (*mapi).second->adjAirports;
 			list<Flightpath*>::iterator f;
-      for(f = adjFlights.begin(); f != adjFlights.end(); f++)
+      for(f = adjAirports.begin(); f != adjAirports.end(); f++)
       {
-				cout << "   -> " << (*f)->dest->IATA << " weight " << (*e=f)->weight <<endl;
+				cout << "   -> " << (*f)->dest->IATAcode << " weight " << (*f)->price <<endl;
 			}
 		}
 		return o;
@@ -85,7 +92,7 @@ struct compare{
   bool operator()(Airport * &a,Airport * &b) const
   {
     // least to greatest
-    return (b->cost) < (a->cost);      
+    return (b->min_cost) < (a->min_cost);      
   }
 };
 
@@ -95,7 +102,7 @@ struct compare{
 void reset_airports(AirMap &nm){
 	map<string,Airport*>::iterator im;
 	for(im = nm.airmap.begin(); im != nm.airmap.end(); im++){
-		(*im).second->cost = 0; 
+		(*im).second->min_cost = 0; 
 		(*im).second->prev_ptr = 0;
 		(*im).second->visited = false;
 	}
@@ -107,10 +114,10 @@ void reset_airports(AirMap &nm){
 void dijkstra ( string s, string t, AirMap &airports )
 {
 	// check and report or abort
-	Airport* source = airports.airports[s];
+	Airport* source = airports.airmap[s];
 	if(source==0){cout << s << " not in map " << endl; return;}
 	else cout << s << " in map " << endl;
-	Airport* target = airports.airports[t];
+	Airport* target = airports.airmap[t];
 	if(target==0){cout << t << " not in map " << endl; return;}
 	else cout << t << " in map " << endl;
   
@@ -128,13 +135,13 @@ void dijkstra ( string s, string t, AirMap &airports )
     
 		// process neighbors
 		list<Flightpath*>::iterator flight;
-		for(flight = curr->adjFlights.begin(); flight != curr->adjFlights.end(); flight++){
+		for(flight = curr->adjAirports.begin(); flight != curr->adjAirports.end(); flight++){
 			Airport *next = (*flight)->dest;
 			if(!next->visited){
-				next->cost += (*flight)->weight + curr->cost;
+				next->min_cost += (*flight)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
-				cout << " pushing " << next->IATAcode << " cost " << next->cost << endl;;
+				cout << " pushing " << next->IATAcode << " cost " << next->min_cost << endl;;
 				pq.push(next);
 			}
 			else{
@@ -158,13 +165,14 @@ void get_graph(string const &filename, AirMap &air_map)
 			Airport *Target = air_map.find_in_airmap(to);
 			Airport *Source = air_map.find_in_airmap(from);
 			Flightpath *connector = new Flightpath(weight,Target);
-			Source->adjFlights.push_back(connector);
+			Source->adjAirports.push_back(connector);
 		}
 	}
 }
 
-
-int main(){
+/*
+int main()
+{
 	AirMap airports;
 	
   get_graph("graph.txt", airports);
@@ -183,7 +191,8 @@ int main(){
 	}while(s == "y");
   return 0;
 }
-}
+*/
+
 
 #endif
 
