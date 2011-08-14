@@ -6,6 +6,42 @@
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 
+#include <cstdlib>
+#include <vector>
+
+using namespace std;
+
+
+struct Vertex {
+  int id;
+  std::vector<int> neighbors;
+  double dist_from_source;  // need some sentry value for "infinity"
+  int prev;  // need some sentry value for "undefined"
+};
+
+
+template <class >
+class <#class name#> {
+  <#instance variables#>
+  
+public:
+  <#member functions#>
+};
+  
+public:
+  <#member functions#>
+};
+
+template <vector>
+class Graph {
+  <#instance variables#>
+  
+public:
+  <#member functions#>
+};
+class 
+
+/*
 #include "Graph.h"
 
 
@@ -92,5 +128,6 @@ public:
   }
   
 };
+*/
 
 

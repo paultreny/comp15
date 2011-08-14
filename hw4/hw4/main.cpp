@@ -13,13 +13,15 @@
 #include <iomanip>
 #include <cassert>
 #include <queue>
-
+#include <limits.h> // for double max???
+#include "pgraph.h"
 
 using namespace std;
 
 int main (int argc, const char * argv[])
 {
-
+  
+  
   cout << "  A  |  B  |   Cost" << endl;
   while(!cin.eof())
   {
@@ -45,6 +47,19 @@ int main (int argc, const char * argv[])
   }
   return (EXIT_SUCCESS);
 }
+
+
+
+struct Vertex {
+  int id;
+  std::vector<int> neighbors;
+  int dist_from_source;  // need some sentry value for "infinity"
+  int prev;  // need some sentry value for "undefined"
+};
+
+
+
+
 
 /*
 (
