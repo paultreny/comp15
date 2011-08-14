@@ -49,3 +49,103 @@ public:
 #endif
 //**************************************************************************
 
+#include <iostream> 
+#include <fstream> 
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <ctype.h> 
+#include <string.h> 
+#include <math.h> 
+#include <limits.h> 
+#include <vector>
+
+using namespace std;
+
+class Edge;
+
+class Node 
+{ 
+public: 
+  int id; 
+  bool visited; 
+  vector <Edge*>* adj; 
+  double distance; 
+  Node* previous; 
+  Node(int); 
+  ~Node(){}; 
+};
+
+class Edge 
+{ 
+  public: Node* initial; 
+  Node* next; 
+  double w; 
+  Edge(Node*, 
+  Node*, int); 
+  ~Edge(){}; 
+  
+  bool Connects(Node* node1, Node* node2) 
+  {
+  return((node1==this->initial&&node2==this->next)||(node1==this->next&&node2==this->initial));
+  }
+};
+
+Node::Node(int a) 
+{ 
+  id=a; 
+  visited=0; 
+  adj=new vector<Edge*>; 
+  previous=NULL; 
+  distance=DBL_MAX;
+}
+
+
+Edge::Edge(Node* a, Node* b, double weight) 
+{ 
+  initial=a; 
+  next=b; 
+  w=weight; 
+}
+
+
+class MyGraph
+{ 
+  public: int Maxnodes; 
+  int m; 
+  vector <Edge*> Akmes; 
+  vector <Node*> List; 
+  Node* remaining[]; 
+  MyGraph(int); 
+  ~MyGraph();
+  int GetNumNodes(); 
+  int GetNumEdges(); 
+  void InsertEdge(int,int,double); 
+};
+
+MyGraph::MyGraph(int size) 
+{ 
+  Maxnodes=size;
+  for (int i=1;i<=Maxnodes;i++)
+  {
+    Node* temp=new Node(i);
+    List.push_back(temp);
+  } 
+  m=0; 
+}
+
+MyGraph::~MyGraph() {}
+
+int MyGraph::GetNumNodes() { return Maxnodes; }
+
+int MyGraph::GetNumEdges() { return Akmes.size(); }
+
+void MyGraph::InsertEdge(int x, int y, double w)
+{ 
+  Node* a=List[x-1]; 
+  Node* b=List[y-1]; 
+  Edge* akmi=new Edge(a,b,w); 
+  Edge* akmi2=new Edge(b,a,w); 
+  Akmes.push_back(akmi); 
+  a->adj->push_back(akmi); 
+  b->adj->push_back(akmi2); 
+}

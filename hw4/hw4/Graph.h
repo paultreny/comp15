@@ -15,14 +15,13 @@
 #include <map>
 #include <queue>
 #include <vector>
+#include <pair.h>
 
 using namespace std;
 
-
 class Flightpath; // aka EDGE
 
-// AIRPORT - NODE - VERTEX
-class Airport
+class Airport // AIRPORT - NODE - VERTEX
 {
 public:
   string  IATAcode;
@@ -31,51 +30,51 @@ public:
   double  min_cost;
   Airport *prev_ptr;
   Airport(string code){ IATAcode = code; visited = 0; }
-  
 };
 
 
-// FLIGHTPATH - EDGE
-class Flightpath
+class Flightpath // FLIGHTPATH - EDGE
 {
 public:
   double price;
   Airport* origin;
   Airport* dest;
-  
   Flightpath(double c, Airport *d = NULL):price(c), dest(d) {}  
-  
   ~Flightpath() { if (dest) delete dest; }
 };
 
 
-// AIRMAP - NODEMAP - AIRPORTS
-class AirMap
+class aGraph // aGraph - NodeMap - AIRPORTS
 {
 public:
-  map < string, Airport* > airmap;
-  
-  Airport* find_in_airmap (const string &iata)
+  map < string, Airport* > agraph;
+  Airport* find_in_agraph (const string &iata)
   {
-    Airport* result = airmap[iata];
+    Airport* result = agraph[iata];
     if ( result == 0 )
     {
-      result = airmap[iata] = new Airport(iata);
+      result = agraph[iata] = new Airport(iata);
       return result;
     }
   }
   
-  friend ostream& operator<<(ostream& o, AirMap amap)
+  friend ostream& operator<<(ostream& o, aGraph ag)
   {
-		map< string, Airport* >::iterator mapi;
-		for(mapi = amap.airmap.begin(); mapi != amap.airmap.end(); mapi++)
-    {
-			//pair<string,Node*> p = *im;
+		map <string, Airport*>::iterator mapit;
+		for(
+        mapit = ag.agraph.begin(); 
+        mapit != ag.agraph.end(); 
+        mapit++)
+    {	
+      //pair<string,Node*> p = *im;
 			//o << p.second->name << endl;
-			if (!mapi->second) break;
-      o << (*mapi).second->IATAcode << endl;
-      list<Flightpath*> adjAirports = (*mapi).second->adjAirports;
+			
+      if (!mapit->second) break;
+      o << (*mapit).second->IATAcode << endl;
+      
+      list<Flightpath*> adjAirports = (*mapit).second->adjAirports;
 			list<Flightpath*>::iterator f;
+      
       for(f = adjAirports.begin(); f != adjAirports.end(); f++)
       {
 				cout << "   -> " << (*f)->dest->IATAcode << " weight " << (*f)->price <<endl;
@@ -86,10 +85,8 @@ public:
 };
 
 
-
 // is this correct?
-struct compare{
-  bool operator()(Airport * &a,Airport * &b) const
+struct compare{ bool operator()(Airport * &a, Airport * &b) const
   {
     // least to greatest
     return (b->min_cost) < (a->min_cost);      
@@ -97,27 +94,27 @@ struct compare{
 };
 
 
-
 // for each solution, reset node information
-void reset_airports(AirMap &nm){
-	map<string,Airport*>::iterator im;
-	for(im = nm.airmap.begin(); im != nm.airmap.end(); im++){
-		(*im).second->min_cost = 0; 
-		(*im).second->prev_ptr = 0;
-		(*im).second->visited = false;
+void reset_airports(aGraph &ag)
+{
+	map<string,Airport*>::iterator mapit;
+	for(mapit = ag.agraph.begin(); mapit != ag.agraph.end(); mapit++)
+  {
+		(*mapit).second->min_cost = 0; 
+		(*mapit).second->prev_ptr = 0;
+		(*mapit).second->visited = false;
 	}
 }
 
 
-
 // DIJKSTRA ALGORITHM
-void dijkstra ( string s, string t, AirMap &airports )
+void dijkstra ( string s, string t, aGraph &airports )
 {
 	// check and report or abort
-	Airport* source = airports.airmap[s];
+	Airport* source = airports.agraph[s];
 	if(source==0){cout << s << " not in map " << endl; return;}
 	else cout << s << " in map " << endl;
-	Airport* target = airports.airmap[t];
+	Airport* target = airports.agraph[t];
 	if(target==0){cout << t << " not in map " << endl; return;}
 	else cout << t << " in map " << endl;
   
@@ -126,8 +123,8 @@ void dijkstra ( string s, string t, AirMap &airports )
 	// put the source into pq and loop until empty
 	priority_queue < Airport*, deque<Airport*>, compare>  pq;
 	pq.push(source);
-	while(!pq.empty()){
-    
+	while(!pq.empty())
+  {
 		// process least cost node.
 		Airport* curr = pq.top(); 
 		pq.pop();
@@ -135,16 +132,22 @@ void dijkstra ( string s, string t, AirMap &airports )
     
 		// process neighbors
 		list<Flightpath*>::iterator flight;
-		for(flight = curr->adjAirports.begin(); flight != curr->adjAirports.end(); flight++){
+		for(
+        flight = curr->adjAirports.begin(); 
+        flight != curr->adjAirports.end(); 
+        flight++)
+    {
 			Airport *next = (*flight)->dest;
-			if(!next->visited){
+			if(!next->visited)
+      {
 				next->min_cost += (*flight)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
 				cout << " pushing " << next->IATAcode << " cost " << next->min_cost << endl;;
 				pq.push(next);
 			}
-			else{
+			else
+      {
 				// see if this can cost less
 			}
 		}
@@ -152,7 +155,7 @@ void dijkstra ( string s, string t, AirMap &airports )
 }
 
 
-void get_graph(string const &filename, AirMap &air_map) 
+void get_graph(string const &filename, aGraph &agraph) 
 {
 	ifstream inf(filename.c_str());
 	string from, to;
@@ -162,8 +165,8 @@ void get_graph(string const &filename, AirMap &air_map)
 		inf >> from >> to >> weight;
 		if ( inf.good() ) 
 		{
-			Airport *Target = air_map.find_in_airmap(to);
-			Airport *Source = air_map.find_in_airmap(from);
+			Airport *Target = agraph.find_in_agraph(to);
+			Airport *Source = agraph.find_in_agraph(from);
 			Flightpath *connector = new Flightpath(weight,Target);
 			Source->adjAirports.push_back(connector);
 		}
@@ -173,7 +176,7 @@ void get_graph(string const &filename, AirMap &air_map)
 /*
 int main()
 {
-	AirMap airports;
+	aGraph airports;
 	
   get_graph("graph.txt", airports);
   
@@ -193,6 +196,6 @@ int main()
 }
 */
 
-
 #endif
+
 

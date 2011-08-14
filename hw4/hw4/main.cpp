@@ -25,7 +25,7 @@ using namespace std;
 
 int main ( int argc, const char * argv[])
 {
-  AirMap flightmap;
+  aGraph flightmap;
   
   ifstream arq(getenv("FLIGHTDATA"));
   cin.rdbuf(arq.rdbuf());
@@ -60,8 +60,8 @@ int main ( int argc, const char * argv[])
 //    flightmap->add_vertex(iata2);
 //    flightmap->add_edge();
     
-    Airport *Target = flightmap.find_in_airmap(iata1);
-    Airport *Source = flightmap.find_in_airmap(iata2);
+    Airport *Target = flightmap.find_in_agraph(iata1);
+    Airport *Source = flightmap.find_in_agraph(iata2);
     Flightpath *redEye = new Flightpath(cost, Target);
     
     if (!redEye ) return (EXIT_FAILURE);
