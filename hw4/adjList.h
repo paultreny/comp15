@@ -6,96 +6,45 @@
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 
-#include <cstdlib>
-#include <vector>
-#include <list>
-#include <pair>
-
-using namespace std;
-
-
-#include <cassert>    // Provides assert
-#include <cstdlib>    // Provides size_t
-#include <set>        // Provides set
-
-
-class graph
+//**************************************************************************
+#ifndef ADJLIST_H
+#define ADJLIST_H
+//**************************************************************************
+#include "vertex.h"
+//**************************************************************************
+const int List_Default_Size = 1001;
+//**************************************************************************
+class AdjList //Adjacency List class
 {
-
+private:
+  int size;
+  int edges;
+  int verts;
+  struct Adj_Node {
+    Vertex *curpos;
+    Vertex *head;
+    short known;
+    double dist;
+  } *List;
+  
 public:
+  AdjList(int new_size = List_Default_Size);
+  ~AdjList();
   
+  void add_Edge(int ptA,int ptB, int edge);
+  int operator ()(int vertA,int vertB);
   
-  void add_edge(std::size_t source, std::size_t target)
-  // Library facilities used: cassert, cstdlib
-  {
-    assert(source < size( ));
-    assert(target < size( ));
-    edges[source][target] = true;
-  }
+  int Empty() {return (size == 0);};
+  void setVerts(int nv) {verts = nv;};
+  int no_of_edges() {return edges;};
+  int no_of_verts() {return verts;};
+  void setKnown(int i,short status) {List[i-1].known = status;};
+  short Known(int i) {return List[i-1].known;};
+  int distance(int i) {return List[i-1].dist;};
+  void setDist(int i, int distance) {List[i-1].dist = distance;};
+  Vertex *start(int i) {return List[i-1].head->next;};
   
-  void add_vertex(const Item& label)
-  // Library facilities used: cassert, cstdlib
-  {
-    std::size_t new_vertex_number;
-    std::size_t other_number;
-    
-    assert(size( ) < MAXIMUM);
-    new_vertex_number = many_vertices;
-    many_vertices++;
-    for (other_number = 0; other_number < many_vertices; ++other_number)
-    {
-      edges[other_number][new_vertex_number] = false;
-      edges[new_vertex_number][other_number] = false;
-    }
-    labels[new_vertex_number] = label;
-  }
-  
-  bool is_edge(std::size_t source, std::size_t target) const
-  // Library facilities used: cassert, cstdlib
-  {
-    assert(source < size( ));
-    assert(target < size( ));
-    return edges[source][target];
-  }
-  
-  template <class Item>
-  Item& graph<Item>::operator[ ] (std::size_t vertex)
-  // Library facilities used: cassert, cstdlib
-  {
-    assert(vertex < size( ));
-    return labels[vertex];     // Returns a reference to the label
-  }
-  
-  template <class Item>
-  Item graph<Item>::operator[ ] (std::size_t vertex) const
-  // Library facilities used: cassert, cstdlib
-  {
-    assert(vertex < size( ));
-    return labels[vertex];     // Returns only a copy of the label
-  }
-  
-  template <class Item>
-  std::set<std::size_t> graph<Item>::neighbors(std::size_t vertex) const
-  // Library facilities used: cassert, cstdlib, set
-  {
-    std::set<std::size_t> answer;
-    std::size_t i;
-    
-    assert(vertex < size( ));
-    
-    for (i = 0; i < size( ); ++i)
-    {
-      if (edges[vertex][i])
-        answer.insert(i);
-    }
-    return answer;
-  }
-  
-  template <class Item>
-  void graph<Item>::remove_edge(std::size_t source, std::size_t target)
-  // Library facilities used: cassert, cstdlib
-  {
-    assert(source < size( ));
-    assert(target < size( ));
-    edges[source][target] = false;
-  }
+};
+//**************************************************************************
+#endif
+//**************************************************************************

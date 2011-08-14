@@ -34,8 +34,9 @@ public:
   
   
 private:
-  bool edges[MAXIMUM][MAXIMUM];
-  Item labels[MAXIMUM];
+  bool **edges;
+  Item *labels;
+  std::size_t allocated;
   std::size_t many_vertices;
 
 };
@@ -45,3 +46,14 @@ private:
 
 
 
+edges = new (bool*) [n];
+for (i=0; i<n; ++i)
+edges[i] = new bool[n];
+
+for ( i=0; i<n; ++i)
+  for ( j=0; j<n; ++j)
+    edges[i][j] = false;
+    
+implementation should include a constructor with one argument. this argument is a size_t value that specifies the initial allocation for the number or roes and columns in the adjacency matrix.
+    
+add_vertex is called and the matrix is already full, then add_vertex should call resize to alocate larger adj matrix.

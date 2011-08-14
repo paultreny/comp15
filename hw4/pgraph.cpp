@@ -6,8 +6,6 @@
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 
-#include "pgraph.h"
-
 
 #include <cassert>    // Provides assert
 #include <cstdlib>    // Provides size_t

@@ -72,7 +72,7 @@ public:
     {
 			//pair<string,Node*> p = *im;
 			//o << p.second->name << endl;
-			if (!amap.second) break;
+			if (!mapi->second) break;
       o << (*mapi).second->IATAcode << endl;
       list<Flightpath*> adjAirports = (*mapi).second->adjAirports;
 			list<Flightpath*>::iterator f;

@@ -65,6 +65,7 @@ int main ( int argc, const char * argv[])
     Flightpath *redEye = new Flightpath(cost, Target);
     
     if (!redEye ) return (EXIT_FAILURE);
+    cout << redEye->origin->IATAcode;
     cout << redEye->price << redEye->origin->IATAcode << redEye->dest->IATAcode << endl;
   
 

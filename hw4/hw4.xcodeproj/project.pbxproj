@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		402A06B413F1097800B890B2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402A06B313F1097800B890B2 /* main.cpp */; };
 		402A06B613F1097800B890B2 /* hw4.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 402A06B513F1097800B890B2 /* hw4.1 */; };
-		40E2058413F7E2EA0039483A /* adjList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40E2058213F7E2EA0039483A /* adjList.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,12 +39,13 @@
 		4058272413F7A2CA000D9537 /* randair.2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = randair.2; sourceTree = "<group>"; };
 		4058272513F7A2CA000D9537 /* randair.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = randair.1; sourceTree = "<group>"; };
 		4058272613F7A2CA000D9537 /* randair.0 */ = {isa = PBXFileReference; lastKnownFileType = text; path = randair.0; sourceTree = "<group>"; };
-		4058272813F7B70E000D9537 /* pgraph.template */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pgraph.template; path = ../pgraph.template; sourceTree = "<group>"; };
+		4058272813F7B70E000D9537 /* pgraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pgraph.cpp; path = ../pgraph.cpp; sourceTree = "<group>"; };
 		4058272913F7B70E000D9537 /* pgraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pgraph.h; path = ../pgraph.h; sourceTree = "<group>"; };
-		4058272B13F7BBF3000D9537 /* dijkstra.template */ = {isa = PBXFileReference; lastKnownFileType = text; name = dijkstra.template; path = ../dijkstra.template; sourceTree = "<group>"; };
+		4058272B13F7BBF3000D9537 /* dijkstra.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dijkstra.cpp; path = ../dijkstra.cpp; sourceTree = "<group>"; };
 		4058272C13F7BBF3000D9537 /* dijkstra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dijkstra.h; path = ../dijkstra.h; sourceTree = "<group>"; };
 		40E2058213F7E2EA0039483A /* adjList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = adjList.cpp; path = ../adjList.cpp; sourceTree = "<group>"; };
 		40E2058313F7E2EA0039483A /* adjList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = adjList.h; path = ../adjList.h; sourceTree = "<group>"; };
+		40E2058513F7EE130039483A /* vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vertex.h; path = ../vertex.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +78,12 @@
 		402A06B213F1097800B890B2 /* hw4 */ = {
 			isa = PBXGroup;
 			children = (
+				40E2058513F7EE130039483A /* vertex.h */,
 				40E2058213F7E2EA0039483A /* adjList.cpp */,
 				40E2058313F7E2EA0039483A /* adjList.h */,
-				4058272B13F7BBF3000D9537 /* dijkstra.template */,
+				4058272B13F7BBF3000D9537 /* dijkstra.cpp */,
 				4058272C13F7BBF3000D9537 /* dijkstra.h */,
-				4058272813F7B70E000D9537 /* pgraph.template */,
+				4058272813F7B70E000D9537 /* pgraph.cpp */,
 				4058272913F7B70E000D9537 /* pgraph.h */,
 				402A06B313F1097800B890B2 /* main.cpp */,
 				4058272713F7A2D7000D9537 /* data */,
@@ -157,7 +158,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				402A06B413F1097800B890B2 /* main.cpp in Sources */,
-				40E2058413F7E2EA0039483A /* adjList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <queue>
 #include <set>
-#include "graph.h"
+#include "pgraph.h"
 #include "dijkstra.h"
 
 namespace main_savitch_15
@@ -93,4 +93,43 @@ namespace main_savitch_15
     }   
     while (!vertex_queue.empty( ));
   }
+  
+  
+  
+  template <class Process, class Item, class SizeType>
+  void dijkstra(Process f, pgraph<Item>& g, SizeType start);
+  // Precondition: start is a vertex number of the labeled graph g.
+  // Postcondition: Dijkstra's algorithm has been executed,
+  // starting at the start vertex. The function f has been applied to the
+  // label of each vertex visited by the search.
+  // Library facilities used: algorithm, cassert, cstdlib, graph.h, queue
+  {
+    bool marked[g.MAXIMUM];
+    std::set<std::size_t> connections;
+    std::set<std::size_t>::iterator it;
+    std::queue<std::size_t> vertex_queue;       
+    assert(start < g.size( ));
+    std::fill_n(marked, g.size( ), false);
+    marked[start] = true;
+    f(g[start]);
+    vertex_queue.push(start);
+    do
+    {
+	    connections = g.neighbors(vertex_queue.front( ));
+	    vertex_queue.pop( );
+	    // Mark and process the unmarked neighbors,
+	    // and place them in the queue.
+	    for (it = connections.begin( ); it != connections.end( ); ++it)
+	    {
+        if (!marked[*it])
+        {
+          marked[*it] = true;
+          f(g[*it]);
+          vertex_queue.push(*it);
+        }
+	    }
+    }   
+    while (!vertex_queue.empty( ));
+  }
+  
 }
