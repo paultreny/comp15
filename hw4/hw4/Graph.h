@@ -14,6 +14,7 @@
 #include <list>
 #include <map>
 #include <queue>
+#include <stack>
 #include <vector>
 #include <pair.h>
 
@@ -22,7 +23,7 @@ using namespace std;
 
 //typedef vector<map<string, double> > graph;
 //typedef map< pair <string, int>, double> neighbors;
-
+  
 class Flightpath; // aka EDGE
 
 class Airport // AIRPORT - NODE - VERTEX
@@ -127,19 +128,31 @@ void dijkstra ( string s, string t, aGraph &airports )
 	// put the source into pq and loop until empty
 	priority_queue < Airport*, deque<Airport*>, compare>  pq;
 	pq.push(source);
-	while(!pq.empty())
+  stack<Airport*> *traceroute;
+  while(!pq.empty())
   {
 		// process least cost node.
 		Airport* curr = pq.top(); 
-		pq.pop();
+		if (curr == target)
+    {
+      while(curr->prev_ptr)
+      {
+        traceroute->push(curr);
+        curr = curr->prev_ptr;
+      }
+      while (!traceroute->empty())
+      {
+        Airport* output = traceroute->top();
+        traceroute->pop();
+        cout << output->prev_ptr->cityCode << " -> " << output->cityCode << " $" << output->min_cost << endl;
+      }
+    }
+    pq.pop();
 		curr->visited = true;
     
 		// process neighbors
 		list<Flightpath*>::iterator flight;
-		for(
-        flight = curr->adjAirports.begin(); 
-        flight != curr->adjAirports.end(); 
-        flight++)
+		for(flight = curr->adjAirports.begin(); flight != curr->adjAirports.end(); flight++)
     {
 			Airport *next = (*flight)->dest;
 			if(!next->visited)
@@ -147,8 +160,23 @@ void dijkstra ( string s, string t, aGraph &airports )
 				next->min_cost += (*flight)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
-				cout << " pushing " << next->cityCode << " cost " << next->min_cost << endl;;
+//        cout << (*flight)->price << endl;
+        cout << " pushing " << next->cityCode << " cost " << next->min_cost << endl;;
 				pq.push(next);
+//        if ( next->cityCode == target->cityCode )
+//        {
+//          while (!pq.empty())
+//          {
+//            Airport* path = pq.top();
+//            pq.pop();
+//            cout << path->cityCode << " " << path->min_cost << " " << (*flight)->price << endl;
+//            
+//            
+//            
+//          }
+//          break;
+//        }
+//        
 			}
 			else
       {
@@ -156,6 +184,27 @@ void dijkstra ( string s, string t, aGraph &airports )
 			}
 		}
 	}
+  //stack<Airport*> traceroute;
+  //Airport* current = target;
+  //if (!current) exit(EXIT_FAILURE);
+//  if (!source) exit(EXIT_FAILURE);
+//  while (current->cityCode != source->cityCode)
+//  {
+//    traceroute.push(current);
+//    current = current->prev_ptr;
+//  }
+  //cout << source->cityCode;
+//  if (found == true)
+//  {
+//    while (!traceroute.empty())
+//    {
+//      Airport* output = traceroute.top();
+//      traceroute.pop();
+//      cout << output->prev_ptr->cityCode << " -> " << output->cityCode << " $" << output->min_cost << endl;
+//    }
+//  }
+  //cout << target->cityCode << " S" << target->min_cost << endl;
+  
 }
 
 

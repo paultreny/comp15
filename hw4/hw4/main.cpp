@@ -13,15 +13,13 @@
 #include <iomanip>
 #include <cassert>
 #include <queue>
-#include <limits.h> // for double max???
-//#include "pgraph.h"
+#include <limits.h>
 
 #include "Graph.h"
 
 using namespace std;
 
-
-
+void dijkstra (string, string, aGraph&);
 
 int main ( int argc, const char * argv[])
 {
@@ -30,14 +28,11 @@ int main ( int argc, const char * argv[])
   ifstream arq(getenv("FLIGHTDATA"));
   cin.rdbuf(arq.rdbuf());
   
-  
-  
-  cout << "  A  |  B  |   Cost" << endl;
+  //cout << "  A  |  B  |   Cost" << endl;
   while(!cin.eof())
   {
     string iata1, iata2;
     double cost;
-    
     cin >> iata1 >> ws >> iata2 >> ws >> cost >> ws;
     
     // CHECK IF 3 letter Alpha and both cities, or discard.
@@ -49,12 +44,12 @@ int main ( int argc, const char * argv[])
       assert(isalpha(iata2[i]));
     }
     
-    if (iata1 > iata2)  // make it so the two cities are in alphabetical order
-    {
-      string temp = iata1;
-      iata1 = iata2;
-      iata2 = temp;
-    }
+//    if (iata1 > iata2)  // make it so the two cities are in alphabetical order
+//    {
+//      string temp = iata1;
+//      iata1 = iata2;
+//      iata2 = temp;
+//    }
     assert(cost > 0);
 //    flightmap->add_vertex(iata1);
 //    flightmap->add_vertex(iata2);
@@ -63,7 +58,7 @@ int main ( int argc, const char * argv[])
     Airport *Source = flightmap->find_in_agraph(iata1);
     Airport *Target = flightmap->find_in_agraph(iata2);
     Flightpath *dest_target = new Flightpath(cost, Target);
-    Flightpath *dest_source = new Flightpath(cost, Source);
+    //Flightpath *dest_source = new Flightpath(cost, Source);
     
     
     //if (!redEye ) return (EXIT_FAILURE);
@@ -71,15 +66,17 @@ int main ( int argc, const char * argv[])
     //cout << redEye->price << redEye->dest->cityCode << endl;
 
     Source->adjAirports.push_back(dest_target);
-    Target->adjAirports.push_back(dest_source);
+//    Target->adjAirports.push_back(dest_source);
     
     //
     //cout << " " << iata1 << " | " << iata2 << " | ";
     //cout << setw(8) << cost << endl;
        
   }
-  cout << *flightmap;
-
+  //cout << *flightmap;
+  dijkstra("BOS", "MSN", *flightmap);
+  
+  //cout << *flightmap;
   return (EXIT_SUCCESS);
 }
 
