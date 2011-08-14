@@ -25,7 +25,7 @@ using namespace std;
 
 int main ( int argc, const char * argv[])
 {
-  aGraph flightmap;
+  aGraph *flightmap = new aGraph();
   
   ifstream arq(getenv("FLIGHTDATA"));
   cin.rdbuf(arq.rdbuf());
@@ -60,23 +60,26 @@ int main ( int argc, const char * argv[])
 //    flightmap->add_vertex(iata2);
 //    flightmap->add_edge();
     
-    Airport *Target = flightmap.find_in_agraph(iata1);
-    Airport *Source = flightmap.find_in_agraph(iata2);
-    Flightpath *redEye = new Flightpath(cost, Target);
+    Airport *Source = flightmap->find_in_agraph(iata1);
+    Airport *Target = flightmap->find_in_agraph(iata2);
+    Flightpath *dest_target = new Flightpath(cost, Target);
+    Flightpath *dest_source = new Flightpath(cost, Source);
     
-    if (!redEye ) return (EXIT_FAILURE);
-    cout << redEye->origin->IATAcode;
-    cout << redEye->price << redEye->origin->IATAcode << redEye->dest->IATAcode << endl;
-  
+    
+    //if (!redEye ) return (EXIT_FAILURE);
+    
+    //cout << redEye->price << redEye->dest->cityCode << endl;
 
-    Source->adjAirports.push_back(redEye);
+    Source->adjAirports.push_back(dest_target);
+    Target->adjAirports.push_back(dest_source);
     
-    
-    cout << " " << iata1 << " | " << iata2 << " | ";
-    cout << setw(8) << cost << endl;
-
+    //
+    //cout << " " << iata1 << " | " << iata2 << " | ";
+    //cout << setw(8) << cost << endl;
        
   }
+  cout << *flightmap;
+
   return (EXIT_SUCCESS);
 }
 

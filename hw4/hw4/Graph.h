@@ -19,17 +19,21 @@
 
 using namespace std;
 
+
+//typedef vector<map<string, double> > graph;
+//typedef map< pair <string, int>, double> neighbors;
+
 class Flightpath; // aka EDGE
 
 class Airport // AIRPORT - NODE - VERTEX
 {
 public:
-  string  IATAcode;
+  string  cityCode;
   list    <Flightpath*> adjAirports;
   bool    visited;
   double  min_cost;
   Airport *prev_ptr;
-  Airport(string code){ IATAcode = code; visited = 0; }
+  Airport(string code){ cityCode = code; visited = 0; }
 };
 
 
@@ -37,7 +41,6 @@ class Flightpath // FLIGHTPATH - EDGE
 {
 public:
   double price;
-  Airport* origin;
   Airport* dest;
   Flightpath(double c, Airport *d = NULL):price(c), dest(d) {}  
   ~Flightpath() { if (dest) delete dest; }
@@ -48,14 +51,14 @@ class aGraph // aGraph - NodeMap - AIRPORTS
 {
 public:
   map < string, Airport* > agraph;
-  Airport* find_in_agraph (const string &iata)
+  Airport* find_in_agraph (const string &code)
   {
-    Airport* result = agraph[iata];
+    Airport* result = agraph[code];
     if ( result == 0 )
     {
-      result = agraph[iata] = new Airport(iata);
-      return result;
+      result = agraph[code] = new Airport(code);
     }
+    return result;
   }
   
   friend ostream& operator<<(ostream& o, aGraph ag)
@@ -69,15 +72,16 @@ public:
       //pair<string,Node*> p = *im;
 			//o << p.second->name << endl;
 			
-      if (!mapit->second) break;
-      o << (*mapit).second->IATAcode << endl;
+      if (!mapit->second) break;  // if no cityname
+      o << (*mapit).second->cityCode << endl; // output origin city
       
       list<Flightpath*> adjAirports = (*mapit).second->adjAirports;
 			list<Flightpath*>::iterator f;
       
       for(f = adjAirports.begin(); f != adjAirports.end(); f++)
       {
-				cout << "   -> " << (*f)->dest->IATAcode << " weight " << (*f)->price <<endl;
+        //<< (*mapit).second->cityCode
+				cout  << "   -> " << (*f)->dest->cityCode << " price: " << (*f)->price <<endl;
 			}
 		}
 		return o;
@@ -143,7 +147,7 @@ void dijkstra ( string s, string t, aGraph &airports )
 				next->min_cost += (*flight)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
-				cout << " pushing " << next->IATAcode << " cost " << next->min_cost << endl;;
+				cout << " pushing " << next->cityCode << " cost " << next->min_cost << endl;;
 				pq.push(next);
 			}
 			else
