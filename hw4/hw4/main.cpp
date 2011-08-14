@@ -69,11 +69,11 @@ int main ( int argc, const char * argv[])
 //    Target->adjAirports.push_back(dest_source);
     
     //
-    //cout << " " << iata1 << " | " << iata2 << " | ";
+    //cout << " " << iata1 << " | " << iata2 << " | "; 
     //cout << setw(8) << cost << endl;
        
   }
-  //cout << *flightmap;
+  cout << *flightmap;
   dijkstra("BOS", "MSN", *flightmap);
   
   //cout << *flightmap;

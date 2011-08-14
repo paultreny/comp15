@@ -117,38 +117,45 @@ void dijkstra ( string s, string t, aGraph &airports )
 {
 	// check and report or abort
 	Airport* source = airports.agraph[s];
-	if(source==0){cout << s << " not in map " << endl; return;}
-	else cout << s << " in map " << endl;
+	if(source==0){cout << s << " not in map. " << endl; return;}
+	else cout << s << " in map. ";
 	Airport* target = airports.agraph[t];
-	if(target==0){cout << t << " not in map " << endl; return;}
-	else cout << t << " in map " << endl;
+	if(target==0){cout << t << " not in map. " << endl; return;}
+	else cout << t << " in map. " << endl;
   
 	reset_airports(airports);
   
 	// put the source into pq and loop until empty
 	priority_queue < Airport*, deque<Airport*>, compare>  pq;
 	pq.push(source);
-  stack<Airport*> *traceroute;
+  stack<Airport*> traceroute;
+  bool found = false;
   while(!pq.empty())
   {
 		// process least cost node.
-		Airport* curr = pq.top(); 
-		if (curr == target)
+		Airport* curr = pq.top();
+    pq.pop();
+ 		curr->visited = true;
+		if (curr->cityCode == target->cityCode)
     {
+      found = true;
       while(curr->prev_ptr)
       {
-        traceroute->push(curr);
-        curr = curr->prev_ptr;
+        if (curr)
+        {
+          traceroute.push(curr);
+          curr = curr->prev_ptr;
+        }
       }
-      while (!traceroute->empty())
+      while (!traceroute.empty())
       {
-        Airport* output = traceroute->top();
-        traceroute->pop();
-        cout << output->prev_ptr->cityCode << " -> " << output->cityCode << " $" << output->min_cost << endl;
+        Airport* output = traceroute.top();
+        traceroute.pop();
+        cout << output->prev_ptr->cityCode << " -> " << output->cityCode  << " $" << 
+        output->min_cost << endl;
       }
+      break;
     }
-    pq.pop();
-		curr->visited = true;
     
 		// process neighbors
 		list<Flightpath*>::iterator flight;
@@ -184,6 +191,12 @@ void dijkstra ( string s, string t, aGraph &airports )
 			}
 		}
 	}
+  if ( !found )
+  {
+    cout << "No connecting flights from " << 
+    source->cityCode << " to " << 
+    target->cityCode << " found." << endl;
+  } 
   //stack<Airport*> traceroute;
   //Airport* current = target;
   //if (!current) exit(EXIT_FAILURE);
