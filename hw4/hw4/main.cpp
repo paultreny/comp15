@@ -7,6 +7,23 @@
 //  Created by Paul Reny on 8/9/11.
 //  Copyright 2011 Reny Design. All rights reserved.
 //
+//
+//
+//  This program is intended to read from standard-input
+//  (cin) a text file containing lines of code formatted
+//  similar to the example below, store it in a directed
+//  graph and answer if it is possible to go from BOS to
+//  MSN.
+//  
+//  
+//
+//  BOS	ORD	218.64
+//  MSP	BOS	269.25
+//  MSN	BOS	237.31
+//  ORD	MSP	42.77
+//  PHX	ORD	316.79
+//  MSP	MSN	46.91
+// 
 
 #include <iostream>
 #include <list>
@@ -26,6 +43,7 @@ typedef pair<string, string> citycode;
 int main ( int argc, const char * argv[])
 {
   //ifstream arq(getenv("FLIGHTDATA")); cin.rdbuf(arq.rdbuf());
+  // used for Xcode when testing ^ not needed for commandline
     
   AirportMap *flightmap = new AirportMap();
   int flightcount;
@@ -63,7 +81,7 @@ int main ( int argc, const char * argv[])
     ++flightcount;
   }
   
-  
+  // formatted output
   cout << endl << flightcount << " Flights between " << flightmap->size << " Airports added to graph.";
   cout << "(" << fixed << setprecision(6) << stopwatch.elapsed() << " seconds elapsed.)" << endl << endl;
   comp15::Timer d_watch;

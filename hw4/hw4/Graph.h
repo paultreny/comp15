@@ -8,6 +8,7 @@
 //  Copyright 2011 Reny Design. All rights reserved.
 //
 
+ 
 #ifndef PTR_COMP15_HW4_GRAPH
 #define PTR_COMP15_HW4_GRAPH
 #include <iostream>
@@ -26,7 +27,6 @@ class Airport;
 class Flightpath;
 class AirportMap;
 
-void reset_airports(AirportMap&);
 void dijkstra (string, string, AirportMap&);
 
 
@@ -40,7 +40,7 @@ public:
   Airport *prev_ptr;
   Airport(string code){ 
     cityCode = code, 
-    min_cost = std::numeric_limits<double>::infinity(), 
+    min_cost = numeric_limits<double>::infinity(), 
     prev_ptr = NULL, 
     visited = 0; }
 };
@@ -54,64 +54,50 @@ public:
   ~Flightpath() { if (dest) delete dest; }
 };
 
-class AirportMap // AirportMap (Graph)
+class AirportMap // AirportMap (Graph) returns a new Airport if not in map
 {
 public:
   size_t size;
   map <string, Airport*> airportmap;
-
   Airport* find_city (const string &code)
   {
     Airport* result = airportmap[code];
-    if ( result == 0 )
-    {
-      ++size;
-      result = airportmap[code] = new Airport(code);
-    }
+    if (result == 0) { ++size; result = airportmap[code] = new Airport(code); }
     return result;
   }
-  
-  friend ostream& operator<<(ostream& o, AirportMap ag)
-  {
-		map <string, Airport*>::iterator map_it;
-		for(
-        map_it = ag.airportmap.begin(); 
-        map_it != ag.airportmap.end(); 
-        map_it++)
-    {				
-      if (!map_it->second) break;  // if no cityname
-      o << (*map_it).second->cityCode << endl; // output origin city
-      
-      list<Flightpath*> adjAirports = (*map_it).second->adjAirports;
-      for(list<Flightpath*>::iterator f = adjAirports.begin(); f != adjAirports.end(); f++)
-      {	cout << " -> " << (*f)->dest->cityCode << " $ " << (*f)->price <<endl; }
-		}
-		return o;
-	}
+
+//  // ostream operator to output a graph easily to cout
+// 
+//  friend ostream& operator<<(ostream& o, AirportMap ag) 
+//  {
+//		map <string, Airport*>::iterator map_it;
+//		for(
+//        map_it = ag.airportmap.begin(); 
+//        map_it != ag.airportmap.end(); 
+//        map_it++)
+//    {				
+//      if (!map_it->second) break;  // if no cityname
+//      o << (*map_it).second->cityCode << endl; // output origin city
+//      
+//      list<Flightpath*> adjAirports = (*map_it).second->adjAirports;
+//      for(list<Flightpath*>::iterator f = adjAirports.begin(); f != adjAirports.end(); f++)
+//      {	cout << " -> " << (*f)->dest->cityCode << " $ " << (*f)->price <<endl; }
+//		}
+//		return o;
+//	}
+
 };
 
-
+// comparison operator for Airport* objects
 struct compare{ bool operator()(Airport * &a, Airport * &b) const
 { return (b->min_cost) < (a->min_cost); }
 };
 
-// for each solution, reset node information
-void reset_airports(AirportMap &ag)
-{
-	map <string,Airport*>::iterator mapit;
-	for(mapit = ag.airportmap.begin(); mapit != ag.airportmap.end(); mapit++)
-  {
-		(*mapit).second->min_cost = std::numeric_limits<double>::infinity(); 
-		(*mapit).second->prev_ptr = NULL;
-		(*mapit).second->visited = false;
-	}
-}
 
-
-// DIJKSTRA ALGORITHM
+// DIJKSTRA ALGORITHM (sort of)
 void dijkstra ( string s, string t, AirportMap &airports )
 {
-  
+
   Airport* source = airports.airportmap[s];
 	if(source==0){cout << s << " not in map. " << endl; return;}
   Airport* target = airports.airportmap[t];
@@ -130,7 +116,7 @@ void dijkstra ( string s, string t, AirportMap &airports )
     pq.pop();
     curr->visited = true;
     
-		list<Flightpath*>::iterator flight_it;  // NEIGHBORING AIRPORTS
+		list<Flightpath*>::iterator flight_it;  // cycle through flights at airport
 		for(flight_it = curr->adjAirports.begin(); flight_it != curr->adjAirports.end(); flight_it++) 
     {
       Airport *next = (*flight_it)->dest;
@@ -145,9 +131,10 @@ void dijkstra ( string s, string t, AirportMap &airports )
         }
         if (next==target) { break;}
       }
+      if (next==target) { break;}
     }
     
-    if (target->min_cost == DBL_MAX)
+    if (target->min_cost == numeric_limits<double>::infinity())
     {
       cout << "No connecting flights from " << 
       source->cityCode << " to " << 
@@ -159,16 +146,16 @@ void dijkstra ( string s, string t, AirportMap &airports )
       target->cityCode << " are available!" << endl;
       cout << "For example: " << endl;
       Airport* route = target;
-      while(route != source)
+      while(route != source) // use a stack to reverse order, for output
       {
         flightStack.push(route);
         route = route->prev_ptr;    
       }
       int step = 0;
       double total = 0;
-      cout.setf(ios::left, ios::adjustfield);
       
-      while( !flightStack.empty() )
+      cout.setf(ios::left, ios::adjustfield);      
+      while( !flightStack.empty() ) // formatted output for flight paths
       {
         cout << ++step << ":        ";
         cout << setw(8) << flightStack.top()->prev_ptr->cityCode << "-> "; 
