@@ -26,6 +26,7 @@
 // 
 
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <cstdlib>
 #include <iomanip>
@@ -34,15 +35,16 @@
 #include "Timer.h"
 #include "Graph.h"
 
+
 using namespace std;
 
 void dijkstra (string, string, AirportMap&);
 
 typedef pair<string, string> citycode;
 
-int main ()// int argc, const char * argv[]
+int main (int argc, const char * argv[])
 {
-  //ifstream arq(getenv("FLIGHTDATA")); cin.rdbuf(arq.rdbuf());
+  ifstream arq(getenv("FLIGHTDATA")); cin.rdbuf(arq.rdbuf());
   // used for Xcode when testing ^ not needed for commandline
     
   AirportMap *flightmap = new AirportMap();

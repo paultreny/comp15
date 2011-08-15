@@ -23,12 +23,10 @@
 
 using namespace std;
 
-class Airport;
 class Flightpath;
 class AirportMap;
 
 void dijkstra (string, string, AirportMap&);
-
 
 class Airport // Airport (Node/Vertex)
 {
@@ -39,9 +37,9 @@ public:
   double  min_cost;
   Airport *prev_ptr;
   Airport(string code){ 
-    cityCode = code, 
-    min_cost = numeric_limits<double>::infinity(), 
-    prev_ptr = NULL, 
+    cityCode = code; 
+    min_cost = std::numeric_limits<double>::infinity();
+    prev_ptr = NULL; 
     visited = 0; }
 };
 
@@ -110,11 +108,12 @@ void dijkstra ( string s, string t, AirportMap &airports )
   source->min_cost = 0;
   source->visited = true;
   
-  while(!pq.empty())
+  while( !pq.empty() )
   {
     Airport* curr = pq.top(); // MIN priority queue, cheapest path first
     pq.pop();
     curr->visited = true;
+    //if ((curr->min_cost) == DBL_MAX) { break; }
     
 		list<Flightpath*>::iterator flight_it;  // cycle through flights at airport
 		for(flight_it = curr->adjAirports.begin(); flight_it != curr->adjAirports.end(); flight_it++) 
@@ -125,16 +124,14 @@ void dijkstra ( string s, string t, AirportMap &airports )
         next->min_cost = (*flight_it)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
-        if (next->cityCode == target->cityCode)
-        {
-          pq.push(next);
-        }
-        if (next==target) { break;}
+        pq.push(next);
+        //f (next->cityCode == target->cityCode)
+        if (target==next) { break;}
       }
-      if (next==target) { break;}
+      //if (next==target) { break;}
     }
     
-    if (target->min_cost == numeric_limits<double>::infinity())
+    if (target->min_cost == DBL_MAX)
     {
       cout << "No connecting flights from " << 
       source->cityCode << " to " << 
