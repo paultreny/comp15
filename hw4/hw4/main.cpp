@@ -26,7 +26,8 @@ typedef pair<string, string> citycode;
 
 int main ( int argc, const char * argv[])
 {
-  
+  // all but randair.5 seem to work
+  //     and randair.7
 
   aGraph *flightmap = new aGraph();
   
@@ -49,7 +50,7 @@ int main ( int argc, const char * argv[])
     for (int i = 0; i < fromTo.first.size(); i++) {
       assert(isalnum(fromTo.first[i]));
       fromTo.first[i] = toupper(fromTo.first[i]); }
-    
+  
     for (int i = 0; i < fromTo.second.size(); i++) {
       assert(isalnum(fromTo.second[i]));
       fromTo.second[i] = toupper(fromTo.second[i]); }

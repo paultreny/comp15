@@ -13,10 +13,11 @@
 #include <string>
 #include <list>
 #include <map>
+#include <set>
 #include <queue>
 #include <stack>
 #include <vector>
-#include <limits.h>
+#include <limits>
 #include <float.h>
 #include <iomanip>
 
@@ -32,6 +33,7 @@ class aGraph;
 struct compare_flights;
 
 void reset_airports(aGraph&);
+void dijkstra( string, string, aGraph&);
 
 //struct compare_flights{}; //bool operator()(Flightpath*, Flightpath*) const;
 
@@ -43,9 +45,10 @@ public:
   bool    visited;
   double  min_cost;
   Airport *prev_ptr;
-  Airport(string code){ cityCode = code; min_cost = DBL_MAX, prev_ptr = NULL, visited = 0; }
+  Airport(string code){ cityCode = code; min_cost = std::numeric_limits<double>::infinity(), prev_ptr = NULL, visited = 0; }
 };
 
+// infiniteeeee   std::numeric_limits<double>::infinity()
 
 class Flightpath // FLIGHTPATH - EDGE
 {
@@ -181,22 +184,22 @@ void dijkstra ( string s, string t, aGraph &airports )
 //      break;
 //    }
 
+    set< std::pair<double, Airport*> > fare_queue;
+    for (
     
-		list<Flightpath*>::iterator flight;  // NEIGHBORING AIRPORTS
-		for(flight = curr->adjAirports.begin();
-        flight != curr->adjAirports.end(); 
-        flight++) 
-      {
-      Airport *next = (*flight)->dest;
+		list<Flightpath*>::iterator flight_it;  // NEIGHBORING AIRPORTS
+		for(flight_it = curr->adjAirports.begin(); flight_it != curr->adjAirports.end(); flight_it++) 
+    {
+      Airport *next = (*flight_it)->dest;
 			if(!next->visited)
       {
-        next->min_cost = (*flight)->price + curr->min_cost;
+        next->min_cost = (*flight_it)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
         //cout << " pushing " << next->cityCode << " $" << next->min_cost << endl;;
 				pq.push(next);
       }
-        if (next==target) { break;}
+       if (next==target) { break;}
     }
   }
   
