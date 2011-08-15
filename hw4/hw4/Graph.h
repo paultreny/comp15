@@ -16,7 +16,8 @@
 #include <queue>
 #include <stack>
 #include <vector>
-#include <pair.h>
+#include <limits.h>
+#include <float.h>
 
 using namespace std;
 
@@ -25,8 +26,11 @@ using namespace std;
 //typedef map< pair <string, int>, double> neighbors;
   
 class Flightpath; // aka EDGE
+class aGraph;
 
 struct compare_flights;
+
+void reset_airports(aGraph&);
 
 //struct compare_flights{}; //bool operator()(Flightpath*, Flightpath*) const;
 
@@ -108,11 +112,11 @@ struct compare{ bool operator()(Airport * &a, Airport * &b) const
 // for each solution, reset node information
 void reset_airports(aGraph &ag)
 {
-	map<string,Airport*>::iterator mapit;
+	map <string,Airport*>::iterator mapit;
 	for(mapit = ag.agraph.begin(); mapit != ag.agraph.end(); mapit++)
   {
-		(*mapit).second->min_cost = 0; 
-		(*mapit).second->prev_ptr = 0;
+		(*mapit).second->min_cost = DBL_MAX; 
+		(*mapit).second->prev_ptr = NULL;
 		(*mapit).second->visited = false;
 	}
 }
@@ -121,23 +125,27 @@ void reset_airports(aGraph &ag)
 // DIJKSTRA ALGORITHM
 void dijkstra ( string s, string t, aGraph &airports )
 {
-	// check and report or abort
-	Airport* source = airports.agraph[s];
+
+  Airport* source = airports.agraph[s];
 	if(source==0){cout << s << " not in map. " << endl; return;}
 	else cout << s << " in map. ";
-	Airport* target = airports.agraph[t];
+	
+  Airport* target = airports.agraph[t];
 	if(target==0){cout << t << " not in map. " << endl; return;}
 	else cout << t << " in map. " << endl;
   
-	reset_airports(airports);
+	
+  reset_airports(airports);
   
 	// put the source into pq and loop until empty
-	priority_queue < Airport*, deque<Airport*>, compare>  pq;
+	
+  priority_queue < Airport*, deque<Airport*>, compare>  pq;
 	pq.push(source);
   stack<Airport*> traceroute;
   bool found = false;
   while(!pq.empty())
   {
+  
 		// process least cost node.
 		Airport* curr = pq.top();
     pq.pop();

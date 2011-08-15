@@ -21,58 +21,59 @@ using namespace std;
 
 void dijkstra (string, string, aGraph&);
 
+
+typedef pair<string, string> citycode;
+
 int main ( int argc, const char * argv[])
 {
   aGraph *flightmap = new aGraph();
   
   ifstream arq(getenv("FLIGHTDATA"));
   cin.rdbuf(arq.rdbuf());
-  
-  //cout << "  A  |  B  |   Cost" << endl;
+  int flightcount;
+
   while(!cin.eof())
   {
-    string iata1, iata2;
+    citycode fromTo;
     double cost;
-    cin >> iata1 >> ws >> iata2 >> ws >> cost >> ws;
+    cin >> fromTo.first
+        >> ws 
+        >> fromTo.second
+        >> ws 
+        >> cost 
+        >> ws;
     
     // CHECK IF 3 letter Alpha and both cities, or discard.
-    for (int i = 0; i < 3; i++)
-    {
-      assert(sizeof(iata1));
-      assert(sizeof(iata2));
-      assert(isalpha(iata1[i]));
-      assert(isalpha(iata2[i]));
-    }
+    for (int i = 0; i < fromTo.first.size(); i++) {
+      assert(isalnum(fromTo.first[i]));
+      fromTo.first[i] = toupper(fromTo.first[i]); }
     
+    for (int i = 0; i < fromTo.second.size(); i++) {
+      assert(isalnum(fromTo.second[i]));
+      fromTo.second[i] = toupper(fromTo.second[i]); }
+    assert(cost >= 0);
+
 //    if (iata1 > iata2)  // make it so the two cities are in alphabetical order
 //    {
 //      string temp = iata1;
 //      iata1 = iata2;
 //      iata2 = temp;
 //    }
-    assert(cost > 0);
-//    flightmap->add_vertex(iata1);
-//    flightmap->add_vertex(iata2);
-//    flightmap->add_edge();
-    
-    Airport *Source = flightmap->find_in_agraph(iata1);
-    Airport *Target = flightmap->find_in_agraph(iata2);
+
+    Airport *Source = flightmap->find_in_agraph(fromTo.first);
+    Airport *Target = flightmap->find_in_agraph(fromTo.second);
     Flightpath *dest_target = new Flightpath(cost, Source, Target);
     //Flightpath *dest_source = new Flightpath(cost, Source);
     
-    
-    //if (!redEye ) return (EXIT_FAILURE);
-    
-    //cout << redEye->price << redEye->dest->cityCode << endl;
-
     Source->adjAirports.push_back(dest_target);
-//    Target->adjAirports.push_back(dest_source);
+//  Target->adjAirports.push_back(dest_source);
     
-    //
     //cout << " " << iata1 << " | " << iata2 << " | "; 
     //cout << setw(8) << cost << endl;
-       
+    ++flightcount;
   }
+  
+  cout << flightcount << " flights read into graph." << endl;
   cout << *flightmap;
   dijkstra("BOS", "MSN", *flightmap);
   
