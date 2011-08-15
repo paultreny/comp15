@@ -40,7 +40,7 @@ void dijkstra (string, string, AirportMap&);
 
 typedef pair<string, string> citycode;
 
-int main ( int argc, const char * argv[])
+int main ()// int argc, const char * argv[]
 {
   //ifstream arq(getenv("FLIGHTDATA")); cin.rdbuf(arq.rdbuf());
   // used for Xcode when testing ^ not needed for commandline
@@ -61,10 +61,10 @@ int main ( int argc, const char * argv[])
         >> ws;
     
     // VERIFY City Names are only letters/numbers, convert to uppercase.  
-    for (int i = 0; i < cityPair.first.size(); i++) {
+    for (int i = 0; i < (int)cityPair.first.size(); i++) {
       assert(isalnum(cityPair.first[i]));
       cityPair.first[i] = toupper(cityPair.first[i]); }
-    for (int i = 0; i < cityPair.second.size(); i++) {
+    for (int i = 0; i < (int)cityPair.second.size(); i++) {
       assert(isalnum(cityPair.second[i]));
       cityPair.second[i] = toupper(cityPair.second[i]); }
     
