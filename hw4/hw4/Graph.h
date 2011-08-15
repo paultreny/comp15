@@ -104,15 +104,17 @@ void dijkstra ( string s, string t, AirportMap &airports )
   priority_queue < Airport*, deque<Airport*>, compare>  pq;
 	pq.push(source);
   
-  stack<Airport*> flightStack;
   source->min_cost = 0;
-  source->visited = true;
+  stack<Airport*> flightStack;
+//  source->min_cost = 0;
+//  source->visited = true;
   
   while( !pq.empty() )
   {
     Airport* curr = pq.top(); // MIN priority queue, cheapest path first
-    pq.pop();
     curr->visited = true;
+    pq.pop();
+    
     //if ((curr->min_cost) == DBL_MAX) { break; }
     
 		list<Flightpath*>::iterator flight_it;  // cycle through flights at airport
@@ -125,49 +127,51 @@ void dijkstra ( string s, string t, AirportMap &airports )
 				next->visited = true;
 				next->prev_ptr = curr;
         pq.push(next);
-        //f (next->cityCode == target->cityCode)
-        if (target==next) { break;}
       }
-      //if (next==target) { break;}
-    }
-    
-    if (target->min_cost == DBL_MAX)
-    {
-      cout << "No connecting flights from " << 
-      source->cityCode << " to " << 
-      target->cityCode << " found." << endl;
-    }
-    else
-    {
-      cout << "Yes, flights from " << source->cityCode << " to " <<
-      target->cityCode << " are available!" << endl;
-      cout << "For example: " << endl;
-      Airport* route = target;
-      while(route != source) // use a stack to reverse order, for output
-      {
-        flightStack.push(route);
-        route = route->prev_ptr;    
-      }
-      int step = 0;
-      double total = 0;
-      
-      cout.setf(ios::left, ios::adjustfield);      
-      while( !flightStack.empty() ) // formatted output for flight paths
-      {
-        cout << ++step << ":        ";
-        cout << setw(8) << flightStack.top()->prev_ptr->cityCode << "-> "; 
-        cout << setw(8) << flightStack.top()->cityCode << "  $";
-        cout << setprecision(2) << setw(8) << flightStack.top()->min_cost-total << endl;
-        total = flightStack.top()->min_cost;
-        flightStack.pop(); 
-      }
-      cout << "---------------------------------------" << endl;
-      cout << setw(10) << " " << setw(8) << source->cityCode << "-> ";
-      cout << setw(8) << target->cityCode << "  $";
-      cout << setprecision(2) << setw(8) << target->min_cost << endl;
+      if (next->cityCode == target->cityCode)
+      { break; }
     }
   }
+  if (target->min_cost == std::numeric_limits<double>::infinity())
+  {
+    cout << "No connecting flights from " << 
+    source->cityCode << " to " << 
+    target->cityCode << " found." << endl;
+  }
+  else
+  {
+    cout << "Yes, flights from " << source->cityCode << " to " <<
+    target->cityCode << " are available!" << endl;
+    cout << "For example: " << endl;
+    Airport* route = target;
+    while(route != source) // use a stack to reverse order, for output
+    {
+      flightStack.push(route);
+      route = route->prev_ptr;    
+    }
+    int step = 0;
+    double total = 0;
+    
+    cout.setf(ios::left, ios::adjustfield);      
+    while( !flightStack.empty() ) // formatted output for flight paths
+    {
+      cout << ++step << ":        ";
+      cout << setw(8) << flightStack.top()->prev_ptr->cityCode << "-> "; 
+      cout << setw(8) << flightStack.top()->cityCode << "  $";
+      cout.setf(ios::right, ios::adjustfield);      
+      cout << setprecision(2) << setw(8) << flightStack.top()->min_cost-total << endl;
+      cout.setf(ios::left, ios::adjustfield);   
+      total = flightStack.top()->min_cost;
+      flightStack.pop(); 
+    }
+    cout << "---------------------------------------" << endl;
+    cout << setw(10) << " " << setw(8) << source->cityCode << "-> ";
+    cout << setw(8) << target->cityCode << "  $";
+    cout.setf(ios::right, ios::adjustfield);      
+    cout << setprecision(2) << setw(8) << target->min_cost << endl;
+  }
 }
+
 
 
 #endif
