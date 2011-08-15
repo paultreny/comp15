@@ -42,10 +42,9 @@ void dijkstra (string, string, AirportMap&);
 
 typedef pair<string, string> citycode;
 
-int main (int argc, const char * argv[])
+int main () //int argc, const char * argv[])
 {
-  ifstream arq(getenv("FLIGHTDATA"));
-  cin.rdbuf(arq.rdbuf());
+  // ifstream arq(getenv("FLIGHTDATA")); cin.rdbuf(arq.rdbuf());
   // used for Xcode when testing ^ not needed for commandline
     
   AirportMap *flightmap = new AirportMap();

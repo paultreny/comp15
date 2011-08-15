@@ -106,8 +106,6 @@ void dijkstra ( string s, string t, AirportMap &airports )
   
   source->min_cost = 0;
   stack<Airport*> flightStack;
-//  source->min_cost = 0;
-//  source->visited = true;
   
   while( !pq.empty() )
   {
