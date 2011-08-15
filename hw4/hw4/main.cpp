@@ -26,13 +26,14 @@ typedef pair<string, string> citycode;
 
 int main ( int argc, const char * argv[])
 {
+  
 
   aGraph *flightmap = new aGraph();
   
   ifstream arq(getenv("FLIGHTDATA"));
   cin.rdbuf(arq.rdbuf());
   int flightcount;
-
+  comp15::Timer stopwatch;
   while(!cin.eof())
   {
     citycode fromTo;
@@ -77,11 +78,14 @@ int main ( int argc, const char * argv[])
   }
   
   
-  cout << endl << flightcount << " Flights between " << flightmap->size << " Airports added to graph." << endl;
-  //cout << *flightmap;
+  cout << endl << flightcount << " Flights between " << flightmap->size << " Airports added to graph.";
+  cout << "(" << fixed << setprecision(6) << stopwatch.elapsed() << " seconds elapsed.)" << endl << endl;
+  comp15::Timer d_watch;
   dijkstra("BOS", "MSN", *flightmap);
   
+  cout << endl << "(compute time after reading input:  " << fixed << setprecision(6) << d_watch.elapsed() << " seconds." << endl;
   //cout << *flightmap;
+  
   return (EXIT_SUCCESS);
 }
 

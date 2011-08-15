@@ -131,11 +131,11 @@ void dijkstra ( string s, string t, aGraph &airports )
 
   Airport* source = airports.agraph[s];
 	if(source==0){cout << s << " not in map. " << endl; return;}
-	else cout << s << " in map. ";
+//	else cout << s << " in map. ";
 	
   Airport* target = airports.agraph[t];
 	if(target==0){cout << t << " not in map. " << endl; return;}
-	else cout << t << " in map. " << endl;
+//	else cout << t << " in map. " << endl;
   
 	
   //reset_airports(airports);  // INITIALIZE ALL AIRPORT MIN_COST VALUES
@@ -150,7 +150,7 @@ void dijkstra ( string s, string t, aGraph &airports )
   source->min_cost = 0;
   source->visited = true;
   
-  bool found = false;
+  //bool found = false;
   while(!pq.empty())
   {
 		// process least cost node.
@@ -225,13 +225,14 @@ void dijkstra ( string s, string t, aGraph &airports )
       cout << ++step << ":        ";
       cout << setw(8) << flightStack.top()->prev_ptr->cityCode << "-> "; 
       cout << setw(8) << flightStack.top()->cityCode << "  $";
-      cout << setw(8) << flightStack.top()->min_cost-total << endl;
+      cout << setprecision(2) << setw(8) << flightStack.top()->min_cost-total << endl;
       total = flightStack.top()->min_cost;
       flightStack.pop(); 
     }
+    cout << "---------------------------------------" << endl;
     cout << setw(10) << " " << setw(8) << source->cityCode << "-> ";
     cout << setw(8) << target->cityCode << "  $";
-    cout << setw(8) << target->min_cost << endl;
+    cout << setprecision(2) << setw(8) << target->min_cost << endl;
     
   }
 
