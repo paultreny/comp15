@@ -1,3 +1,13 @@
+//
+//  Paul Reny - COMP15 - August 12th, 2011
+//  HW4 - Random Airlines
+//  
+//  Timer.cpp
+//  
+//  Created by Keith Noto
+//  
+//
+
 #include <sys/time.h>		// for getrusage
 #include <sys/resource.h>	// for getrusage
 #include <iostream>

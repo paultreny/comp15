@@ -1,3 +1,13 @@
+//
+//  Paul Reny - COMP15 - August 12th, 2011
+//  HW4 - Random Airlines
+//  
+//  Timer.h
+//  
+//  Created by Keith Noto
+//  
+//
+
 #ifndef TIMER_H
 #define TIMER_H
 
