@@ -14,7 +14,7 @@
 #include <cassert>
 #include <queue>
 #include <limits.h>
-
+#include "Timer.h"
 #include "Graph.h"
 
 using namespace std;
@@ -26,6 +26,7 @@ typedef pair<string, string> citycode;
 
 int main ( int argc, const char * argv[])
 {
+
   aGraph *flightmap = new aGraph();
   
   ifstream arq(getenv("FLIGHTDATA"));
@@ -51,6 +52,8 @@ int main ( int argc, const char * argv[])
     for (int i = 0; i < fromTo.second.size(); i++) {
       assert(isalnum(fromTo.second[i]));
       fromTo.second[i] = toupper(fromTo.second[i]); }
+    
+    assert(fromTo.first != fromTo.second);
     assert(cost >= 0);
 
 //    if (iata1 > iata2)  // make it so the two cities are in alphabetical order
@@ -73,8 +76,9 @@ int main ( int argc, const char * argv[])
     ++flightcount;
   }
   
-  cout << flightcount << " flights read into graph." << endl;
-  cout << *flightmap;
+  
+  cout << endl << flightcount << " Flights between " << flightmap->size << " Airports added to graph." << endl;
+  //cout << *flightmap;
   dijkstra("BOS", "MSN", *flightmap);
   
   //cout << *flightmap;

@@ -18,6 +18,7 @@
 #include <vector>
 #include <limits.h>
 #include <float.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ public:
   bool    visited;
   double  min_cost;
   Airport *prev_ptr;
-  Airport(string code){ cityCode = code; visited = 0; }
+  Airport(string code){ cityCode = code; min_cost = DBL_MAX, prev_ptr = NULL, visited = 0; }
 };
 
 
@@ -60,12 +61,14 @@ public:
 class aGraph // aGraph - NodeMap - AIRPORTS
 {
 public:
+  size_t size;
   map < string, Airport* > agraph;
   Airport* find_in_agraph (const string &code)
   {
     Airport* result = agraph[code];
     if ( result == 0 )
     {
+      ++size;
       result = agraph[code] = new Airport(code);
     }
     return result;
@@ -135,58 +138,110 @@ void dijkstra ( string s, string t, aGraph &airports )
 	else cout << t << " in map. " << endl;
   
 	
-  reset_airports(airports);
+  //reset_airports(airports);  // INITIALIZE ALL AIRPORT MIN_COST VALUES
   
 	// put the source into pq and loop until empty
 	
   priority_queue < Airport*, deque<Airport*>, compare>  pq;
 	pq.push(source);
-  stack<Airport*> traceroute;
+  
+  stack<Airport*> flightStack;
+  
+  source->min_cost = 0;
+  source->visited = true;
+  
   bool found = false;
   while(!pq.empty())
   {
-  
 		// process least cost node.
 		Airport* curr = pq.top();
+    curr->visited = true;
+		if (curr->min_cost == DBL_MAX) { break; }
     pq.pop();
- 		curr->visited = true;
-		if (curr->cityCode == target->cityCode)
-    {
-      found = true;
-      while(curr->prev_ptr)
-      {
-        if (curr)
-        {
-          traceroute.push(curr);
-          curr = curr->prev_ptr;
-        }
-      }
-      while (!traceroute.empty())
-      {
-        Airport* output = traceroute.top();
-        traceroute.pop();
-        cout << output->prev_ptr->cityCode << " -> " << output->cityCode  << " $" << 
-        output->min_cost << endl;
-      }
-      break;
-    }
+
     
-		// process neighbors
-		list<Flightpath*>::iterator flight;
-		for(flight = curr->adjAirports.begin(); flight != curr->adjAirports.end(); flight++)
-    {
-			Airport *next = (*flight)->dest;
+//    if (curr->cityCode == target->cityCode)
+//    {
+//      found = true;
+//      while(curr->prev_ptr)
+//      {
+//        if (curr)
+//        {
+//          traceroute.push(curr);
+//          curr = curr->prev_ptr;
+//        }
+//      }
+//      while (!traceroute.empty())
+//      {
+//        Airport* output = traceroute.top();
+//        traceroute.pop();
+//        cout << output->prev_ptr->cityCode << " -> " << output->cityCode  << " $" << 
+//        output->min_cost << endl;
+//      }
+//      break;
+//    }
+
+    
+		list<Flightpath*>::iterator flight;  // NEIGHBORING AIRPORTS
+		for(flight = curr->adjAirports.begin();
+        flight != curr->adjAirports.end(); 
+        flight++) 
+      {
+      Airport *next = (*flight)->dest;
 			if(!next->visited)
       {
-				next->min_cost += (*flight)->price + curr->min_cost;
+        next->min_cost = (*flight)->price + curr->min_cost;
 				next->visited = true;
 				next->prev_ptr = curr;
-//        cout << (*flight)->price << endl;
-        cout << " pushing " << next->cityCode << " cost " << next->min_cost << endl;;
+        //cout << " pushing " << next->cityCode << " $" << next->min_cost << endl;;
 				pq.push(next);
-//        if ( next->cityCode == target->cityCode )
-//        {
-//          while (!pq.empty())
+      }
+        if (next==target) { break;}
+    }
+  }
+  
+  if (target->min_cost == DBL_MAX)
+  {
+    cout << "No connecting flights from " << 
+    source->cityCode << " to " << 
+    target->cityCode << " found." << endl;
+  }
+  else
+  {
+    cout << "Yes, flights from " << source->cityCode << " to " <<
+    target->cityCode << " are available!" << endl;
+    Airport* route = target;
+    while(route != source)
+    {
+      flightStack.push(route);
+      route = route->prev_ptr;    
+    }
+    int step = 0;
+    double total = 0;
+    cout.setf(ios::left, ios::adjustfield);
+    
+    while( !flightStack.empty() )
+    {
+      cout << ++step << ":        ";
+      cout << setw(8) << flightStack.top()->prev_ptr->cityCode << "-> "; 
+      cout << setw(8) << flightStack.top()->cityCode << "  $";
+      cout << setw(8) << flightStack.top()->min_cost-total << endl;
+      total = flightStack.top()->min_cost;
+      flightStack.pop(); 
+    }
+    cout << setw(10) << " " << setw(8) << source->cityCode << "-> ";
+    cout << setw(8) << target->cityCode << "  $";
+    cout << setw(8) << target->min_cost << endl;
+    
+  }
+
+
+
+}
+//                  
+//      if (next->cityCode == target->cityCode )
+//      {
+//        while (!pq.empty())
 //          {
 //            Airport* path = pq.top();
 //            pq.pop();
@@ -197,20 +252,7 @@ void dijkstra ( string s, string t, aGraph &airports )
 //          }
 //          break;
 //        }
-//        
-			}
-			else
-      {
-				// see if this can cost less
-			}
-		}
-	}
-  if ( !found )
-  {
-    cout << "No connecting flights from " << 
-    source->cityCode << " to " << 
-    target->cityCode << " found." << endl;
-  } 
+
   //stack<Airport*> traceroute;
   //Airport* current = target;
   //if (!current) exit(EXIT_FAILURE);
@@ -232,7 +274,7 @@ void dijkstra ( string s, string t, aGraph &airports )
 //  }
   //cout << target->cityCode << " S" << target->min_cost << endl;
   
-}
+//
 
 
 //void get_graph(string const &filename, aGraph &agraph) 

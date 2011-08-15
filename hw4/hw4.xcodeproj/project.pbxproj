@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		402A06B413F1097800B890B2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402A06B313F1097800B890B2 /* main.cpp */; };
 		402A06B613F1097800B890B2 /* hw4.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 402A06B513F1097800B890B2 /* hw4.1 */; };
+		40AB2C1413F8BF5300E1D129 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40AB2C1213F8BF5300E1D129 /* Timer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		4058272913F7B70E000D9537 /* pgraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pgraph.h; path = ../pgraph.h; sourceTree = "<group>"; };
 		4058272B13F7BBF3000D9537 /* dijkstra.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dijkstra.cpp; path = ../dijkstra.cpp; sourceTree = "<group>"; };
 		4058272C13F7BBF3000D9537 /* dijkstra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dijkstra.h; path = ../dijkstra.h; sourceTree = "<group>"; };
+		40AB2C1213F8BF5300E1D129 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = ../Timer.cpp; sourceTree = "<group>"; };
+		40AB2C1313F8BF5300E1D129 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = ../Timer.h; sourceTree = "<group>"; };
 		40E2058213F7E2EA0039483A /* adjList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = adjList.cpp; path = ../adjList.cpp; sourceTree = "<group>"; };
 		40E2058313F7E2EA0039483A /* adjList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = adjList.h; path = ../adjList.h; sourceTree = "<group>"; };
 		40E2058513F7EE130039483A /* vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vertex.h; path = ../vertex.h; sourceTree = "<group>"; };
@@ -78,6 +81,8 @@
 		402A06B213F1097800B890B2 /* hw4 */ = {
 			isa = PBXGroup;
 			children = (
+				40AB2C1213F8BF5300E1D129 /* Timer.cpp */,
+				40AB2C1313F8BF5300E1D129 /* Timer.h */,
 				40E2058513F7EE130039483A /* vertex.h */,
 				40E2058213F7E2EA0039483A /* adjList.cpp */,
 				40E2058313F7E2EA0039483A /* adjList.h */,
@@ -158,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				402A06B413F1097800B890B2 /* main.cpp in Sources */,
+				40AB2C1413F8BF5300E1D129 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
